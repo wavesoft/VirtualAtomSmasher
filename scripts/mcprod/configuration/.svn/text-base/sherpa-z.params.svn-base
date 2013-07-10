@@ -1,0 +1,67 @@
+# steering file based on example from Sherpa 1.2.3 distribution:
+#   share/SHERPA-MC/Examples/LHC_ZJets/Run.dat
+
+(run){
+  # disable colorizing of text printed on screen:
+  PRETTY_PRINT = Off
+  
+  # number of events:
+  EVENTS = %nevts%
+  
+  # set random seed:
+  # (see section "6.1.3 RANDOM_SEED" of Sherpa manual for details)
+  RANDOM_SEED = %seedA% %seedB%
+  
+  # Event output file:
+  HEPMC2_GENEVENT_OUTPUT = sherpa
+  # full name of output file will be:
+  #  "sherpa.hepmc2g"
+  
+  # disable splitting of HepMC output file:
+  FILE_SIZE = 1000000000
+  
+  # Makes particles with c*tau > 10 mm stable:
+  MAX_PROPER_LIFETIME = 10.0
+}(run)
+
+(beam){
+  BEAM_1 =  %beam1%; BEAM_ENERGY_1 = %beamEn%;
+  BEAM_2 =  %beam2%; BEAM_ENERGY_2 = %beamEn%;
+}(beam)
+
+(processes){
+  # two electrons and up to two jets in final state
+  Process 93 93 -> 11 -11 93{2}
+  Order_EW 2;
+  CKKW sqr(30/E_CMS)
+  Integration_Error 0.02 {3,4};
+  #Integration_Error 0.07 {5,6};
+  # two muons and up to two jets in final state
+  Process 93 93 -> 13 -13 93{2}
+  Order_EW 2;
+  CKKW sqr(30/E_CMS)
+  Integration_Error 0.02 {3,4};
+
+  End process;
+}(processes)
+
+(selector){
+  # Set cuts
+  # Use this for hard leading jets in a certain pT window
+  #NJetFinder  2  %pTmin%  0.0  1.0   # set min pT
+  ## Or this?
+  #PT 93 %pTmin% %pTmax%
+
+  # Use this for lepton pair inv. mass in a certain window
+  Mass 11 -11 %mHatMin% %mHatMax% 
+  Mass 13 -13 %mHatMin% %mHatMax%
+
+}(selector)
+
+(me){
+  ME_SIGNAL_GENERATOR = Internal Comix
+}(me)
+
+(mi){
+  MI_HANDLER = Amegic  # None or Amisic
+}(mi)

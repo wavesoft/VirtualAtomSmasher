@@ -1,0 +1,45 @@
+# set beams
+RG:Beam1 = %beam1%
+RG:Beam2 = %beam2%
+RG:Mom1 = %beamEn%
+RG:Mom2 = %beamEn%
+RG:Seed = %seed%
+RG:NumEvents = %nevts%
+
+
+# The Underlying Events setting
+
+#QCD 2->2 partonic scattering + non-diffractive + double diffractive
+MSEL 0
+
+MSUB(11) 1
+MSUB(12) 1
+MSUB(13) 1
+MSUB(28) 1
+MSUB(53) 1
+MSUB(68) 1
+MSUB(94) 1
+MSUB(95) 1
+MSUB(96) 1
+
+
+# Set cuts
+# Use this for hard leading-jets in a certain pT window
+# min pT
+CKIN(3) %pTmin%
+# max pT
+CKIN(4) %pTmax%
+
+# Use this for hard leading-jets in a certain mHat window
+# min mHat
+CKIN(1) %mHatMin%
+# max mHat
+CKIN(2) %mHatMax%
+
+
+# Makes particles with c*tau > 10 mm stable:
+MSTJ(22)     2
+PARJ(71)     10.0
+
+# set tune
+MSTP(5) %tuneCode%

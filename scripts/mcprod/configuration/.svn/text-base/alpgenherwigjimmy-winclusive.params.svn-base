@@ -1,0 +1,45 @@
+# Alpgen process name
+[process]
+wjet
+
+# Alpgen weighted events steering file
+[genwgt]
+1                 ! imode
+alpgen            ! label for files
+0                 ! start with: 0=new grid, 1=previous warmup grid, 2=previous generation grid
+%NeWarm% %NcWarm% ! Nevents/iteration,  N(warm-up iterations)
+%NeWgt%           ! Nevents generated after warm-up
+ebeam   %beamEn%    
+ih2     %beam%
+njets   %NJets%
+ickkw   1.
+ptjmin  15
+drjmin  0.7
+etajmax 4.0
+iwdecmode 4
+xlclu %Xlclu%
+lpclu %Lpclu%
+iseed1 %seed%
+iseed2 %seed%
+iseed3 %seed%
+iseed4 %seed%
+
+# user-defined filtering at the weighted events level
+[filter]
+
+# Alpgen unweighted events steering file
+[genuwgt]
+2        ! imode
+alpgen   ! label for files
+
+# Herwig steering
+[steerPS]
+RG:Seed = %seed%
+RG:NumEvents = %nevts%
+
+# Alpgen matching parameters
+# keeping ET(CLUS), R(CLUS), ETACLMAX to NLJETS.EQ.0 values mandated in alpsho
+[addPS]
+alpgen                        ! label for files
+%IsExc%                       ! is exclusive: 0/1
+%ETclu% %Rclu% %ETAclu%       ! clustering ET,R,ETAMAX

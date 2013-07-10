@@ -1,0 +1,62 @@
+# set beams
+RG:Beam1 = %beam1%
+RG:Beam2 = %beam2%
+RG:Mom1 = %beamEn%
+RG:Mom2 = %beamEn%
+RG:Seed = %seed%
+RG:NumEvents = %nevts%
+
+
+# Hadronic decays (for LEP)
+MDME(162,1) 1
+MDME(163,1) 1
+MDME(164,1) 1
+MDME(165,1) 1
+MDME(166,1) 1
+MDME(170,1) 0
+MDME(171,1) 0
+MDME(172,1) 0
+MDME(174,1) 1
+MDME(175,1) 1
+MDME(176,1) 1
+MDME(177,1) 1
+MDME(178,1) 1
+MDME(179,1) 1
+MDME(182,1) 0
+MDME(184,1) 0
+MDME(186,1) 0
+MDME(183,1) 0
+MDME(185,1) 0
+MDME(187,1) 0
+
+
+# switch off ISR (LEP data already corrected for ISR effect)
+MSTP(61) 0
+# switch off lepton PDFs
+MSTP(11) 0
+
+## For Four-jet angles, no hadronization, uncomment this
+#MSTP(111) 0
+
+
+## Set cuts
+## Use this for hard leading-jets in a certain pT window
+## min pT
+#CKIN(3) %pTmin%
+## max pT
+#CKIN(4) %pTmax%
+#
+## Use this for hard leading-jets in a certain mHat window
+## min mHat
+#CKIN(1) %mHatMin%
+## max mHat
+#CKIN(2) %mHatMax%
+
+
+# LEP: Make particles with c*tau > 100 mm stable:
+MSTJ(22)     2
+PARJ(71)     100.0
+
+# set tune
+MSTP(5) %tuneCode%
+

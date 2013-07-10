@@ -1,0 +1,53 @@
+# set beams
+RG:Beam1 = %beam1%
+RG:Beam2 = %beam2%
+RG:Mom1 = %beamEn%
+RG:Mom2 = %beamEn%
+RG:Seed = %seed%
+RG:NumEvents = %nevts%
+
+
+# The WplusJet settings
+# stolen from EvgenJobOptions/share/MC8.106041.PythiaWmunuJet_Ptcut.py
+# additional W-> enu and W->tau nu
+
+MSEL 14
+
+# Lower P_T for hard 2 ->2 process.
+MDME(190,1) 0
+MDME(191,1) 0
+MDME(192,1) 0
+MDME(194,1) 0
+MDME(195,1) 0
+MDME(196,1) 0
+MDME(198,1) 0
+MDME(199,1) 0
+MDME(200,1) 0
+# Switch for W->enu.
+MDME(206,1) 1
+# Switch for W->munu.
+MDME(207,1) 0    
+# Switch for W->taunu.
+MDME(208,1) 0
+
+
+# Set cuts
+# Use this for hard leading-jets in a certain pT window
+# min pT
+CKIN(3) %pTmin%
+# max pT
+CKIN(4) %pTmax%
+
+# Use this for hard leading-jets in a certain mHat window
+# min mHat
+CKIN(1) %mHatMin%
+# max mHat
+CKIN(2) %mHatMax%
+
+
+# Makes particles with c*tau > 10 mm stable:
+MSTJ(22)     2
+PARJ(71)     10.0
+
+# set tune
+MSTP(5) %tuneCode%

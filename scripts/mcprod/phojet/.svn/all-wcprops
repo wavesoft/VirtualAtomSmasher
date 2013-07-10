@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/reps/mcplots/!svn/ver/1460/trunk/scripts/mcprod/phojet
+END
+mb.inp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/reps/mcplots/!svn/ver/1344/trunk/scripts/mcprod/phojet/mb.inp
+END
+hist.f
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/reps/mcplots/!svn/ver/1460/trunk/scripts/mcprod/phojet/hist.f
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/reps/mcplots/!svn/ver/1344/trunk/scripts/mcprod/phojet/readme.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/reps/mcplots/!svn/ver/1460/trunk/scripts/mcprod/phojet/Makefile
+END
+phojet.cc
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/reps/mcplots/!svn/ver/1344/trunk/scripts/mcprod/phojet/phojet.cc
+END

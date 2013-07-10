@@ -1,0 +1,86 @@
+# set beams
+RG:Beam1 = %beam1%
+RG:Beam2 = %beam2%
+RG:Mom1 = %beamEn%
+RG:Mom2 = %beamEn%
+RG:Seed = %seed%
+RG:NumEvents = %nevts%
+
+
+#Drell-Yan (wide mass window)
+MSEL 0
+MSUB(1) 1
+
+
+# Set cuts
+# Use this for hard leading-jets in a certain pT window
+# min pT
+CKIN(3) %pTmin%
+# max pT
+CKIN(4) %pTmax%
+
+# Use this for lepton pair in a certain mHat window
+# min mHat
+CKIN(1) %mHatMin%
+# max mHat
+CKIN(2) %mHatMax%
+
+
+# Select only decays to e + mu
+## gamma decays
+# d
+MDME(162,1) 0
+# u
+MDME(163,1) 0
+# s
+MDME(164,1) 0
+# c
+MDME(165,1) 0
+# b
+MDME(166,1) 0
+# t
+MDME(167,1) 0
+# e-
+MDME(170,1) 1
+# mu-
+MDME(171,1) 0
+# tau-
+MDME(172,1) 0
+
+## Z decays
+# d
+MDME(174,1) 0
+# u
+MDME(175,1) 0
+# s
+MDME(176,1) 0
+# c
+MDME(177,1) 0
+# b
+MDME(178,1) 0
+# t
+MDME(179,1) 0
+# e-
+MDME(182,1) 1
+# mu-
+MDME(184,1) 1
+# tau-
+MDME(186,1) 0
+# nu_e
+MDME(183,1) 0
+# nu_mu
+MDME(185,1) 0
+# nu_tau
+MDME(187,1) 0
+
+
+
+
+
+# Makes particles with c*tau > 10 mm stable:
+MSTJ(22)     2
+PARJ(71)     10.0
+
+# set tune
+MSTP(5) %tuneCode%
+

@@ -1,0 +1,1979 @@
+# this is correspondence between run parameters to
+# Rivet histogram name, observable and cut
+#
+# detail description of Rivet analyses is here:
+#   http://projects.hepforge.org/rivet/analyses
+#
+# [params] is a list of additional parameters for generator,
+#          following parameters supported now:
+#
+#            pTmin,pTmax,mHatMin,mHatMax
+#
+#          Parameters should be separated by comas without any
+#          'space' characters. If you want to use default value
+#          of parameter put '-' character.
+#
+#          Default values:
+#            pTmin   = 0
+#            pTmax   = CM energy
+#            mHatMin = 0
+#            mHatMax = CM energy
+#
+#
+# format is:
+# [beam]  [process]     [energy]   [params]    [analysis]_[histogram]            [observable]    [cuts]
+
+# Hadronic Z decay charged multiplicity measurement
+# histogram superseded by ALEPH_1996_S3486095_d18-x01-y01 and disabled
+# ee        zhad          91.2        -          ALEPH_1991_S2435284_d01-x01-y01   nch          aleph0-charged
+
+
+# Studies of QCD with the ALEPH detector
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d01-x01-y01   S            aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d02-x01-y01   A            aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d03-x01-y01   tau          aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d04-x01-y01   Tminor       aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d05-x01-y01   Y3           aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d06-x01-y01   Mh2          aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d07-x01-y01   C            aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d08-x01-y01   tO           aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d09-x01-y01   x            aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d10-x01-y01   yT           aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d11-x01-y01   pTinSph      aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d12-x01-y01   pToutSph     aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d17-x01-y01   xln          aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d18-x01-y01   nch          aleph1-charged
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d19-x01-y01   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d20-x01-y01   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d21-x01-y01   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d22-x01-y01   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d23-x01-y01   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d25-x01-y01   xpich           aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d26-x01-y01   xKch            aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d27-x01-y01   xp              aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d28-x01-y01   xgamma          aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d29-x01-y01   xpi0            aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d30-x01-y01   xeta0           aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d31-x01-y01   xetap0          aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d32-x01-y01   xK0             aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d33-x01-y01   xLambda0        aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d34-x01-y01   xXi-            aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d35-x01-y01   xSigmach1385    aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d36-x01-y01   xXi01530        aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d37-x01-y01   xrho            aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d38-x01-y01   xomega782       aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d39-x01-y01   xKstar0892      aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d40-x01-y01   xphi            aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d43-x01-y01   xKstarch892     aleph1
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y02   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y03   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y04   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y05   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y06   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y07   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y08   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y09   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y10   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y11   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y12   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y13   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y14   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y15   -               -
+ee        zhad          91.2        -          ALEPH_1996_S3486095_d44-x01-y16   -               -
+
+
+# CDF transverse momentum distributions
+ppbar     uemb-soft     1800        -          CDF_1988_S1865951_d01-x01-y01     pt              cdf1
+ppbar     uemb-soft     630         -          CDF_1988_S1865951_d02-x01-y01     pt              cdf1
+
+
+# CDF pseudorapidity distributions
+ppbar     uemb-soft     1800        -          CDF_1990_S2089246_d03-x01-y01   eta         cdf-vtpc
+ppbar     uemb-soft     630         -          CDF_1990_S2089246_d04-x01-y01   eta         cdf-vtpc
+
+
+# CDF Run 1 charged multiplicity measurement
+ppbar     uemb-soft     630         -          CDF_2002_S4796047_d01-x01-y01   nch           cdf1
+ppbar     uemb-soft     630         -          CDF_2002_S4796047_d03-x01-y01   avgpt-vs-nch  cdf1
+ppbar     uemb-soft     1800        -          CDF_2002_S4796047_d02-x01-y01   nch           cdf1
+ppbar     uemb-soft     1800        -          CDF_2002_S4796047_d04-x01-y01   avgpt-vs-nch  cdf1
+
+
+# CDF Run 2 min bias charged multiplicity analysis
+ppbar     uemb-soft         1960        -          CDF_2009_NOTE_9936_d01-x01-y01  nch           cdf1
+
+
+# CDF Run 2 min bias cross-section analysis
+ppbar     uemb-soft         1960        -          CDF_2009_S8233977_d01-x01-y01   pt            cdf1
+ppbar     uemb-soft         1960        -          CDF_2009_S8233977_d02-x01-y01   avgpt-vs-nch  cdf1
+ppbar     uemb-soft         1960        -          CDF_2009_S8233977_d03-x01-y01   sumEt         cdf1
+
+
+# ATLAS 900 GeV:
+pp        uemb-soft         900         -          ATLAS_2010_S8591806_d02-x01-y01 eta           atlas1
+pp        uemb-soft         900         -          ATLAS_2010_S8591806_d03-x01-y01 pt            atlas1
+pp        uemb-soft         900         -          ATLAS_2010_S8591806_d04-x01-y01 nch           atlas1
+pp        uemb-soft         900         -          ATLAS_2010_S8591806_d05-x01-y01 avgpt-vs-nch  atlas1
+
+
+# UA5 200 GeV:
+# non single difractive (NSD) trigger events:
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d01-x01-y01   eta         ua5
+
+# eta of NSD + single difractive (SD) trigger events:
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d01-x01-y02   -           -
+
+# eta of NSD events in various intervals of charged multiplicity:
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y01   -           -
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y02   -           -
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y03   -           -
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y04   -           -
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y05   -           -
+ppbar     uemb-soft         200         -          UA5_1986_S1583476_d02-x01-y06   -           -
+
+# UA5 900 GeV:
+# NSD:
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d01-x01-y03   eta         ua5
+
+# NSD + SD:
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d01-x01-y04   -           -
+
+# NSD, various multiplicity:
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y01   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y02   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y03   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y04   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y05   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y06   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y07   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y08   -           -
+ppbar     uemb-soft         900         -          UA5_1986_S1583476_d03-x01-y09   -           -
+
+
+# UA5 546 GeV:
+ppbar     uemb-soft         546         -          UA5_1987_S1640666_d01-x01-y01   -           -
+ppbar     uemb-soft         546         -          UA5_1987_S1640666_d03-x01-y01   nch         ua5
+
+
+# UA5 200 GeV:
+# |eta| < 5, full phase space:
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d01-x01-y01   nch         ua5
+
+# in symmetric pseudorapidity intervals:
+# |eta| < 0.5
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d03-x01-y01   nch         ua5-0.5
+# |eta| < 1.5
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d04-x01-y01   nch         ua5-1.5
+# |eta| < 3
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d05-x01-y01   nch         ua5-3
+# |eta| < 5
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d06-x01-y01   nch         ua5-5
+
+# |eta| < 5, mean multiplicity:
+ppbar     uemb-soft         200         -          UA5_1989_S1926373_d11-x01-y01   -           -
+
+# UA5 900 GeV:
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d02-x01-y01   nch         ua5
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d07-x01-y01   nch         ua5-0.5
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d08-x01-y01   nch         ua5-1.5
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d09-x01-y01   nch         ua5-3
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d10-x01-y01   nch         ua5-5
+ppbar     uemb-soft         900         -          UA5_1989_S1926373_d12-x01-y01   -           -
+
+
+
+# ALICE pseudorapidities and charged multiplicity (ALICE_2010_S8625980)
+pp        uemb-soft         900         -          ALICE_2010_S8625980_d04-x01-y01 eta         alice1
+pp        uemb-soft         2360        -          ALICE_2010_S8625980_d05-x01-y01 eta         alice1
+pp        uemb-soft         7000        -          ALICE_2010_S8625980_d03-x01-y01 nch         alice1
+pp        uemb-soft         7000        -          ALICE_2010_S8625980_d06-x01-y01 eta         alice1
+
+
+
+# invariant particle yield as function of pT:
+pp        uemb-soft         900         -          ALICE_2010_S8706239_d04-x01-y01 pt          alice2
+
+# <pT> vs N_ch:
+# 0.15 < pT < 4 GeV
+pp        uemb-soft         900         -          ALICE_2010_S8706239_d11-x01-y01 avgpt-vs-nch  alice2
+# 0.5 < pT < 4 GeV
+pp        uemb-soft         900         -          ALICE_2010_S8706239_d12-x01-y01 avgpt-vs-nch  alice2-2
+
+
+
+# Charged particle multiplicities in three different pseudorapidity intervals
+pp        uemb-soft         900        -          ALICE_2010_S8624100_d11-x01-y01  nch   alice3-eta0.5
+pp        uemb-soft         900        -          ALICE_2010_S8624100_d12-x01-y01  nch   alice3-eta1.0
+pp        uemb-soft         900        -          ALICE_2010_S8624100_d13-x01-y01  nch   alice3-eta1.3
+
+pp        uemb-soft         2360       -          ALICE_2010_S8624100_d17-x01-y01  nch   alice3-eta0.5
+pp        uemb-soft         2360       -          ALICE_2010_S8624100_d18-x01-y01  nch   alice3-eta1.0
+pp        uemb-soft         2360       -          ALICE_2010_S8624100_d19-x01-y01  nch   alice3-eta1.3
+
+
+# ATLAS_2010_S8894728
+# ATLAS 900 GeV:
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d01-x01-y01   nch-vs-pt-trns    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d01-x01-y02   nch-vs-pt-twrd    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d01-x01-y03   nch-vs-pt-away    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d03-x01-y01   sumpt-vs-pt-trns    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d03-x01-y02   sumpt-vs-pt-twrd    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d03-x01-y03   sumpt-vs-pt-away    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d05-x01-y01   stddev-nch-vs-pt-trns    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d07-x01-y01   stddev-sumpt-vs-pt-trns    atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d09-x01-y01   avgpt-vs-pt-trns  atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d09-x01-y02   avgpt-vs-pt-twrd  atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d09-x01-y03   avgpt-vs-pt-away  atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d11-x01-y01   avgpt-vs-nch-trns  atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d11-x01-y02   avgpt-vs-nch-twrd  atlas4
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d11-x01-y03   avgpt-vs-nch-away  atlas4
+# pT > 1 GeV:
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d13-x01-y01   nch-vs-dphi  atlas4-pt1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d15-x01-y01   pt-vs-dphi  atlas4-pt1
+# pT > 1.5 GeV:
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d13-x01-y02   nch-vs-dphi  atlas4-pt1.5
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d15-x01-y02   pt-vs-dphi  atlas4-pt1.5
+# pT > 2 GeV:
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d13-x01-y03   nch-vs-dphi  atlas4-pt2
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d15-x01-y03   pt-vs-dphi  atlas4-pt2
+# pT > 2.5 GeV:
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d13-x01-y04   nch-vs-dphi  atlas4-pt2.5
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d15-x01-y04   pt-vs-dphi  atlas4-pt2.5
+# pT > 100 MeV
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d17-x01-y01   nch-vs-pt-trns    atlas4-pt0.1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d17-x01-y02   nch-vs-pt-twrd    atlas4-pt0.1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d17-x01-y03   nch-vs-pt-away    atlas4-pt0.1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d19-x01-y01   sumpt-vs-pt-trns    atlas4-pt0.1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d19-x01-y02   sumpt-vs-pt-twrd    atlas4-pt0.1
+pp        uemb-hard         900         -          ATLAS_2010_S8894728_d19-x01-y03   sumpt-vs-pt-away    atlas4-pt0.1
+
+# ATLAS 7000 GeV:
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d02-x01-y01   nch-vs-pt-trns    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d02-x01-y02   nch-vs-pt-twrd    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d02-x01-y03   nch-vs-pt-away    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d04-x01-y01   sumpt-vs-pt-trns    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d04-x01-y02   sumpt-vs-pt-twrd    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d04-x01-y03   sumpt-vs-pt-away    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d06-x01-y01   stddev-nch-vs-pt-trns    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d08-x01-y01   stddev-sumpt-vs-pt-trns    atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d10-x01-y01   avgpt-vs-pt-trns  atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d10-x01-y02   avgpt-vs-pt-twrd  atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d10-x01-y03   avgpt-vs-pt-away  atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d12-x01-y01   avgpt-vs-nch-trns  atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d12-x01-y02   avgpt-vs-nch-twrd  atlas4
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d12-x01-y03   avgpt-vs-nch-away  atlas4
+# pT > 1 GeV:
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d14-x01-y01   nch-vs-dphi  atlas4-pt1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d16-x01-y01   pt-vs-dphi  atlas4-pt1
+# pT > 2 GeV:
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d14-x01-y02   nch-vs-dphi  atlas4-pt2
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d16-x01-y02   pt-vs-dphi  atlas4-pt2
+# pT > 3 GeV:
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d14-x01-y03   nch-vs-dphi  atlas4-pt3
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d16-x01-y03   pt-vs-dphi  atlas4-pt3
+# pT > 5 GeV:
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d14-x01-y04   nch-vs-dphi  atlas4-pt5
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d16-x01-y04   pt-vs-dphi  atlas4-pt5
+# pT > 100 MeV
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d18-x01-y01   nch-vs-pt-trns    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d18-x01-y02   nch-vs-pt-twrd    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d18-x01-y03   nch-vs-pt-away    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d20-x01-y01   sumpt-vs-pt-trns    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d20-x01-y02   sumpt-vs-pt-twrd    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d20-x01-y03   sumpt-vs-pt-away    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d21-x01-y01   nch-vs-eta-trns    atlas4-pt0.1
+pp        uemb-hard         7000         -          ATLAS_2010_S8894728_d22-x01-y01   sumpt-vs-eta-trns    atlas4-pt0.1
+
+
+# UA5 mean charged multiplicity and pseudorapidity distributions:
+ppbar     uemb-soft         53          -          UA5_1982_S875503_d02-x01-y02           -                 -
+ppbar     uemb-soft         53          -          UA5_1982_S875503_d04-x01-y01           eta               ua5
+
+pp        uemb-soft         53          -          UA5_1982_S875503_d02-x01-y01           -                 -
+pp        uemb-soft         53          -          UA5_1982_S875503_d03-x01-y01           eta               ua5
+
+
+# 200 GeV:
+ppbar     uemb-soft         200         -          UA1_1990_S2044935_d01-x01-y01          nch               ua1-1
+ppbar     uemb-soft         200         -          UA1_1990_S2044935_d02-x01-y01          pt                ua1-1
+ppbar     uemb-soft         200         -          UA1_1990_S2044935_d06-x01-y01          avgpt-vs-nch      ua1-1
+ppbar     uemb-soft         200         -          UA1_1990_S2044935_d09-x01-y01          sumEt             ua1-1
+ppbar     uemb-soft         200         -          UA1_1990_S2044935_d12-x01-y01          sumEt-vs-nch      ua1-1
+
+# 500 GeV:
+ppbar     uemb-soft         500         -          UA1_1990_S2044935_d01-x01-y02          nch               ua1-1
+ppbar     uemb-soft         500         -          UA1_1990_S2044935_d02-x01-y02          pt                ua1-1
+ppbar     uemb-soft         500         -          UA1_1990_S2044935_d10-x01-y01          sumEt             ua1-1
+ppbar     uemb-soft         500         -          UA1_1990_S2044935_d12-x01-y02          sumEt-vs-nch      ua1-1
+
+ppbar     uemb-soft         63          -          UA1_1990_S2044935_d08-x01-y01          avgpt-vs-nch      ua1-1
+
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d01-x01-y03          nch               ua1-1
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d02-x01-y03          pt                ua1-1
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d03-x01-y01          pt                ua1-1-eta0.8
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d04-x01-y01          pt                ua1-1-eta4
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d05-x01-y01          pt                ua1-1-eta8
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d07-x01-y01          avgpt-vs-nch      ua1-1
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d11-x01-y01          sumEt             ua1-1
+ppbar     uemb-soft         900         -          UA1_1990_S2044935_d12-x01-y03          sumEt-vs-nch      ua1-1
+
+
+
+# 200 GeV:
+ppbar     uemb-soft         200         -          UA5_1988_S1867512_d02-x01-y01          fbcorr-vs-deta    ua5-7
+ppbar     uemb-soft         200         -          UA5_1988_S1867512_d03-x01-y01          fbcorr-vs-detapos ua5-7
+
+# 546 GeV:
+ppbar     uemb-soft         546         -          UA5_1988_S1867512_d02-x01-y02          fbcorr-vs-deta    ua5-7
+ppbar     uemb-soft         546         -          UA5_1988_S1867512_d03-x01-y02          fbcorr-vs-detapos ua5-7
+
+# 900 GeV:
+ppbar     uemb-soft         900         -          UA5_1988_S1867512_d02-x01-y03          fbcorr-vs-deta    ua5-7
+ppbar     uemb-soft         900         -          UA5_1988_S1867512_d03-x01-y03          fbcorr-vs-detapos ua5-7
+
+
+
+# Identified hadron spectra in pp at 200 GeV:
+pp        uemb-soft         200         -          STAR_2006_S6500200_d01-x01-y01         pip_pt            star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d01-x02-y01         pim_pt            star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d01-x03-y01         p_pt              star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d01-x04-y01         pbar_pt           star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d02-x01-y01         pim2pip_pt        star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d02-x02-y01         pbar2p_pt         star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d02-x03-y01         p2pip_pt          star-2
+pp        uemb-soft         200         -          STAR_2006_S6500200_d02-x04-y01         pbar2pim_pt       star-2
+
+# Strange particle production in pp at 200 GeV:
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x01-y01         K0S_pt            star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x02-y01         Km_pt             star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x03-y01         Kp_pt             star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x04-y01         L_pt              star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x05-y01         Lbar_pt           star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x06-y01         Xim_pt            star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d01-x07-y01         Xip_pt            star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d02-x01-y01         -                 -
+pp        uemb-soft         200         -          STAR_2006_S6860818_d02-x02-y01         Lbar2L_pt         star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d02-x03-y01         Xip2Xim_pt        star-1
+pp        uemb-soft         200         -          STAR_2006_S6860818_d03-x01-y01         pt-vs-mass        star-1
+
+
+# UE measurement in pp at 200 GeV:
+# TransMAX (?) region charged particle density:
+pp        uemb-hard         200         4          STAR_2009_UE_HELEN_d01-x01-y01         -                 -
+# TransMIN (?) region:
+pp        uemb-hard         200         4          STAR_2009_UE_HELEN_d02-x01-y01         -                 -
+# Away region:
+pp        uemb-hard         200         4          STAR_2009_UE_HELEN_d03-x01-y01         nch-vs-pt-away    star-3
+
+
+
+
+# CDF Run I underlying event analysis (1800 GeV):
+# pT_lead_jet > 2 GeV
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d01-x01-y01          nch-vs-dphi       cdf2-02
+# pT_lead_jet > 5 GeV
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d01-x01-y02          nch-vs-dphi       cdf2-05
+# pT_lead_jet > 30 GeV
+ppbar     uemb-hard  1800        15         CDF_2001_S4751469_d01-x01-y03          nch-vs-dphi       cdf2-30
+
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d02-x01-y01          sumpt-vs-dphi     cdf2-02
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d02-x01-y02          sumpt-vs-dphi     cdf2-05
+ppbar     uemb-hard  1800        15         CDF_2001_S4751469_d02-x01-y03          sumpt-vs-dphi     cdf2-30
+
+# min-bias sample (pT_lead_jet range [0 - 20] GeV)
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d03-x01-y01          nch-vs-pt-twrd    cdf2-mb
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d03-x01-y02          nch-vs-pt-trns    cdf2-mb
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d03-x01-y03          nch-vs-pt-away    cdf2-mb
+
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d05-x01-y01          sumpt-vs-pt-twrd  cdf2-mb
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d05-x01-y02          sumpt-vs-pt-trns  cdf2-mb
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d05-x01-y03          sumpt-vs-pt-away  cdf2-mb
+
+# JET20 sample (pT_lead_jet range [18 - 49] GeV)
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d04-x01-y01          nch-vs-pt-twrd    cdf2-jet20
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d04-x01-y02          nch-vs-pt-trns    cdf2-jet20
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d04-x01-y03          nch-vs-pt-away    cdf2-jet20
+
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d06-x01-y01          sumpt-vs-pt-twrd  cdf2-jet20
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d06-x01-y02          sumpt-vs-pt-trns  cdf2-jet20
+ppbar     uemb-hard  1800        10         CDF_2001_S4751469_d06-x01-y03          sumpt-vs-pt-away  cdf2-jet20
+
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d07-x01-y01          pt-trns           cdf2-02
+ppbar     uemb-hard  1800        -          CDF_2001_S4751469_d07-x01-y02          pt-trns           cdf2-05
+ppbar     uemb-hard  1800        15         CDF_2001_S4751469_d07-x01-y03          pt-trns           cdf2-30
+
+
+# CDF Run II jet shape analysis (1960 GeV)
+# Differential jet shape rho(r/R) in different jet pT bins:
+# pT_jet = [37 - 45] GeV
+ppbar     jets       1960        17         CDF_2005_S6217184_d01-x01-y01          js_diff           cdf3-037
+ppbar     jets       1960        17         CDF_2005_S6217184_d01-x01-y02          js_diff           cdf3-045
+ppbar     jets       1960        17         CDF_2005_S6217184_d01-x01-y03          js_diff           cdf3-055
+ppbar     jets       1960        17         CDF_2005_S6217184_d02-x01-y01          js_diff           cdf3-063
+ppbar     jets       1960        37         CDF_2005_S6217184_d02-x01-y02          js_diff           cdf3-073
+ppbar     jets       1960        37         CDF_2005_S6217184_d02-x01-y03          js_diff           cdf3-084
+ppbar     jets       1960        37         CDF_2005_S6217184_d03-x01-y01          js_diff           cdf3-097
+ppbar     jets       1960        37         CDF_2005_S6217184_d03-x01-y02          js_diff           cdf3-112
+ppbar     jets       1960        64         CDF_2005_S6217184_d03-x01-y03          js_diff           cdf3-128
+ppbar     jets       1960        64         CDF_2005_S6217184_d04-x01-y01          js_diff           cdf3-148
+ppbar     jets       1960        64         CDF_2005_S6217184_d04-x01-y02          js_diff           cdf3-166
+ppbar     jets       1960        64         CDF_2005_S6217184_d04-x01-y03          js_diff           cdf3-186
+ppbar     jets       1960        90         CDF_2005_S6217184_d05-x01-y01          js_diff           cdf3-208
+ppbar     jets       1960        90         CDF_2005_S6217184_d05-x01-y02          js_diff           cdf3-229
+ppbar     jets       1960        90         CDF_2005_S6217184_d05-x01-y03          js_diff           cdf3-250
+ppbar     jets       1960        140        CDF_2005_S6217184_d06-x01-y01          js_diff           cdf3-277
+ppbar     jets       1960        140        CDF_2005_S6217184_d06-x01-y02          js_diff           cdf3-304
+# pT_jet = [340 - 380] GeV
+ppbar     jets       1960        140        CDF_2005_S6217184_d06-x01-y03          js_diff           cdf3-340
+
+# Integral jet shape Psi(r/R) in different jet pT bins
+ppbar     jets       1960        17         CDF_2005_S6217184_d07-x01-y01          js_int            cdf3-037
+ppbar     jets       1960        17         CDF_2005_S6217184_d07-x01-y02          js_int            cdf3-045
+ppbar     jets       1960        17         CDF_2005_S6217184_d07-x01-y03          js_int            cdf3-055
+ppbar     jets       1960        17         CDF_2005_S6217184_d08-x01-y01          js_int            cdf3-063
+ppbar     jets       1960        37         CDF_2005_S6217184_d08-x01-y02          js_int            cdf3-073
+ppbar     jets       1960        37         CDF_2005_S6217184_d08-x01-y03          js_int            cdf3-084
+ppbar     jets       1960        37         CDF_2005_S6217184_d09-x01-y01          js_int            cdf3-097
+ppbar     jets       1960        37         CDF_2005_S6217184_d09-x01-y02          js_int            cdf3-112
+ppbar     jets       1960        64         CDF_2005_S6217184_d09-x01-y03          js_int            cdf3-128
+ppbar     jets       1960        64         CDF_2005_S6217184_d10-x01-y01          js_int            cdf3-148
+ppbar     jets       1960        64         CDF_2005_S6217184_d10-x01-y02          js_int            cdf3-166
+ppbar     jets       1960        64         CDF_2005_S6217184_d10-x01-y03          js_int            cdf3-186
+ppbar     jets       1960        90         CDF_2005_S6217184_d11-x01-y01          js_int            cdf3-208
+ppbar     jets       1960        90         CDF_2005_S6217184_d11-x01-y02          js_int            cdf3-229
+ppbar     jets       1960        90         CDF_2005_S6217184_d11-x01-y03          js_int            cdf3-250
+ppbar     jets       1960        140        CDF_2005_S6217184_d12-x01-y01          js_int            cdf3-277
+ppbar     jets       1960        140        CDF_2005_S6217184_d12-x01-y02          js_int            cdf3-304
+ppbar     jets       1960        140        CDF_2005_S6217184_d12-x01-y03          js_int            cdf3-340
+
+# Integral jet shape Psi(r/R == 0.3) vs pT_jet
+# PS 10 Mar 2011: Commented out for now since we will need to comine multiple separate subruns to fill it properly
+# TODO: re-enable when corresponding machinery will be ready
+# ppbar     jets       1960        -          CDF_2005_S6217184_d13-x01-y01          js_int-vs-pt      cdf3
+ppbar     jets       1960        -          CDF_2005_S6217184_d13-x01-y01          -                 -
+
+
+
+## CDF Run 2 underlying event in leading jet events (1960 GeV)
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d01-x01-y01       nch-vs-pt-trns    cdf4
+## same observable, TransMAX (?) region:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d02-x01-y01       -                 -
+## TransMIN:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d03-x01-y01       -                 -
+## TransDIF:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d04-x01-y01       -                 -
+#
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d05-x01-y01       sumpt-vs-pt-trns  cdf4
+## TransMAX:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d06-x01-y01       -                 -
+## TransMIN:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d07-x01-y01       -                 -
+## TransDIF:
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d08-x01-y01       -                 -
+#
+#ppbar     uemb-hard  1960        -          CDF_2008_LEADINGJETS_d09-x01-y01       avgpt-vs-pt-trns     cdf4
+
+
+# CDF Run 2 underlying event in leading jet events (1960 GeV) UPDATED 2010 ANALYSIS
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d10-x01-y01       nch-vs-pt-twrd    cdf2010
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d10-x01-y02       nch-vs-pt-trns    cdf2010
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d10-x01-y03       nch-vs-pt-away    cdf2010
+# same observable, TransMAX (?) region:
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d11-x01-y01      -                 -
+# TransMIN
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d11-x01-y02      -                 -
+# TransDIF
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d11-x01-y03      -                 -
+
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d12-x01-y01       sumpt-vs-pt-twrd    cdf2010
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d12-x01-y02       sumpt-vs-pt-trns    cdf2010
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d12-x01-y03       sumpt-vs-pt-away    cdf2010
+# same observable, TransMAX (?) region:
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d13-x01-y01      -                 -
+# TransMIN
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d13-x01-y02      -                 -
+# TransDIF
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d13-x01-y03      -                 -
+
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d14-x01-y01       avgpt-vs-pt-trns    cdf2010
+ppbar     uemb-hard  1960        -          CDF_2010_S8591881_QCD_d15-x01-y01       maxpt-vs-pt-trns    cdf2010
+
+
+# Inclusive jet cross section and di-jet mass and chi spectra at 7 TeV in ATLAS
+# Inclusive jet pT spectrum for different binning on |y| and two jets reconstruction algorithms:
+# jets: Anti-KT, R = 0.4
+# |y| < 0.3
+pp        jets       7000        40         ATLAS_2010_S8817804_d01-x01-y01        pt                atlas6-akt4-y0
+pp        jets       7000        40         ATLAS_2010_S8817804_d02-x01-y01        pt                atlas6-akt4-y0.3
+pp        jets       7000        40         ATLAS_2010_S8817804_d03-x01-y01        pt                atlas6-akt4-y0.8
+pp        jets       7000        40         ATLAS_2010_S8817804_d04-x01-y01        pt                atlas6-akt4-y1.2
+# 2.1 < |y| < 2.8
+pp        jets       7000        40         ATLAS_2010_S8817804_d05-x01-y01        pt                atlas6-akt4-y2.1
+
+# jets: Anti-KT, R = 0.6
+pp        jets       7000        40         ATLAS_2010_S8817804_d06-x01-y01        pt                atlas6-akt6-y0
+pp        jets       7000        40         ATLAS_2010_S8817804_d07-x01-y01        pt                atlas6-akt6-y0.3
+pp        jets       7000        40         ATLAS_2010_S8817804_d08-x01-y01        pt                atlas6-akt6-y0.8
+pp        jets       7000        40         ATLAS_2010_S8817804_d09-x01-y01        pt                atlas6-akt6-y1.2
+pp        jets       7000        40         ATLAS_2010_S8817804_d10-x01-y01        pt                atlas6-akt6-y2.1
+
+# Dijet mass spectrum (Jet 1 pT > 60, jet 2 pT > 30):
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d11-x01-y01        dijet_m12         atlas6-akt4-y0
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d12-x01-y01        dijet_m12         atlas6-akt4-y0.3
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d13-x01-y01        dijet_m12         atlas6-akt4-y0.8
+pp        jets       7000        25,-,300    ATLAS_2010_S8817804_d14-x01-y01        dijet_m12         atlas6-akt4-y1.2
+pp        jets       7000        25,-,760    ATLAS_2010_S8817804_d15-x01-y01        dijet_m12         atlas6-akt4-y2.1
+
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d16-x01-y01        dijet_m12         atlas6-akt6-y0
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d17-x01-y01        dijet_m12         atlas6-akt6-y0.3
+pp        jets       7000        25,-,100    ATLAS_2010_S8817804_d18-x01-y01        dijet_m12         atlas6-akt6-y0.8
+pp        jets       7000        25,-,300    ATLAS_2010_S8817804_d19-x01-y01        dijet_m12         atlas6-akt6-y1.2
+pp        jets       7000        25,-,760    ATLAS_2010_S8817804_d20-x01-y01        dijet_m12         atlas6-akt6-y2.1
+
+# Dijet chi
+# 340 < m12 < 520 GeV
+pp        jets       7000        25,-,300    ATLAS_2010_S8817804_d21-x01-y01        dijet_chi         atlas6-akt4-m340
+# 520 < m12 < 800 GeV
+pp        jets       7000        25,-,480    ATLAS_2010_S8817804_d22-x01-y01        dijet_chi         atlas6-akt4-m520
+# 800 < m12 < 1200 GeV
+pp        jets       7000        25,-,760    ATLAS_2010_S8817804_d23-x01-y01        dijet_chi         atlas6-akt4-m800
+
+pp        jets       7000        25,-,300    ATLAS_2010_S8817804_d24-x01-y01        dijet_chi         atlas6-akt6-m340
+pp        jets       7000        25,-,480    ATLAS_2010_S8817804_d25-x01-y01        dijet_chi         atlas6-akt6-m520
+pp        jets       7000        25,-,760    ATLAS_2010_S8817804_d26-x01-y01        dijet_chi         atlas6-akt6-m800
+
+
+# Dijet Azimuthal Decorrelations at 7000 GeV in ATLAS
+# Highest pT jet-jet azimuthal angle, in bins of leading jet pT
+# pT bins = 110 - 160 - 210 -260 - 310 - 400 - 500 - 600 - 800 - inf  [GeV]
+# 110 < pT < 160 GeV
+pp        jets       7000        80         ATLAS_2011_S8971293_d01-x01-y01   dijet_dphi        atlas5-pt110
+pp        jets       7000        80         ATLAS_2011_S8971293_d01-x01-y02   dijet_dphi        atlas5-pt160
+pp        jets       7000        160        ATLAS_2011_S8971293_d01-x01-y03   dijet_dphi        atlas5-pt210
+pp        jets       7000        160        ATLAS_2011_S8971293_d01-x01-y04   dijet_dphi        atlas5-pt260
+pp        jets       7000        250        ATLAS_2011_S8971293_d01-x01-y05   dijet_dphi        atlas5-pt310
+pp        jets       7000        250        ATLAS_2011_S8971293_d01-x01-y06   dijet_dphi        atlas5-pt400
+pp        jets       7000        400        ATLAS_2011_S8971293_d01-x01-y07   dijet_dphi        atlas5-pt500
+pp        jets       7000        400        ATLAS_2011_S8971293_d01-x01-y08   dijet_dphi        atlas5-pt600
+# pT > 800 GeV
+pp        jets       7000        400        ATLAS_2011_S8971293_d01-x01-y09   dijet_dphi        atlas5-pt800
+
+
+# Cross-section and fragmentation in anti-kt track jets at 7 TeV in ATLAS
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d01-x01-y01   pt                atlas3-akt6
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d02-x01-y01   pt                atlas3-akt4
+
+# Fragmentation distributions of charged particles in jets in bins of jet pT
+# (probability that a particle carries fraction z of the jet momentum)
+# 4 < pT < 6 GeV
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d03-x01-y01   jet_frag          atlas3-akt6-pt04
+# 6 < pT < 10 GeV
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d03-x02-y01   jet_frag          atlas3-akt6-pt06
+# 10 < pT < 15 GeV
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d03-x03-y01   jet_frag          atlas3-akt6-pt10
+# 15 < pT < 24 GeV
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d03-x04-y01   jet_frag          atlas3-akt6-pt15
+
+# same for Anti-KT R = 0.4 jet reco algorithm
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d04-x01-y01   jet_frag          atlas3-akt4-pt04
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d04-x02-y01   jet_frag          atlas3-akt4-pt06
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d04-x03-y01   jet_frag          atlas3-akt4-pt10
+pp        jets       7000        -          ATLAS_2010_CONF_2010_049_d04-x04-y01   jet_frag          atlas3-akt4-pt15
+
+# TODO: "we need to redouble efforts to get correct hadron-level ones implemented in Rivet"
+# LEP Four-Jet Angles
+#ee        zhad            91.2        -          OPAL_2001_S4553896_d03-x01-y01    cos_chi_bz       opal1-part
+#ee        zhad            91.2        -          OPAL_2001_S4553896_d04-x01-y01    cos_phi_ksw      opal1-part
+#ee        zhad            91.2        -          OPAL_2001_S4553896_d05-x01-y01    cos_theta_nr     opal1-part
+#ee        zhad            91.2        -          OPAL_2001_S4553896_d06-x01-y01    cos_alpha_34     opal1-part
+
+
+# Jet rates and event shapes at LEP I and II
+
+# PS Mar 10 2011: nch-aleph1 commented out since it actually shows the energy *scaling* and cannot be done with current setup
+# TODO: ??? 
+# ee        zhad            91.2        -          ALEPH_2004_S5765862_d01-x01-y01      nch                aleph1
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d01-x01-y01      -                  -
+
+# Histograms corresponding to beam energy 161, 172, 183, 196 have low stats and disabled.
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d02-x01-y01      x                  aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d03-x01-y01      x                  aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d04-x01-y01      x                  aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d05-x01-y01      x                  aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d06-x01-y01      x                  aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d07-x01-y01      x                  aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d08-x01-y01      x                  aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d09-x01-y01      x                  aleph1
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d11-x01-y01      xln                aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d12-x01-y01      xln                aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d13-x01-y01      xln                aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d14-x01-y01      xln                aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d15-x01-y01      xln                aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d16-x01-y01      xln                aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d17-x01-y01      xln                aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d18-x01-y01      xln                aleph1
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d19-x01-y01      xE                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d20-x01-y01      xE                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d21-x01-y01      xE                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d22-x01-y01      xE                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d23-x01-y01      xE                 aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d24-x01-y01      xE                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d25-x01-y01      xE                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d26-x01-y01      xE                 aleph1
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d27-x01-y01      pTinT              aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d28-x01-y01      pTinT              aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d29-x01-y01      pTinT              aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d30-x01-y01      pTinT              aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d31-x01-y01      pTinT              aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d32-x01-y01      pTinT              aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d33-x01-y01      pTinT              aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d34-x01-y01      pTinT              aleph1
+
+ee        zhad             206        -          ALEPH_2004_S5765862_d35-x01-y01      pToutT             aleph1
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d36-x01-y01      yT                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d37-x01-y01      yT                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d38-x01-y01      yT                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d39-x01-y01      yT                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d40-x01-y01      yT                 aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d41-x01-y01      yT                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d42-x01-y01      yT                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d43-x01-y01      yT                 aleph1
+
+ee        zhad             133        -          ALEPH_2004_S5765862_d44-x01-y01      yS                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d45-x01-y01      yS                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d46-x01-y01      yS                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d47-x01-y01      yS                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d48-x01-y01      yS                 aleph1
+#ee        zhad             196        -          ALEPH_2004_S5765862_d49-x01-y01      yS                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d50-x01-y01      yS                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d51-x01-y01      yS                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d54-x01-y01      T                  aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d55-x01-y01      T                  aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d56-x01-y01      T                  aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d57-x01-y01      T                  aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d58-x01-y01      T                  aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d59-x01-y01      T                  aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d60-x01-y01      T                  aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d61-x01-y01      T                  aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d62-x01-y01      Mh2                aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d63-x01-y01      Mh2                aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d64-x01-y01      Mh2                aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d65-x01-y01      Mh2                aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d66-x01-y01      Mh2                aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d67-x01-y01      Mh2                aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d68-x01-y01      Mh2                aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d69-x01-y01      Mh2                aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d70-x01-y01      broadj             aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d71-x01-y01      broadj             aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d72-x01-y01      broadj             aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d73-x01-y01      broadj             aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d74-x01-y01      broadj             aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d75-x01-y01      broadj             aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d76-x01-y01      broadj             aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d77-x01-y01      broadj             aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d78-x01-y01      broadjh            aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d79-x01-y01      broadjh            aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d80-x01-y01      broadjh            aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d81-x01-y01      broadjh            aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d82-x01-y01      broadjh            aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d83-x01-y01      broadjh            aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d84-x01-y01      broadjh            aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d85-x01-y01      broadjh            aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d86-x01-y01      C                  aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d87-x01-y01      C                  aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d88-x01-y01      C                  aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d89-x01-y01      C                  aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d90-x01-y01      C                  aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d91-x01-y01      C                  aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d92-x01-y01      C                  aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d93-x01-y01      C                  aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d94-x01-y01      Tmajor             aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d95-x01-y01      Tmajor             aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d96-x01-y01      Tmajor             aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d97-x01-y01      Tmajor             aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d98-x01-y01      Tmajor             aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d99-x01-y01      Tmajor             aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d100-x01-y01     Tmajor             aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d101-x01-y01     Tmajor             aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d102-x01-y01     Tminor             aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d103-x01-y01     Tminor             aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d104-x01-y01     Tminor             aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d105-x01-y01     Tminor             aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d106-x01-y01     Tminor             aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d107-x01-y01     Tminor             aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d108-x01-y01     Tminor             aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d109-x01-y01     Tminor             aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d110-x01-y01     Msdiff             aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d111-x01-y01     Msdiff             aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d112-x01-y01     Msdiff             aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d113-x01-y01     Msdiff             aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d114-x01-y01     Msdiff             aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d115-x01-y01     Msdiff             aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d116-x01-y01     Msdiff             aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d117-x01-y01     Msdiff             aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d118-x01-y01     A                  aleph1
+ee        zhad            133         -          ALEPH_2004_S5765862_d119-x01-y01     A                  aleph1
+#ee        zhad            161         -          ALEPH_2004_S5765862_d120-x01-y01     A                  aleph1
+#ee        zhad            172         -          ALEPH_2004_S5765862_d121-x01-y01     A                  aleph1
+#ee        zhad            183         -          ALEPH_2004_S5765862_d122-x01-y01     A                  aleph1
+
+# following two histograms are disabled due to bad quality of data points
+#ee        zhad            189         -          ALEPH_2004_S5765862_d123-x01-y01     A                  aleph1
+#ee        zhad            200         -          ALEPH_2004_S5765862_d124-x01-y01     A                  aleph1
+ee        zhad            189         -          ALEPH_2004_S5765862_d123-x01-y01     -                  -
+ee        zhad            200         -          ALEPH_2004_S5765862_d124-x01-y01     -                  -
+
+ee        zhad            206         -          ALEPH_2004_S5765862_d125-x01-y01     A                  aleph1
+
+ee        zhad            133         -          ALEPH_2004_S5765862_d126-x01-y01     P                  aleph1
+#ee        zhad            161         -          ALEPH_2004_S5765862_d127-x01-y01     P                  aleph1
+#ee        zhad            172         -          ALEPH_2004_S5765862_d128-x01-y01     P                  aleph1
+#ee        zhad            183         -          ALEPH_2004_S5765862_d129-x01-y01     P                  aleph1
+ee        zhad            189         -          ALEPH_2004_S5765862_d130-x01-y01     P                  aleph1
+ee        zhad            200         -          ALEPH_2004_S5765862_d131-x01-y01     P                  aleph1
+ee        zhad            206         -          ALEPH_2004_S5765862_d132-x01-y01     P                  aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d133-x01-y01     tO                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d134-x01-y01     tO                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d135-x01-y01     tO                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d136-x01-y01     tO                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d137-x01-y01     tO                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d138-x01-y01     tO                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d139-x01-y01     tO                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d140-x01-y01     tO                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d141-x01-y01     S                  aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d142-x01-y01     S                  aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d143-x01-y01     S                  aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d144-x01-y01     S                  aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d145-x01-y01     S                  aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d146-x01-y01     S                  aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d147-x01-y01     S                  aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d148-x01-y01     S                  aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d149-x01-y01     Y2                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d150-x01-y01     Y2                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d151-x01-y01     Y2                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d152-x01-y01     Y2                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d153-x01-y01     Y2                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d154-x01-y01     Y2                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d155-x01-y01     Y2                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d156-x01-y01     Y2                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d157-x01-y01     Y3                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d158-x01-y01     Y3                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d159-x01-y01     Y3                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d160-x01-y01     Y3                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d161-x01-y01     Y3                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d162-x01-y01     Y3                 aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d163-x01-y01     Y3                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d164-x01-y01     Y3                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d165-x01-y01     Y4                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d166-x01-y01     Y4                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d167-x01-y01     Y4                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d168-x01-y01     Y4                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d169-x01-y01     Y4                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d170-x01-y01     Y4                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d172-x01-y01     Y4                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d173-x01-y01     Y5                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d174-x01-y01     Y5                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d175-x01-y01     Y5                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d176-x01-y01     Y5                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d177-x01-y01     Y5                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d178-x01-y01     Y5                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d179-x01-y01     Y5                 aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d180-x01-y01     Y6                 aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d181-x01-y01     Y6                 aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d182-x01-y01     Y6                 aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d183-x01-y01     Y6                 aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d184-x01-y01     Y6                 aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d185-x01-y01     Y6                 aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d186-x01-y01     Y6                 aleph1
+
+# Jet rates
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d187-x01-y01     rate-1jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d188-x01-y01     rate-1jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d189-x01-y01     rate-1jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d190-x01-y01     rate-1jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d191-x01-y01     rate-1jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d192-x01-y01     rate-1jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d193-x01-y01     rate-1jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d194-x01-y01     rate-1jet          aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d195-x01-y01     rate-2jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d196-x01-y01     rate-2jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d197-x01-y01     rate-2jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d198-x01-y01     rate-2jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d199-x01-y01     rate-2jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d200-x01-y01     rate-2jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d201-x01-y01     rate-2jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d202-x01-y01     rate-2jet          aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d203-x01-y01     rate-3jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d204-x01-y01     rate-3jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d205-x01-y01     rate-3jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d206-x01-y01     rate-3jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d207-x01-y01     rate-3jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d208-x01-y01     rate-3jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d209-x01-y01     rate-3jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d210-x01-y01     rate-3jet          aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d211-x01-y01     rate-4jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d212-x01-y01     rate-4jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d213-x01-y01     rate-4jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d214-x01-y01     rate-4jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d215-x01-y01     rate-4jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d216-x01-y01     rate-4jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d217-x01-y01     rate-4jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d218-x01-y01     rate-4jet          aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d219-x01-y01     rate-5jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d220-x01-y01     rate-5jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d221-x01-y01     rate-5jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d222-x01-y01     rate-5jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d223-x01-y01     rate-5jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d224-x01-y01     rate-5jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d225-x01-y01     rate-5jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d226-x01-y01     rate-5jet          aleph1
+
+ee        zhad            91.2        -          ALEPH_2004_S5765862_d227-x01-y01     rate-6jet          aleph1
+ee        zhad             133        -          ALEPH_2004_S5765862_d228-x01-y01     rate-6jet          aleph1
+#ee        zhad             161        -          ALEPH_2004_S5765862_d229-x01-y01     rate-6jet          aleph1
+#ee        zhad             172        -          ALEPH_2004_S5765862_d230-x01-y01     rate-6jet          aleph1
+#ee        zhad             183        -          ALEPH_2004_S5765862_d231-x01-y01     rate-6jet          aleph1
+ee        zhad             189        -          ALEPH_2004_S5765862_d232-x01-y01     rate-6jet          aleph1
+ee        zhad             200        -          ALEPH_2004_S5765862_d233-x01-y01     rate-6jet          aleph1
+ee        zhad             206        -          ALEPH_2004_S5765862_d234-x01-y01     rate-6jet          aleph1
+
+
+# DELPHI b fragmentation studies
+ee        zhad            91.2        -          DELPHI_2002_069_CONF_603_d01-x01-y01    b-f-prim          delphi2002
+ee        zhad            91.2        -          DELPHI_2002_069_CONF_603_d02-x01-y01    b-f-weak          delphi2002
+ee        zhad            91.2        -          DELPHI_2002_069_CONF_603_d04-x01-y01    b-f-prim-mean     delphi2002
+ee        zhad            91.2        -          DELPHI_2002_069_CONF_603_d05-x01-y01    b-f-weak-mean     delphi2002
+
+
+# Z pT measurement in CDF Z -> e^+e^- events (CDF_2000_S4155203)
+ppbar     z             1800        -,-,50,130 CDF_2000_S4155203_d01-x01-y01           pT-Z         cdf2010-el
+
+
+# Jet shapes at 7 TeV in ATLAS
+# Differential shape
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x01-y01          js_diff            atlas8-pt030-y0.3
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x02-y01          js_diff            atlas8-pt030-y0.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x03-y01          js_diff            atlas8-pt030-y1.2
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x04-y01          js_diff            atlas8-pt030-y2.1
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x05-y01          js_diff            atlas8-pt030-y2.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x06-y01          js_diff            atlas8-pt030-yall
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x01-y01          js_diff            atlas8-pt040-y0.3
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x02-y01          js_diff            atlas8-pt040-y0.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x03-y01          js_diff            atlas8-pt040-y1.2
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x04-y01          js_diff            atlas8-pt040-y2.1
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x05-y01          js_diff            atlas8-pt040-y2.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x06-y01          js_diff            atlas8-pt040-yall
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x01-y01          js_diff            atlas8-pt060-y0.3
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x02-y01          js_diff            atlas8-pt060-y0.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x03-y01          js_diff            atlas8-pt060-y1.2
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x04-y01          js_diff            atlas8-pt060-y2.1
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x05-y01          js_diff            atlas8-pt060-y2.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x06-y01          js_diff            atlas8-pt060-yall
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x01-y01          js_diff            atlas8-pt080-y0.3
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x02-y01          js_diff            atlas8-pt080-y0.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x03-y01          js_diff            atlas8-pt080-y1.2
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x04-y01          js_diff            atlas8-pt080-y2.1
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x05-y01          js_diff            atlas8-pt080-y2.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x06-y01          js_diff            atlas8-pt080-yall
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x01-y01          js_diff            atlas8-pt110-y0.3
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x02-y01          js_diff            atlas8-pt110-y0.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x03-y01          js_diff            atlas8-pt110-y1.2
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x04-y01          js_diff            atlas8-pt110-y2.1
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x05-y01          js_diff            atlas8-pt110-y2.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x06-y01          js_diff            atlas8-pt110-yall
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x01-y01          js_diff            atlas8-pt160-y0.3
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x02-y01          js_diff            atlas8-pt160-y0.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x03-y01          js_diff            atlas8-pt160-y1.2
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x04-y01          js_diff            atlas8-pt160-y2.1
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x05-y01          js_diff            atlas8-pt160-y2.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x06-y01          js_diff            atlas8-pt160-yall
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x01-y01          js_diff            atlas8-pt210-y0.3
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x02-y01          js_diff            atlas8-pt210-y0.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x03-y01          js_diff            atlas8-pt210-y1.2
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x04-y01          js_diff            atlas8-pt210-y2.1
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x05-y01          js_diff            atlas8-pt210-y2.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x06-y01          js_diff            atlas8-pt210-yall
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x01-y01          js_diff            atlas8-pt260-y0.3
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x02-y01          js_diff            atlas8-pt260-y0.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x03-y01          js_diff            atlas8-pt260-y1.2
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x04-y01          js_diff            atlas8-pt260-y2.1
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x05-y01          js_diff            atlas8-pt260-y2.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x06-y01          js_diff            atlas8-pt260-yall
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x01-y01          js_diff            atlas8-pt310-y0.3
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x02-y01          js_diff            atlas8-pt310-y0.8
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x03-y01          js_diff            atlas8-pt310-y1.2
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x04-y01          js_diff            atlas8-pt310-y2.1
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x06-y01          js_diff            atlas8-pt310-yall
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x01-y01          js_diff            atlas8-pt400-y0.3
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x02-y01          js_diff            atlas8-pt400-y0.8
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x03-y01          js_diff            atlas8-pt400-y1.2
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x04-y01          js_diff            atlas8-pt400-y2.1
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x06-y01          js_diff            atlas8-pt400-yall
+pp        jets       7000        200        ATLAS_2011_S8924791_d11-x06-y01          js_diff            atlas8-pt500-yall
+
+
+# Integral shape
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x01-y02          js_int            atlas8-pt030-y0.3
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x02-y02          js_int            atlas8-pt030-y0.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x03-y02          js_int            atlas8-pt030-y1.2
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x04-y02          js_int            atlas8-pt030-y2.1
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x05-y02          js_int            atlas8-pt030-y2.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d01-x06-y02          js_int            atlas8-pt030-yall
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x01-y02          js_int            atlas8-pt040-y0.3
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x02-y02          js_int            atlas8-pt040-y0.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x03-y02          js_int            atlas8-pt040-y1.2
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x04-y02          js_int            atlas8-pt040-y2.1
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x05-y02          js_int            atlas8-pt040-y2.8
+pp        jets       7000        10         ATLAS_2011_S8924791_d02-x06-y02          js_int            atlas8-pt040-yall
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x01-y02          js_int            atlas8-pt060-y0.3
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x02-y02          js_int            atlas8-pt060-y0.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x03-y02          js_int            atlas8-pt060-y1.2
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x04-y02          js_int            atlas8-pt060-y2.1
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x05-y02          js_int            atlas8-pt060-y2.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d03-x06-y02          js_int            atlas8-pt060-yall
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x01-y02          js_int            atlas8-pt080-y0.3
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x02-y02          js_int            atlas8-pt080-y0.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x03-y02          js_int            atlas8-pt080-y1.2
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x04-y02          js_int            atlas8-pt080-y2.1
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x05-y02          js_int            atlas8-pt080-y2.8
+pp        jets       7000        30         ATLAS_2011_S8924791_d04-x06-y02          js_int            atlas8-pt080-yall
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x01-y02          js_int            atlas8-pt110-y0.3
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x02-y02          js_int            atlas8-pt110-y0.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x03-y02          js_int            atlas8-pt110-y1.2
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x04-y02          js_int            atlas8-pt110-y2.1
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x05-y02          js_int            atlas8-pt110-y2.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d05-x06-y02          js_int            atlas8-pt110-yall
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x01-y02          js_int            atlas8-pt160-y0.3
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x02-y02          js_int            atlas8-pt160-y0.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x03-y02          js_int            atlas8-pt160-y1.2
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x04-y02          js_int            atlas8-pt160-y2.1
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x05-y02          js_int            atlas8-pt160-y2.8
+pp        jets       7000        50         ATLAS_2011_S8924791_d06-x06-y02          js_int            atlas8-pt160-yall
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x01-y02          js_int            atlas8-pt210-y0.3
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x02-y02          js_int            atlas8-pt210-y0.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x03-y02          js_int            atlas8-pt210-y1.2
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x04-y02          js_int            atlas8-pt210-y2.1
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x05-y02          js_int            atlas8-pt210-y2.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d07-x06-y02          js_int            atlas8-pt210-yall
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x01-y02          js_int            atlas8-pt260-y0.3
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x02-y02          js_int            atlas8-pt260-y0.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x03-y02          js_int            atlas8-pt260-y1.2
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x04-y02          js_int            atlas8-pt260-y2.1
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x05-y02          js_int            atlas8-pt260-y2.8
+pp        jets       7000        100        ATLAS_2011_S8924791_d08-x06-y02          js_int            atlas8-pt260-yall
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x01-y02          js_int            atlas8-pt310-y0.3
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x02-y02          js_int            atlas8-pt310-y0.8
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x03-y02          js_int            atlas8-pt310-y1.2
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x04-y02          js_int            atlas8-pt310-y2.1
+pp        jets       7000        150        ATLAS_2011_S8924791_d09-x06-y02          js_int            atlas8-pt310-yall
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x01-y02          js_int            atlas8-pt400-y0.3
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x02-y02          js_int            atlas8-pt400-y0.8
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x03-y02          js_int            atlas8-pt400-y1.2
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x04-y02          js_int            atlas8-pt400-y2.1
+pp        jets       7000        150        ATLAS_2011_S8924791_d10-x06-y02          js_int            atlas8-pt400-yall
+pp        jets       7000        200        ATLAS_2011_S8924791_d11-x06-y02          js_int            atlas8-pt500-yall
+
+
+
+# W+jets jet multiplicities and pT (ATLAS_2010_S8919674)
+# jet multiplicity:
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d01-x01-y01          njets             atlas9-el
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d02-x01-y01          njets             atlas9-mu
+# pT of 1st jet:
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d05-x01-y01          pt                atlas9-el-1
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d06-x01-y01          pt                atlas9-mu-1
+# pT of 2nd jet:
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d07-x01-y01          pt                atlas9-el-2
+pp        winclusive       7000        10         ATLAS_2010_S8919674_d08-x01-y01          pt                atlas9-mu-2
+
+
+
+# ATLAS charged particles at 900 GeV (ATLAS_2010_S8918562)
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d18-x01-y01   nch          atlas7.1-2-100
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d11-x01-y01   pt           atlas7.1-2-100
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d04-x01-y01   eta          atlas7.1-2-100
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d24-x01-y01   avgpt-vs-nch atlas7.1-2-100
+
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d34-x01-y01   nch          atlas7.1-20-100
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d30-x01-y01   pt           atlas7.1-20-100
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d26-x01-y01   eta          atlas7.1-20-100
+
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d36-x01-y01   nch          atlas7.1-1-2500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d32-x01-y01   pt           atlas7.1-1-2500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d28-x01-y01   eta          atlas7.1-1-2500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d38-x01-y01   avgpt-vs-nch atlas7.1-1-2500
+
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d15-x01-y01   nch          atlas7.1-1-500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d08-x01-y01   pt           atlas7.1-1-500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d01-x01-y01   eta          atlas7.1-1-500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d22-x01-y01   avgpt-vs-nch atlas7.1-1-500
+
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d20-x01-y01   nch          atlas7.1-6-500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d13-x01-y01   pt           atlas7.1-6-500
+pp        uemb-soft         900          -          ATLAS_2010_S8918562_d06-x01-y01   eta          atlas7.1-6-500
+
+# ATLAS charged particles at 2360 GeV (ATLAS_2010_S8918562)
+pp        uemb-soft         2360         -          ATLAS_2010_S8918562_d16-x01-y01   nch          atlas7.2-1-500
+pp        uemb-soft         2360         -          ATLAS_2010_S8918562_d09-x01-y01   pt           atlas7.2-1-500
+pp        uemb-soft         2360         -          ATLAS_2010_S8918562_d02-x01-y01   eta          atlas7.2-1-500
+
+# ATLAS charged particles at 7000 GeV (ATLAS_2010_S8918562)
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d19-x01-y01   nch           atlas7.3-2-100
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d12-x01-y01   pt            atlas7.3-2-100
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d05-x01-y01   eta           atlas7.3-2-100
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d25-x01-y01   avgpt-vs-nch  atlas7.3-2-100
+
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d35-x01-y01   nch           atlas7.3-20-100
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d31-x01-y01   pt            atlas7.3-20-100
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d27-x01-y01   eta           atlas7.3-20-100
+
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d37-x01-y01   nch           atlas7.3-1-2500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d33-x01-y01   pt            atlas7.3-1-2500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d29-x01-y01   eta           atlas7.3-1-2500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d39-x01-y01   avgpt-vs-nch  atlas7.3-1-2500
+
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d17-x01-y01   nch           atlas7.3-1-500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d10-x01-y01   pt            atlas7.3-1-500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d03-x01-y01   eta           atlas7.3-1-500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d23-x01-y01   avgpt-vs-nch  atlas7.3-1-500
+
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d21-x01-y01   nch           atlas7.3-6-500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d14-x01-y01   pt            atlas7.3-6-500
+pp        uemb-soft         7000         -          ATLAS_2010_S8918562_d07-x01-y01   eta           atlas7.3-6-500
+
+
+# CMS event shapes at 7 TeV (CMS_2011_S8957746)
+# pT_jet1 bins = 90 - 125 - 200 - inf.
+# central transverse thrust:
+pp        jets         7000         50          CMS_2011_S8957746_d01-x01-y01    ctt           cms1-pt090
+pp        jets         7000         70          CMS_2011_S8957746_d03-x01-y01    ctt           cms1-pt125
+pp        jets         7000         100         CMS_2011_S8957746_d05-x01-y01    ctt           cms1-pt200
+# central thrust minor:
+pp        jets         7000         50          CMS_2011_S8957746_d02-x01-y01    ctm           cms1-pt090
+pp        jets         7000         70          CMS_2011_S8957746_d04-x01-y01    ctm           cms1-pt125
+pp        jets         7000         100         CMS_2011_S8957746_d06-x01-y01    ctm           cms1-pt200
+
+
+# Measurement of differential Z/gamma* pT (D0_2010_S8671338)
+ppbar     z          1960         -,-,50,120   D0_2010_S8671338_d01-x01-y01    pT-Z-norm      d02010-mu
+ppbar     z          1960         -,-,50,120   D0_2010_S8671338_d02-x01-y01    pT-Z           d02010-mu
+
+
+# D0 measurtement of $Z/\gamma^*$ pT with novel technique (D0_2010_S8821313)
+ppbar     z          1960         -,-,50,120   D0_2010_S8821313_d01-x01-y01    phiStar      d02010-el-1
+ppbar     z          1960         -,-,50,120   D0_2010_S8821313_d01-x01-y02    phiStar      d02010-el-2
+ppbar     z          1960         -,-,50,120   D0_2010_S8821313_d01-x01-y03    phiStar      d02010-el-3
+ppbar     z          1960         -,-,50,120   D0_2010_S8821313_d02-x01-y01    phiStar      d02010-mu-1
+ppbar     z          1960         -,-,50,120   D0_2010_S8821313_d02-x01-y02    phiStar      d02010-mu-2
+
+
+# OPAL Event shape distributions and moments in $e^+ e^-$ -> hadrons at 91--209 GeV (OPAL_2004_S6132243)
+ee        zhad          91.2       -          OPAL_2004_S6132243_d01-x01-y01   tau          opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d02-x01-y01   Mh2          opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d03-x01-y01   C            opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d04-x01-y01   broadj       opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d05-x01-y01   broadjh      opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d06-x01-y01   Y3           opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d07-x01-y01   Tmajor       opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d08-x01-y01   Tminor       opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d09-x01-y01   A            opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d10-x01-y01   S            opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d11-x01-y01   tO           opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d12-x01-y01   Ml2          opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d13-x01-y01   broadjl      opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d14-x01-y01   D            opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d15-x01-y01   tau-mom      opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d16-x01-y01   Mh2-mom      opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d17-x01-y01   C-mom        opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d18-x01-y01   broadj-mom   opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d19-x01-y01   broadjh-mom  opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d20-x01-y01   Y3-mom       opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d21-x01-y01   Tmajor-mom   opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d22-x01-y01   Tminor-mom   opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d23-x01-y01   S-mom        opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d24-x01-y01   O-mom        opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d25-x01-y01   Ml2-mom      opal-2004
+ee        zhad          91.2       -          OPAL_2004_S6132243_d26-x01-y01   broadjl-mom  opal-2004
+
+ee        zhad          133        -          OPAL_2004_S6132243_d01-x01-y02   tau          opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d02-x01-y02   Mh2          opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d03-x01-y02   C            opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d04-x01-y02   broadj       opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d05-x01-y02   broadjh      opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d06-x01-y02   Y3           opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d07-x01-y02   Tmajor       opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d08-x01-y02   Tminor       opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d09-x01-y02   A            opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d10-x01-y02   S            opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d11-x01-y02   tO           opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d12-x01-y02   Ml2          opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d13-x01-y02   broadjl      opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d14-x01-y02   D            opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d15-x01-y02   tau-mom      opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d16-x01-y02   Mh2-mom      opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d17-x01-y02   C-mom        opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d18-x01-y02   broadj-mom   opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d19-x01-y02   broadjh-mom  opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d20-x01-y02   Y3-mom       opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d21-x01-y02   Tmajor-mom   opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d22-x01-y02   Tminor-mom   opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d23-x01-y02   S-mom        opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d24-x01-y02   O-mom        opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d25-x01-y02   Ml2-mom      opal-2004
+ee        zhad          133        -          OPAL_2004_S6132243_d26-x01-y02   broadjl-mom  opal-2004
+
+# Following histograms are masked due to low statistics.
+#ee        zhad          177        -          OPAL_2004_S6132243_d01-x01-y03   tau          opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d02-x01-y03   Mh2          opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d03-x01-y03   C            opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d04-x01-y03   broadj       opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d05-x01-y03   broadjh      opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d06-x01-y03   Y3           opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d07-x01-y03   Tmajor       opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d08-x01-y03   Tminor       opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d09-x01-y03   A            opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d10-x01-y03   S            opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d11-x01-y03   tO           opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d12-x01-y03   Ml2          opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d13-x01-y03   broadjl      opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d14-x01-y03   D            opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d15-x01-y03   tau-mom      opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d16-x01-y03   Mh2-mom      opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d17-x01-y03   C-mom        opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d18-x01-y03   broadj-mom   opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d19-x01-y03   broadjh-mom  opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d20-x01-y03   Y3-mom       opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d21-x01-y03   Tmajor-mom   opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d22-x01-y03   Tminor-mom   opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d23-x01-y03   S-mom        opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d24-x01-y03   O-mom        opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d25-x01-y03   Ml2-mom      opal-2004
+#ee        zhad          177        -          OPAL_2004_S6132243_d26-x01-y03   broadjl-mom  opal-2004
+
+ee        zhad          197        -          OPAL_2004_S6132243_d01-x01-y04   tau          opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d02-x01-y04   Mh2          opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d03-x01-y04   C            opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d04-x01-y04   broadj       opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d05-x01-y04   broadjh      opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d06-x01-y04   Y3           opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d07-x01-y04   Tmajor       opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d08-x01-y04   Tminor       opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d09-x01-y04   A            opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d10-x01-y04   S            opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d11-x01-y04   tO           opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d12-x01-y04   Ml2          opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d13-x01-y04   broadjl      opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d14-x01-y04   D            opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d15-x01-y04   tau-mom      opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d16-x01-y04   Mh2-mom      opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d17-x01-y04   C-mom        opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d18-x01-y04   broadj-mom   opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d19-x01-y04   broadjh-mom  opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d20-x01-y04   Y3-mom       opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d21-x01-y04   Tmajor-mom   opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d22-x01-y04   Tminor-mom   opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d23-x01-y04   S-mom        opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d24-x01-y04   O-mom        opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d25-x01-y04   Ml2-mom      opal-2004
+ee        zhad          197        -          OPAL_2004_S6132243_d26-x01-y04   broadjl-mom  opal-2004
+
+
+# OPAL flavour dependent fragmentation in $e^+ e^-$ -> hadrons at 91 GeV (OPAL_1998_S3780481)
+ee        zhad          91.2        -          OPAL_1998_S3780481_d01-x01-y01   x              opal-1998-uds
+ee        zhad          91.2        -          OPAL_1998_S3780481_d02-x01-y01   x              opal-1998-c
+ee        zhad          91.2        -          OPAL_1998_S3780481_d03-x01-y01   x              opal-1998-b
+ee        zhad          91.2        -          OPAL_1998_S3780481_d04-x01-y01   x              opal-1998-all
+ee        zhad          91.2        -          OPAL_1998_S3780481_d05-x01-y01   xln            opal-1998-uds
+ee        zhad          91.2        -          OPAL_1998_S3780481_d06-x01-y01   xln            opal-1998-c
+ee        zhad          91.2        -          OPAL_1998_S3780481_d07-x01-y01   xln            opal-1998-b
+ee        zhad          91.2        -          OPAL_1998_S3780481_d08-x01-y01   xln            opal-1998-all
+ee        zhad          91.2        -          OPAL_1998_S3780481_d09-x01-y01   -                -
+ee        zhad          91.2        -          OPAL_1998_S3780481_d09-x01-y02   -                -
+ee        zhad          91.2        -          OPAL_1998_S3780481_d09-x01-y03   -                -
+ee        zhad          91.2        -          OPAL_1998_S3780481_d09-x01-y04   -                -
+
+
+# CMS strange production analysis (CMS_2011_S8978280)
+pp        uemb-soft     900        -          CMS_2011_S8978280_d01-x01-y01    K0S_eta        cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d02-x01-y01    K0S_pt         cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d03-x01-y01    L_eta          cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d04-x01-y01    L_pt           cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d05-x01-y01    Xim_eta        cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d06-x01-y01    Xim_pt         cms2011-yless2
+# Ratios
+pp        uemb-soft     900        -          CMS_2011_S8978280_d07-x01-y01    L2K0S_pt       cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d08-x01-y01    Xim2L_pt       cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d09-x01-y01    L2K0S_eta      cms2011-yless2
+pp        uemb-soft     900        -          CMS_2011_S8978280_d10-x01-y01    Xim2L_eta      cms2011-yless2
+
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d01-x01-y02    K0S_eta       cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d02-x01-y02    K0S_pt        cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d03-x01-y02    L_eta         cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d04-x01-y02    L_pt          cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d05-x01-y02    Xim_eta       cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d06-x01-y02    Xim_pt        cms2011-yless2
+# Ratios
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d07-x01-y02    L2K0S_pt      cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d08-x01-y02    Xim2L_pt      cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d09-x01-y02    L2K0S_eta     cms2011-yless2
+pp        uemb-soft     7000        -          CMS_2011_S8978280_d10-x01-y02    Xim2L_eta     cms2011-yless2
+
+
+# Traditional UE measurement. Charge particle analysis transverse to the leading jets. (CMS_2011_S9120041)
+pp        uemb-hard     7000        -          CMS_2011_S9120041_d01-x01-y01    nch-vs-pt-trns    cms2011
+pp        uemb-hard     7000        -          CMS_2011_S9120041_d02-x01-y01    sumpt-vs-pt-trns  cms2011
+pp        uemb-hard      900        -          CMS_2011_S9120041_d03-x01-y01    nch-vs-pt-trns    cms2011
+pp        uemb-hard      900        -          CMS_2011_S9120041_d04-x01-y01    sumpt-vs-pt-trns  cms2011
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d05-x01-y01    nch               cms2011-pt20
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d06-x01-y01    sumpt             cms2011-pt20
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d07-x01-y01    pt                cms2011-pt20
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d08-x01-y01    nch               cms2011-pt3
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d09-x01-y01    sumpt             cms2011-pt3
+pp        uemb-soft     7000        -          CMS_2011_S9120041_d10-x01-y01    pt                cms2011-pt3
+pp        uemb-soft      900        -          CMS_2011_S9120041_d11-x01-y01    nch               cms2011-pt3
+pp        uemb-soft      900        -          CMS_2011_S9120041_d12-x01-y01    sumpt             cms2011-pt3
+pp        uemb-soft      900        -          CMS_2011_S9120041_d13-x01-y01    pt                cms2011-pt3
+
+
+# Measurement of ratio of the 3-jet over 2-jet cross section in pp collisions (CMS_2011_S9088458)
+pp        jets          7000        50         CMS_2011_S9088458_d01-x01-y01    R32-vs-ht        cms2011
+
+
+# Measurement of the Inclusive Jet Cross Section (CMS_2011_S9086218)
+pp        jets          7000        10         CMS_2011_S9086218_d01-x01-y01    pt               cms2011-y0.5
+pp        jets          7000        10         CMS_2011_S9086218_d02-x01-y01    pt               cms2011-y1.0
+pp        jets          7000        10         CMS_2011_S9086218_d03-x01-y01    pt               cms2011-y1.5
+pp        jets          7000        10         CMS_2011_S9086218_d04-x01-y01    pt               cms2011-y2.0
+pp        jets          7000        10         CMS_2011_S9086218_d05-x01-y01    pt               cms2011-y2.5
+pp        jets          7000        10         CMS_2011_S9086218_d06-x01-y01    pt               cms2011-y3.0
+
+
+# Measurement of Dijet Angular Distributions and Search for Quark Compositeness (CMS_2011_S8968497)
+pp        jets          7000        20,-,2160  CMS_2011_S8968497_d01-x01-y01    dijet_chi        cms2011-m2200
+pp        jets          7000        20,-,1760  CMS_2011_S8968497_d02-x01-y01    dijet_chi        cms2011-m1800
+pp        jets          7000        20,-,1360  CMS_2011_S8968497_d03-x01-y01    dijet_chi        cms2011-m1400
+pp        jets          7000        20,-,1060  CMS_2011_S8968497_d04-x01-y01    dijet_chi        cms2011-m1100
+pp        jets          7000        20,-,810   CMS_2011_S8968497_d05-x01-y01    dijet_chi        cms2011-m850
+pp        jets          7000        20,-,610   CMS_2011_S8968497_d06-x01-y01    dijet_chi        cms2011-m650
+pp        jets          7000        20,-,460   CMS_2011_S8968497_d07-x01-y01    dijet_chi        cms2011-m500
+pp        jets          7000        20,-,310   CMS_2011_S8968497_d08-x01-y01    dijet_chi        cms2011-m350
+pp        jets          7000        20,-,210   CMS_2011_S8968497_d09-x01-y01    dijet_chi        cms2011-m250
+
+
+# Charged particle transverse momentum and pseudorapidity spectra (CMS_2010_S8547297)
+pp        uemb-soft      900        -          CMS_2010_S8547297_d01-x01-y01    pt    cms2010-eta0.2
+pp        uemb-soft      900        -          CMS_2010_S8547297_d01-x01-y02    pt    cms2010-eta0.4
+pp        uemb-soft      900        -          CMS_2010_S8547297_d01-x01-y03    pt    cms2010-eta0.6
+pp        uemb-soft      900        -          CMS_2010_S8547297_d01-x01-y04    pt    cms2010-eta0.8
+pp        uemb-soft      900        -          CMS_2010_S8547297_d02-x01-y01    pt    cms2010-eta1.0
+pp        uemb-soft      900        -          CMS_2010_S8547297_d02-x01-y02    pt    cms2010-eta1.2
+pp        uemb-soft      900        -          CMS_2010_S8547297_d02-x01-y03    pt    cms2010-eta1.4
+pp        uemb-soft      900        -          CMS_2010_S8547297_d02-x01-y04    pt    cms2010-eta1.6
+pp        uemb-soft      900        -          CMS_2010_S8547297_d03-x01-y01    pt    cms2010-eta1.8
+pp        uemb-soft      900        -          CMS_2010_S8547297_d03-x01-y02    pt    cms2010-eta2.0
+pp        uemb-soft      900        -          CMS_2010_S8547297_d03-x01-y03    pt    cms2010-eta2.2
+pp        uemb-soft      900        -          CMS_2010_S8547297_d03-x01-y04    pt    cms2010-eta2.4
+
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d04-x01-y01    pt    cms2010-eta0.2
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d04-x01-y02    pt    cms2010-eta0.4
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d04-x01-y03    pt    cms2010-eta0.6
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d04-x01-y04    pt    cms2010-eta0.8
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d05-x01-y01    pt    cms2010-eta1.0
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d05-x01-y02    pt    cms2010-eta1.2
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d05-x01-y03    pt    cms2010-eta1.4
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d05-x01-y04    pt    cms2010-eta1.6
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d06-x01-y01    pt    cms2010-eta1.8
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d06-x01-y02    pt    cms2010-eta2.0
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d06-x01-y03    pt    cms2010-eta2.2
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d06-x01-y04    pt    cms2010-eta2.4
+
+pp        uemb-soft      900        -          CMS_2010_S8547297_d07-x01-y01    pt    cms2010-eta-all
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d07-x01-y02    pt    cms2010-eta-all
+pp        uemb-soft      900        -          CMS_2010_S8547297_d08-x01-y01    eta   cms2010
+pp        uemb-soft     2360        -          CMS_2010_S8547297_d08-x01-y02    eta   cms2010
+
+
+# Charged particle transverse momentum and pseudorapidity spectra (CMS_2010_S8656010)
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d01-x01-y01    pt    cms2010-eta0.2
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d01-x01-y02    pt    cms2010-eta0.4
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d01-x01-y03    pt    cms2010-eta0.6
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d01-x01-y04    pt    cms2010-eta0.8
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d02-x01-y01    pt    cms2010-eta1.0
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d02-x01-y02    pt    cms2010-eta1.2
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d02-x01-y03    pt    cms2010-eta1.4
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d02-x01-y04    pt    cms2010-eta1.6
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d03-x01-y01    pt    cms2010-eta1.8
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d03-x01-y02    pt    cms2010-eta2.0
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d03-x01-y03    pt    cms2010-eta2.2
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d03-x01-y04    pt    cms2010-eta2.4
+
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d04-x01-y01    pt    cms2010-eta-all
+pp        uemb-soft     7000        -          CMS_2010_S8656010_d05-x01-y01    eta   cms2010
+
+
+# Measurement of the NSD charged particle multiplicity (CMS_2011_S8884919)
+pp        uemb-soft      900        -          CMS_2011_S8884919_d02-x01-y01    nch            cms2011-eta0.5
+pp        uemb-soft      900        -          CMS_2011_S8884919_d03-x01-y01    nch            cms2011-eta1.0
+pp        uemb-soft      900        -          CMS_2011_S8884919_d04-x01-y01    nch            cms2011-eta1.5
+pp        uemb-soft      900        -          CMS_2011_S8884919_d05-x01-y01    nch            cms2011-eta2.0
+pp        uemb-soft      900        -          CMS_2011_S8884919_d06-x01-y01    nch            cms2011-eta2.4
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d07-x01-y01    nch            cms2011-eta0.5
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d08-x01-y01    nch            cms2011-eta1.0
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d09-x01-y01    nch            cms2011-eta1.5
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d10-x01-y01    nch            cms2011-eta2.0
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d11-x01-y01    nch            cms2011-eta2.4
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d12-x01-y01    nch            cms2011-eta0.5
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d13-x01-y01    nch            cms2011-eta1.0
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d14-x01-y01    nch            cms2011-eta1.5
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d15-x01-y01    nch            cms2011-eta2.0
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d16-x01-y01    nch            cms2011-eta2.4
+
+pp        uemb-soft      900        -          CMS_2011_S8884919_d20-x01-y01    nch            cms2011-eta-all
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d21-x01-y01    nch            cms2011-eta-all
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d22-x01-y01    nch            cms2011-eta-all
+
+pp        uemb-soft      900        -          CMS_2011_S8884919_d23-x01-y01    avgpt-vs-nch   cms2011
+pp        uemb-soft     2360        -          CMS_2011_S8884919_d24-x01-y01    avgpt-vs-nch   cms2011
+pp        uemb-soft     7000        -          CMS_2011_S8884919_d25-x01-y01    avgpt-vs-nch   cms2011
+
+
+# Dijet Azimuthal Decorrelations (CMS_2011_S8950903)
+pp        jets          7000        30         CMS_2011_S8950903_d01-x01-y01    dijet_dphi     cms2011-pt080-110
+pp        jets          7000        50         CMS_2011_S8950903_d02-x01-y01    dijet_dphi     cms2011-pt110-140
+pp        jets          7000        80         CMS_2011_S8950903_d03-x01-y01    dijet_dphi     cms2011-pt140-200
+pp        jets          7000        100        CMS_2011_S8950903_d04-x01-y01    dijet_dphi     cms2011-pt200-300
+pp        jets          7000        150        CMS_2011_S8950903_d05-x01-y01    dijet_dphi     cms2011-pt300-7000
+
+
+# LHCb differential cross section measurement of prompt $K^0_S$ production (LHCB_2010_S8758301)
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d01-x01-y01   K0S_pt         lhcb2010-y-2.5-3.0
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d01-x01-y02   K0S_pt         lhcb2010-y-3.0-3.5
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d01-x01-y03   K0S_pt         lhcb2010-y-3.5-4.0
+
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d02-x01-y01   K0S_pt         lhcb2010-d-y-2.5-3.0
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d02-x01-y02   K0S_pt         lhcb2010-d-y-3.0-3.5
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d02-x01-y03   K0S_pt         lhcb2010-d-y-3.5-4.0
+
+pp        uemb-soft      900        -          LHCB_2010_S8758301_d03-x01-y01   K0S_pt         lhcb2010-d-y-2.5-4.0
+
+
+# Strange particle production (ALICE_2011_S8909580)
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d01-x01-y01   K0S_pt        alice2011-y0.75
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d02-x01-y01   L_pt          alice2011-y0.75
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d03-x01-y01   Lbar_pt       alice2011-y0.75
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d04-x01-y01   Xi_pt         alice2011-y0.8
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d05-x01-y01   phi_pt        alice2011-y0.6
+pp        uemb-soft      900        -          ALICE_2011_S8909580_d06-x01-y01   L2K0S_pt      alice2011-y0.75
+
+
+# Tranverse momentum spectra of pions, kaons and protons (ALICE_2011_S8945144)
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d01-x01-y01   pip_pt        alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d01-x01-y02   pim_pt        alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d02-x01-y01   Kp_pt         alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d02-x01-y02   Km_pt         alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d03-x01-y01   p_pt          alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d03-x01-y02   pbar_pt       alice2011-eta0.5
+pp        uemb-soft      900        -          ALICE_2011_S8945144_d04-x01-y01   pt-vs-mass    alice2011-eta0.5
+
+
+# ttbar forward-backward assymetry MC analysis (MC_FBA_TTBAR) - MCPLOTS analysis
+# 7 TeV
+pp        top-mc        7000        -          MC_FBA_TTBAR_dphittbar.all             dphittbar       mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_dphittbar.asym            dphittbar.asym  mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_dphittbar.bw              dphittbar       mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dphittbar.fw              dphittbar       mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.all               dyttbar         mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.asym              dyttbar.asym    mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.bw                dyttbar         mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.fw                dyttbar         mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.mttc.upper        dyttbar         mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.dphittbar.all     dphittbar       mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.dphittbar.asym    dphittbar.asym  mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.dphittbar.bw      dphittbar       mc-highMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.dphittbar.fw      dphittbar       mc-highMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTtop.all         pTtop           mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTtop.asym        pTtop.asym      mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTtop.bw          pTtop           mc-highMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTtop.fw          pTtop           mc-highMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTttbar.all       pTttbar         mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTttbar.asym      pTttbar.asym    mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTttbar.bw        pTttbar         mc-highMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.pTttbar.fw        pTttbar         mc-highMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.yttbar.all        yttbar          mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.yttbar.asym       yttbar.asym     mc-highMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.yttbar.bw         yttbar          mc-highMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_highMtt.yttbar.fw         yttbar          mc-highMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.mttc.lower        dyttbar         mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.dphittbar.all      dphittbar       mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.dphittbar.asym     dphittbar.asym  mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.dphittbar.bw       dphittbar       mc-lowMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.dphittbar.fw       dphittbar       mc-lowMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTtop.all          pTtop           mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTtop.asym         pTtop.asym      mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTtop.bw           pTtop           mc-lowMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTtop.fw           pTtop           mc-lowMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTttbar.all        pTttbar         mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTttbar.asym       pTttbar.asym    mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTttbar.bw         pTttbar         mc-lowMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.pTttbar.fw         pTttbar         mc-lowMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.yttbar.all         yttbar          mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.yttbar.asym        yttbar.asym     mc-lowMtt
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.yttbar.bw          yttbar          mc-lowMtt-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_lowMtt.yttbar.fw          yttbar          mc-lowMtt-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_mttbar.all                mttbar          mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_mttbar.asym               mttbar.asym     mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_mttbar.bw                 mttbar          mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_mttbar.fw                 mttbar          mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTatop.all                pTatop          mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTatop.asym               pTatop.asym     mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTatop.bw                 pTatop          mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTatop.fw                 pTatop          mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTtop.all                 pTtop           mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTtop.asym                pTtop.asym      mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTtop.bw                  pTtop           mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTtop.fw                  pTtop           mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTttbar.all               pTttbar         mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTttbar.asym              pTttbar.asym    mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTttbar.bw                pTttbar         mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_pTttbar.fw                pTttbar         mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_xseccut                   xsec            mc-cut
+pp        top-mc        7000        -          MC_FBA_TTBAR_xsectot                   xsec            mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_yatop.all                 yatop           mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_yatop.asym                yatop.asym      mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_yatop.bw                  yatop           mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_yatop.fw                  yatop           mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_ytop.all                  ytop            mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_ytop.asym                 ytop.asym       mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_ytop.bw                   ytop            mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_ytop.fw                   ytop            mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_yttbar.all                yttbar          mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_yttbar.asym               yttbar.asym     mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_yttbar.bw                 yttbar          mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_yttbar.fw                 yttbar          mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_moddyttbar.all            moddyttbar      mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_moddyttbar.asym           moddyttbar.asym mc
+pp        top-mc        7000        -          MC_FBA_TTBAR_moddyttbar.bw             moddyttbar      mc-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_moddyttbar.fw             moddyttbar      mc-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.ptc.upper         dyttbar         mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.dphittbar.all    dphittbar       mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.dphittbar.asym   dphittbar.asym  mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.dphittbar.bw     dphittbar       mc-highPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.dphittbar.fw     dphittbar       mc-highPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.pTtop.all        pTtop           mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.pTtop.asym       pTtop.asym      mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.pTtop.bw         pTtop           mc-highPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.pTtop.fw         pTtop           mc-highPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.yttbar.all       yttbar          mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.yttbar.asym      yttbar.asym     mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.yttbar.bw        yttbar          mc-highPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.yttbar.fw        yttbar          mc-highPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.mttbar.all       mttbar          mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.mttbar.asym      mttbar.asym     mc-highPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.mttbar.bw        mttbar          mc-highPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.highPT.mttbar.fw        mttbar          mc-highPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_dyttbar.ptc.lower         dyttbar         mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.dphittbar.all     dphittbar       mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.dphittbar.asym    dphittbar.asym  mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.dphittbar.bw      dphittbar       mc-lowPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.dphittbar.fw      dphittbar       mc-lowPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.pTtop.all         pTtop           mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.pTtop.asym        pTtop.asym      mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.pTtop.bw          pTtop           mc-lowPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.pTtop.fw          pTtop           mc-lowPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.yttbar.all        yttbar          mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.yttbar.asym       yttbar.asym     mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.yttbar.bw         yttbar          mc-lowPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.yttbar.fw         yttbar          mc-lowPT-fw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.mttbar.all        mttbar          mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.mttbar.asym       mttbar.asym     mc-lowPT
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.mttbar.bw         mttbar          mc-lowPT-bw
+pp        top-mc        7000        -          MC_FBA_TTBAR_z.lowPT.mttbar.fw         mttbar          mc-lowPT-fw
+
+# 1960 GeV
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dphittbar.all             dphittbar       mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dphittbar.asym            dphittbar.asym  mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dphittbar.bw              dphittbar       mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dphittbar.fw              dphittbar       mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.all               dyttbar         mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.asym              dyttbar.asym    mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.bw                dyttbar         mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.fw                dyttbar         mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.mttc.upper        dyttbar         mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.dphittbar.all     dphittbar       mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.dphittbar.asym    dphittbar.asym  mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.dphittbar.bw      dphittbar       mc-highMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.dphittbar.fw      dphittbar       mc-highMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTtop.all         pTtop           mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTtop.asym        pTtop.asym      mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTtop.bw          pTtop           mc-highMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTtop.fw          pTtop           mc-highMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTttbar.all       pTttbar         mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTttbar.asym      pTttbar.asym    mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTttbar.bw        pTttbar         mc-highMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.pTttbar.fw        pTttbar         mc-highMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.yttbar.all        yttbar          mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.yttbar.asym       yttbar.asym     mc-highMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.yttbar.bw         yttbar          mc-highMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_highMtt.yttbar.fw         yttbar          mc-highMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.mttc.lower        dyttbar         mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.dphittbar.all      dphittbar       mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.dphittbar.asym     dphittbar.asym  mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.dphittbar.bw       dphittbar       mc-lowMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.dphittbar.fw       dphittbar       mc-lowMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTtop.all          pTtop           mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTtop.asym         pTtop.asym      mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTtop.bw           pTtop           mc-lowMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTtop.fw           pTtop           mc-lowMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTttbar.all        pTttbar         mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTttbar.asym       pTttbar.asym    mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTttbar.bw         pTttbar         mc-lowMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.pTttbar.fw         pTttbar         mc-lowMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.yttbar.all         yttbar          mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.yttbar.asym        yttbar.asym     mc-lowMtt
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.yttbar.bw          yttbar          mc-lowMtt-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_lowMtt.yttbar.fw          yttbar          mc-lowMtt-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_mttbar.all                mttbar          mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_mttbar.asym               mttbar.asym     mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_mttbar.bw                 mttbar          mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_mttbar.fw                 mttbar          mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTatop.all                pTatop          mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTatop.asym               pTatop.asym     mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTatop.bw                 pTatop          mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTatop.fw                 pTatop          mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTtop.all                 pTtop           mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTtop.asym                pTtop.asym      mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTtop.bw                  pTtop           mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTtop.fw                  pTtop           mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTttbar.all               pTttbar         mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTttbar.asym              pTttbar.asym    mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTttbar.bw                pTttbar         mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_pTttbar.fw                pTttbar         mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_xseccut                   xsec            mc-cut
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_xsectot                   xsec            mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yatop.all                 yatop           mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yatop.asym                yatop.asym      mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yatop.bw                  yatop           mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yatop.fw                  yatop           mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_ytop.all                  ytop            mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_ytop.asym                 ytop.asym       mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_ytop.bw                   ytop            mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_ytop.fw                   ytop            mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yttbar.all                yttbar          mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yttbar.asym               yttbar.asym     mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yttbar.bw                 yttbar          mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_yttbar.fw                 yttbar          mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_moddyttbar.all            moddyttbar      mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_moddyttbar.asym           moddyttbar.asym mc
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_moddyttbar.bw             moddyttbar      mc-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_moddyttbar.fw             moddyttbar      mc-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.ptc.upper         dyttbar         mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.dphittbar.all    dphittbar       mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.dphittbar.asym   dphittbar.asym  mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.dphittbar.bw     dphittbar       mc-highPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.dphittbar.fw     dphittbar       mc-highPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.pTtop.all        pTtop           mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.pTtop.asym       pTtop.asym      mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.pTtop.bw         pTtop           mc-highPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.pTtop.fw         pTtop           mc-highPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.yttbar.all       yttbar          mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.yttbar.asym      yttbar.asym     mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.yttbar.bw        yttbar          mc-highPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.yttbar.fw        yttbar          mc-highPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.mttbar.all       mttbar          mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.mttbar.asym      mttbar.asym     mc-highPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.mttbar.bw        mttbar          mc-highPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.highPT.mttbar.fw        mttbar          mc-highPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_dyttbar.ptc.lower         dyttbar         mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.dphittbar.all     dphittbar       mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.dphittbar.asym    dphittbar.asym  mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.dphittbar.bw      dphittbar       mc-lowPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.dphittbar.fw      dphittbar       mc-lowPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.pTtop.all         pTtop           mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.pTtop.asym        pTtop.asym      mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.pTtop.bw          pTtop           mc-lowPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.pTtop.fw          pTtop           mc-lowPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.yttbar.all        yttbar          mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.yttbar.asym       yttbar.asym     mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.yttbar.bw         yttbar          mc-lowPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.yttbar.fw         yttbar          mc-lowPT-fw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.mttbar.all        mttbar          mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.mttbar.asym       mttbar.asym     mc-lowPT
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.mttbar.bw         mttbar          mc-lowPT-bw
+ppbar     top-mc        1960        -          MC_FBA_TTBAR_z.lowPT.mttbar.fw         mttbar          mc-lowPT-fw
+
+
+# Measurement of the Z pT with electrons and muons (ATLAS_2011_S9131140)
+pp     z          7000         -,-,50,130   ATLAS_2011_S9131140_d01-x01-y02    pT-Z-norm      atlas2011-el-dressed
+pp     z          7000         -,-,50,130   ATLAS_2011_S9131140_d01-x01-y03    pT-Z-norm      atlas2011-el-bare
+pp     z          7000         -,-,50,130   ATLAS_2011_S9131140_d02-x01-y02    pT-Z-norm      atlas2011-mu-dressed
+pp     z          7000         -,-,50,130   ATLAS_2011_S9131140_d02-x01-y03    pT-Z-norm      atlas2011-mu-bare
+
+
+# Measurement of multi-jet cross sections (ATLAS_2011_S9128077)
+pp     jets         7000         40           ATLAS_2011_S9128077_d01-x01-y01    njets          atlas2011-akt4
+pp     jets         7000         40           ATLAS_2011_S9128077_d02-x01-y01    njetsR         atlas2011-akt4
+pp     jets         7000         40           ATLAS_2011_S9128077_d03-x01-y01    pt             atlas2011-akt4-j1
+pp     jets         7000         40           ATLAS_2011_S9128077_d04-x01-y01    pt             atlas2011-akt4-j2
+pp     jets         7000         40           ATLAS_2011_S9128077_d05-x01-y01    pt             atlas2011-akt4-j3
+pp     jets         7000         40           ATLAS_2011_S9128077_d06-x01-y01    pt             atlas2011-akt4-j4
+pp     jets         7000         40           ATLAS_2011_S9128077_d07-x01-y01    ht             atlas2011-akt4-nj2
+pp     jets         7000         40           ATLAS_2011_S9128077_d08-x01-y01    ht             atlas2011-akt4-nj3
+pp     jets         7000         40           ATLAS_2011_S9128077_d09-x01-y01    ht             atlas2011-akt4-nj4
+pp     jets         7000         40           ATLAS_2011_S9128077_d10-x01-y01    R32-vs-pt      atlas2011-akt6-pt060
+pp     jets         7000         40           ATLAS_2011_S9128077_d11-x01-y01    R32-vs-pt      atlas2011-akt6-pt080
+pp     jets         7000         40           ATLAS_2011_S9128077_d12-x01-y01    R32-vs-pt      atlas2011-akt6-pt110
+pp     jets         7000         40           ATLAS_2011_S9128077_d13-x01-y01    R32-vs-pt      atlas2011-akt4-pt060
+pp     jets         7000         40           ATLAS_2011_S9128077_d14-x01-y01    R32-vs-pt      atlas2011-akt4-pt080
+pp     jets         7000         40           ATLAS_2011_S9128077_d15-x01-y01    R32-vs-pt      atlas2011-akt4-pt110
+pp     jets         7000         40           ATLAS_2011_S9128077_d16-x01-y01    R32-vs-ht      atlas2011-akt6
+pp     jets         7000         40           ATLAS_2011_S9128077_d17-x01-y01    R32-vs-ht      atlas2011-akt4
+
+
+# Jet production rates in association with W and Z bosons (CMS_EWK_10_012)
+# sigma(W+ >= n jets)/sigma(W)
+pp     winclusive   7000        20            CMS_EWK_10_012_d01-x01-y01         njets          cms2010-el
+pp     winclusive   7000        20            CMS_EWK_10_012_d02-x01-y01         njetsR         cms2010-el
+pp     winclusive   7000        20            CMS_EWK_10_012_d03-x01-y01         njets          cms2010-mu
+pp     winclusive   7000        20            CMS_EWK_10_012_d04-x01-y01         njetsR         cms2010-mu
+pp     z          7000        20,-,50,200   CMS_EWK_10_012_d05-x01-y01         njets          cms2010-el
+pp     z          7000        20,-,50,200   CMS_EWK_10_012_d06-x01-y01         njetsR         cms2010-el
+pp     z          7000        20,-,50,200   CMS_EWK_10_012_d07-x01-y01         njets          cms2010-mu
+pp     z          7000        20,-,50,200   CMS_EWK_10_012_d08-x01-y01         njetsR         cms2010-mu
+pp     winclusive   7000        20            CMS_EWK_10_012_d09-x01-y01         ch.asym-vs-njets  cms2010-el
+pp     winclusive   7000        20            CMS_EWK_10_012_d10-x01-y01         ch.asym-vs-njets  cms2010-mu
+pp     winclusive   7000        20            CMS_EWK_10_012_d11-x01-y01         -              -
+pp     winclusive   7000        20            CMS_EWK_10_012_d12-x01-y01         -              -
+
+
+# Measurement of dijet production with a veto on additional central jet activity (ATLAS_2011_S9126244)
+# leading jets gap definition
+pp     jets     7000         10       ATLAS_2011_S9126244_d01-x01-y01    gapfr-vs-pt-lj   atlas2011-dy1-2
+pp     jets     7000         10       ATLAS_2011_S9126244_d02-x01-y01    gapfr-vs-pt-lj   atlas2011-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d03-x01-y01    gapfr-vs-pt-lj   atlas2011-dy3-4
+pp     jets     7000         10       ATLAS_2011_S9126244_d04-x01-y01    gapfr-vs-pt-lj   atlas2011-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d05-x01-y01    gapfr-vs-pt-lj   atlas2011-dy5-6
+
+pp     jets     7000         10       ATLAS_2011_S9126244_d06-x01-y01    gapfr-vs-dy-lj   atlas2011-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d07-x01-y01    gapfr-vs-dy-lj   atlas2011-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d08-x01-y01    gapfr-vs-dy-lj   atlas2011-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d09-x01-y01    gapfr-vs-dy-lj   atlas2011-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d10-x01-y01    gapfr-vs-dy-lj   atlas2011-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d11-x01-y01    gapfr-vs-dy-lj   atlas2011-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d12-x01-y01    gapfr-vs-dy-lj   atlas2011-pt240-270
+
+pp     jets     7000         10       ATLAS_2011_S9126244_d13-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt070-090-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d14-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt070-090-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d15-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt120-150-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d16-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt120-150-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d17-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt210-240-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d18-x01-y01    gapfr-vs-Q0-lj   atlas2011-pt210-240-dy4-5
+
+# most forward/backward gap definition
+pp     jets     7000         10       ATLAS_2011_S9126244_d01-x01-y02    gapfr-vs-pt-fb   atlas2011-dy1-2
+pp     jets     7000         10       ATLAS_2011_S9126244_d02-x01-y02    gapfr-vs-pt-fb   atlas2011-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d03-x01-y02    gapfr-vs-pt-fb   atlas2011-dy3-4
+pp     jets     7000         10       ATLAS_2011_S9126244_d04-x01-y02    gapfr-vs-pt-fb   atlas2011-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d05-x01-y02    gapfr-vs-pt-fb   atlas2011-dy5-6
+
+pp     jets     7000         10       ATLAS_2011_S9126244_d06-x01-y02    gapfr-vs-dy-fb   atlas2011-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d07-x01-y02    gapfr-vs-dy-fb   atlas2011-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d08-x01-y02    gapfr-vs-dy-fb   atlas2011-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d09-x01-y02    gapfr-vs-dy-fb   atlas2011-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d10-x01-y02    gapfr-vs-dy-fb   atlas2011-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d11-x01-y02    gapfr-vs-dy-fb   atlas2011-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d12-x01-y02    gapfr-vs-dy-fb   atlas2011-pt240-270
+
+pp     jets     7000         10       ATLAS_2011_S9126244_d13-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt070-090-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d14-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt070-090-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d15-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt120-150-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d16-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt120-150-dy4-5
+pp     jets     7000         10       ATLAS_2011_S9126244_d17-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt210-240-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d18-x01-y02    gapfr-vs-Q0-fb   atlas2011-pt210-240-dy4-5
+
+#
+pp     jets     7000         10       ATLAS_2011_S9126244_d19-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d20-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d21-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d22-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d23-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d24-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d25-x01-y01    gapfr-vs-dy-fb   atlas2011-q0pt-pt240-270
+
+# leading jets
+pp     jets     7000         10       ATLAS_2011_S9126244_d26-x01-y01    njets-vs-pt-lj   atlas2011-dy1-2
+pp     jets     7000         10       ATLAS_2011_S9126244_d27-x01-y01    njets-vs-pt-lj   atlas2011-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d28-x01-y01    njets-vs-pt-lj   atlas2011-dy3-4
+pp     jets     7000         10       ATLAS_2011_S9126244_d29-x01-y01    njets-vs-pt-lj   atlas2011-dy4-5
+
+# fwd/bwd
+pp     jets     7000         10       ATLAS_2011_S9126244_d26-x01-y02    njets-vs-pt-fb   atlas2011-dy1-2
+pp     jets     7000         10       ATLAS_2011_S9126244_d27-x01-y02    njets-vs-pt-fb   atlas2011-dy2-3
+pp     jets     7000         10       ATLAS_2011_S9126244_d28-x01-y02    njets-vs-pt-fb   atlas2011-dy3-4
+pp     jets     7000         10       ATLAS_2011_S9126244_d29-x01-y02    njets-vs-pt-fb   atlas2011-dy4-5
+
+#
+pp     jets     7000         10       ATLAS_2011_S9126244_d30-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d31-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d32-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d33-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d34-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d35-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d36-x01-y01    njets-vs-dy-fb   atlas2011-q0pt-pt240-270
+
+# leading jets
+pp     jets     7000         10       ATLAS_2011_S9126244_d37-x01-y01    njets-vs-dy-lj   atlas2011-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d38-x01-y01    njets-vs-dy-lj   atlas2011-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d39-x01-y01    njets-vs-dy-lj   atlas2011-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d40-x01-y01    njets-vs-dy-lj   atlas2011-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d41-x01-y01    njets-vs-dy-lj   atlas2011-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d42-x01-y01    njets-vs-dy-lj   atlas2011-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d43-x01-y01    njets-vs-dy-lj   atlas2011-pt240-270
+
+# fwd/bwd
+pp     jets     7000         10       ATLAS_2011_S9126244_d37-x01-y02    njets-vs-dy-fb   atlas2011-pt070-090
+pp     jets     7000         10       ATLAS_2011_S9126244_d38-x01-y02    njets-vs-dy-fb   atlas2011-pt090-120
+pp     jets     7000         10       ATLAS_2011_S9126244_d39-x01-y02    njets-vs-dy-fb   atlas2011-pt120-150
+pp     jets     7000         10       ATLAS_2011_S9126244_d40-x01-y02    njets-vs-dy-fb   atlas2011-pt150-180
+pp     jets     7000         10       ATLAS_2011_S9126244_d41-x01-y02    njets-vs-dy-fb   atlas2011-pt180-210
+pp     jets     7000         10       ATLAS_2011_S9126244_d42-x01-y02    njets-vs-dy-fb   atlas2011-pt210-240
+pp     jets     7000         10       ATLAS_2011_S9126244_d43-x01-y02    njets-vs-dy-fb   atlas2011-pt240-270
+
+
+# Muon charge asymmetry in W events (ATLAS_2011_S9002537)
+pp     winclusive   7000     -,-,10   ATLAS_2011_S9002537_d01-x01-y01    ch.asym-vs-eta          atlas2011-mu
+
+
+# Inclusive jet cross-section (STAR_2006_S6870392)
+pp     jets         200          -        STAR_2006_S6870392_d01-x01-y01     pt               star2006-mb
+pp     jets         200          -        STAR_2006_S6870392_d02-x01-y01     pt               star2006-ht
+
+
+# Multiplicities and pT spectra (STAR_2008_S7869363)
+pp     uemb-soft    200          -        STAR_2008_S7869363_d01-x01-y01     nch              star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y01     pim_pt           star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y02     pip_pt           star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y03     Km_pt            star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y04     Kp_pt            star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y05     pbar_pt          star2008
+pp     uemb-soft    200          -        STAR_2008_S7869363_d02-x01-y06     p_pt             star2008
+
+
+# Scaled energy distribution of D^* (ALEPH_1999_S4193598)
+ee        zhad          91.2        -          ALEPH_1999_S4193598_d01-x01-y01   xDstarch     aleph1999
+
+
+# Production cross-sections of muons from b hadron decays (CMS_2011_S8941262)
+pp     b        7000          -        CMS_2011_S8941262_d01-x01-y01     xsec             cms2011-mu-pt6-eta2.1
+pp     b        7000          -        CMS_2011_S8941262_d02-x01-y01     pt               cms2011-mu-eta2.1
+pp     b        7000          -        CMS_2011_S8941262_d03-x01-y01     eta              cms2011-mu-pt6
+
+
+# Measurement of electron and muon differential cross-section from heavy-flavour decays (ATLAS_2011_I926145)
+pp     b        7000          -        ATLAS_2011_I926145_d01-x01-y01    pt               atlas2011-el-eta2.0ex
+pp     b        7000          -        ATLAS_2011_I926145_d02-x01-y01    pt               atlas2011-mu-eta2.0ex
+pp     b        7000          -        ATLAS_2011_I926145_d03-x01-y01    pt               atlas2011-mu-eta2.5
+
+
+# ATLAS, rapidity gap size measurement (ATLAS_2012_I1084540)
+pp     uemb-soft        7000          -        ATLAS_2012_I1084540_d01-x01-y01    eta_gap            atlas2012-pt-0.2
+pp     uemb-soft        7000          -        ATLAS_2012_I1084540_d02-x01-y01    eta_gap            atlas2012-pt-0.4
+pp     uemb-soft        7000          -        ATLAS_2012_I1084540_d03-x01-y01    eta_gap            atlas2012-pt-0.6
+pp     uemb-soft        7000          -        ATLAS_2012_I1084540_d04-x01-y01    eta_gap            atlas2012-pt-0.8
+
+
+# CMS, energy flow measurement in forward rapidites (CMS_2011_S9215166)
+pp     uemb-soft         900          -        CMS_2011_S9215166_d01-x01-y01    eflow            cms2011-mb
+pp     uemb-soft         900          -        CMS_2011_S9215166_d02-x01-y01    eflow            cms2011-dijet-pt08
+pp     uemb-soft        7000          -        CMS_2011_S9215166_d03-x01-y01    eflow            cms2011-mb
+pp     uemb-soft        7000          -        CMS_2011_S9215166_d04-x01-y01    eflow            cms2011-dijet-pt20
+
+# TOTEM, dN/deta (TOTEM_2012_I1115294)
+pp     uemb-soft        7000          -        TOTEM_2012_I1115294_d01-x01-y01    eta              totem2012-dndeta
+
+# ATLAS, \sigma inelastic (ATLAS_2011_I894867)
+pp     uemb-soft        7000          -        ATLAS_2011_I894867_d01-x01-y01   xsec             atlas2011-inel
+
+# CMS, \sigma inelelastic (CMS_2012_I1193338)
+pp     uemb-soft        7000          -        CMS_2012_I1193338_d01-x01-y01    xsec             cms2011-inel
+
+# TOTEM, \sigma total (TOTEM_2011_I930960)
+pp     softqcdall       7000          -        TOTEM_2011_I930960_d01-x01-y01   xsec             totem2011-total
+
+# LHCF, pi0 pt at zero degree (LHCF_2012_I1115479)
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d01-x01-y01    pi0_pt              lhcf2012-y-08.9-9.0
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d02-x01-y01    pi0_pt              lhcf2012-y-09.0-9.2
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d03-x01-y01    pi0_pt              lhcf2012-y-09.2-9.4
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d04-x01-y01    pi0_pt              lhcf2012-y-09.4-9.6
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d05-x01-y01    pi0_pt              lhcf2012-y-09.6-10
+pp     uemb-soft        7000          -        LHCF_2012_I1115479_d06-x01-y01    pi0_pt              lhcf2012-y-10-11
+
+# CMS, forward+central production cross section (CMS_2012_I1087342)
+pp     jets        7000          15        CMS_2012_I1087342_d01-x01-y01    pt              cms2012-fjets-inclforward
+pp     jets        7000          15        CMS_2012_I1087342_d02-x01-y01    pt              cms2012-fjets-forward
+pp     jets        7000          15        CMS_2012_I1087342_d03-x01-y01    pt              cms2012-fjets-central
+
+# CMS, incl., exc. dijet production ratio vs eta_gap between jets (CMS_2012_I1102908)
+pp     jets        7000          15        CMS_2012_I1102908_d01-x01-y01    gapfr-vs-dy              cms2012-fjets-inclratio
+pp     jets        7000          15        CMS_2012_I1102908_d02-x01-y01    gapfr-vs-dy              cms2012-fjets-MNratio
+
+# CMS, diffractive dijets cross section vs \xi (CMS_2012_I1184941)
+pp     uemb-soft        7000          -        CMS_2012_I1184941_d01-x01-y01    xi              cms2012-diffjets
+
+# LHCb, V0 production ratios (LHCB_2011_I917009)
+pp     uemb-soft         900          -        LHCB_2011_I917009_d01-x01-y01    Lbar2L_y              lhcb2011-pt0.25-0.65
+pp     uemb-soft         900          -        LHCB_2011_I917009_d01-x01-y02    Lbar2L_y              lhcb2011-pt0.65-1
+pp     uemb-soft         900          -        LHCB_2011_I917009_d01-x01-y03    Lbar2L_y              lhcb2011-pt1-2.5
+pp     uemb-soft         900          -        LHCB_2011_I917009_d02-x01-y01    Lbar2K0S_y            lhcb2011-pt0.25-0.65
+pp     uemb-soft         900          -        LHCB_2011_I917009_d02-x01-y02    Lbar2K0S_y            lhcb2011-pt0.65-1
+pp     uemb-soft         900          -        LHCB_2011_I917009_d02-x01-y03    Lbar2K0S_y            lhcb2011-pt1-2.5
+pp     uemb-soft         900          -        LHCB_2011_I917009_d03-x01-y01    Lbar2L_y              lhcb2011-pt-all-0.25-2.5
+pp     uemb-soft         900          -        LHCB_2011_I917009_d04-x01-y01    Lbar2K0S_y            lhcb2011-pt-all-0.25-2.5
+pp     uemb-soft         900          -        LHCB_2011_I917009_d05-x01-y01    Lbar2L_pt             lhcb2011-y2-4
+pp     uemb-soft         900          -        LHCB_2011_I917009_d06-x01-y01    Lbar2K0S_pt           lhcb2011-y2-4
+pp     uemb-soft         900          -        LHCB_2011_I917009_d07-x01-y01    Lbar2L_yloss          lhcb2011-pt-all-0.25-2.5
+pp     uemb-soft         900          -        LHCB_2011_I917009_d08-x01-y01    Lbar2K0S_yloss        lhcb2011-pt-all-0.25-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d09-x01-y01    Lbar2L_y              lhcb2011-pt0.15-0.65
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d09-x01-y02    Lbar2L_y              lhcb2011-pt0.65-1
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d09-x01-y03    Lbar2L_y              lhcb2011-pt1-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d10-x01-y01    Lbar2K0S_y            lhcb2011-pt0.15-0.65
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d10-x01-y02    Lbar2K0S_y            lhcb2011-pt0.65-1
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d10-x01-y03    Lbar2K0S_y            lhcb2011-pt1-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d11-x01-y01    Lbar2L_y              lhcb2011-pt0.15-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d12-x01-y01    Lbar2K0S_y            lhcb2011-pt0.15-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d13-x01-y01    Lbar2L_pt             lhcb2011-y2-4.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d14-x01-y01    Lbar2K0S_pt           lhcb2011-y2-4.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d15-x01-y01    Lbar2L_yloss          lhcb2011-pt-all-0.15-2.5
+pp     uemb-soft        7000          -        LHCB_2011_I917009_d16-x01-y01    Lbar2K0S_yloss        lhcb2011-pt-all-0.15-2.5
+
+# ATLAS, Transverse energy flow (ATLAS_2012_I1183818)
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d01-x01-y01    sumEt               atlas2012-mb
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d02-x01-y01    sumEt               atlas2012-dijet
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d03-x01-y01    sumEt               atlas2012-mb-eta-0.0-0.8
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d04-x01-y01    sumEt               atlas2012-mb-eta-0.8-1.6
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d05-x01-y01    sumEt               atlas2012-mb-eta-1.6-2.4
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d06-x01-y01    sumEt               atlas2012-mb-eta-2.4-3.2
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d07-x01-y01    sumEt               atlas2012-mb-eta-3.2-4.0
+pp     uemb-soft        7000          -        ATLAS_2012_I1183818_d08-x01-y01    sumEt               atlas2012-mb-eta-4.0-4.8
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d09-x01-y01    sumEt               atlas2012-dijet-eta-0.0-0.8
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d10-x01-y01    sumEt               atlas2012-dijet-eta-0.8-1.6
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d11-x01-y01    sumEt               atlas2012-dijet-eta-1.6-2.4
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d12-x01-y01    sumEt               atlas2012-dijet-eta-2.4-3.2
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d13-x01-y01    sumEt               atlas2012-dijet-eta-3.2-4.0
+pp     uemb-hard        7000          -        ATLAS_2012_I1183818_d14-x01-y01    sumEt               atlas2012-dijet-eta-4.0-4.8
+
+# LHCb, LHCb b-hadron production cross-section (LHCB_2010_I867355)
+pp     b        7000          -        LHCB_2010_I867355_d01-x01-y01    eta               lhcb2010-eta-lep
+pp     b        7000          -        LHCB_2010_I867355_d01-x01-y02    eta               lhcb2010-eta-tvt
+pp     b        7000          -        LHCB_2010_I867355_d02-x01-y01    eta               lhcb2010-eta-lep-full
+pp     b        7000          -        LHCB_2010_I867355_d02-x01-y02    eta               lhcb2010-eta-tvt-full
+
+# ALICE, ALICE inleastic and inelastic diffractive cross sections (ALICE_2012_I1181770)
+pp     uemb-soft         900          -        ALICE_2012_I1181770_d01-x01-y01    xsec               alice2012-sdinel
+pp     uemb-soft        2760          -        ALICE_2012_I1181770_d01-x01-y02    xsec               alice2012-sdinel
+pp     uemb-soft        7000          -        ALICE_2012_I1181770_d01-x01-y03    xsec               alice2012-sdinel
+pp     uemb-soft         900          -        ALICE_2012_I1181770_d02-x01-y01    xsec               alice2012-ddinel
+pp     uemb-soft        2760          -        ALICE_2012_I1181770_d02-x01-y02    xsec               alice2012-ddinel
+pp     uemb-soft        7000          -        ALICE_2012_I1181770_d02-x01-y03    xsec               alice2012-ddinel
+pp     uemb-soft         900          -        ALICE_2012_I1181770_d03-x01-y01    xsec               alice2012-sd
+pp     uemb-soft        2760          -        ALICE_2012_I1181770_d03-x01-y02    xsec               alice2012-sd
+pp     uemb-soft        7000          -        ALICE_2012_I1181770_d03-x01-y03    xsec               alice2012-sd
+pp     uemb-soft         900          -        ALICE_2012_I1181770_d04-x01-y01    xsec               alice2012-dd
+pp     uemb-soft        2760          -        ALICE_2012_I1181770_d04-x01-y02    xsec               alice2012-dd
+pp     uemb-soft        7000          -        ALICE_2012_I1181770_d04-x01-y03    xsec               alice2012-dd
+pp     uemb-soft         900          -        ALICE_2012_I1181770_d05-x01-y01    xsec               alice2012-inel
+pp     uemb-soft        2760          -        ALICE_2012_I1181770_d05-x01-y02    xsec               alice2012-inel
+pp     uemb-soft        7000          -        ALICE_2012_I1181770_d05-x01-y03    xsec               alice2012-inel
+
+# TOTEM elastic cross-section, TOTEM_2012_002
+pp     elastic         7000          -        TOTEM_2012_002_d01-x01-y01    xsec               totem2012-el-alowt
+pp     elastic         7000          -        TOTEM_2012_002_d02-x01-y01    xsec               totem2012-el-hight
+pp     elastic         7000          -        TOTEM_2012_002_d03-x01-y01    xsec               totem2012-el-sigma
+
+# CMS UE in forward region, (CMS_2012_PAS_FWD_11_003)
+pp        uemb-soft         900         -          CMS_2012_PAS_FWD_11_003_d01-x01-y01   eflow-pt       cms2012-castor
+pp        uemb-soft        2760         -          CMS_2012_PAS_FWD_11_003_d02-x01-y01   eflow-pt       cms2012-castor
+pp        uemb-soft        7000         -          CMS_2012_PAS_FWD_11_003_d03-x01-y01   eflow-pt       cms2012-castor
+
+# CMS strangeness production in UE, (CMS_2012_PAS_QCD_11_010)
+pp        uemb-hard        7000         -          CMS_2012_PAS_QCD_11_010_d01-x01-y01   identified-vs-pt-trns             cms2012-ue-LbarL
+pp        uemb-hard        7000         -          CMS_2012_PAS_QCD_11_010_d02-x01-y01   identified-vs-pt-trns             cms2012-ue-K0S
+pp        uemb-hard        7000         -          CMS_2012_PAS_QCD_11_010_d03-x01-y01   sumpt-vs-pt-trns.identified       cms2012-ue-LbarL
+pp        uemb-hard        7000         -          CMS_2012_PAS_QCD_11_010_d04-x01-y01   sumpt-vs-pt-trns.identified       cms2012-ue-K0S
+
+# LHCb prompt hadron, (LHCB_2012_I1119400)
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d01-x01-y01   pbar2p_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d01-x01-y02   pbar2p_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d01-x01-y03   pbar2p_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d02-x01-y01   pbar2p_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d02-x01-y02   pbar2p_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d02-x01-y03   pbar2p_y         lhcb2012-pt1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d03-x01-y01   Km2Kp_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d03-x01-y02   Km2Kp_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d03-x01-y03   Km2Kp_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d04-x01-y01   Km2Kp_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d04-x01-y02   Km2Kp_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d04-x01-y03   Km2Kp_y         lhcb2012-pt1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d05-x01-y01   pim2pip_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d05-x01-y02   pim2pip_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d05-x01-y03   pim2pip_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d06-x01-y01   pim2pip_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d06-x01-y02   pim2pip_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d06-x01-y03   pim2pip_y         lhcb2012-pt1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d07-x01-y01   pbarp2pippim_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d07-x01-y02   pbarp2pippim_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d07-x01-y03   pbarp2pippim_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d08-x01-y01   pbarp2pippim_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d08-x01-y02   pbarp2pippim_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d08-x01-y03   pbarp2pippim_y         lhcb2012-pt1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d09-x01-y01   KmKp2pippim_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d09-x01-y02   KmKp2pippim_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d09-x01-y03   KmKp2pippim_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d10-x01-y01   KmKp2pippim_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d10-x01-y02   KmKp2pippim_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d10-x01-y03   KmKp2pippim_y         lhcb2012-pt1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d11-x01-y01   pbarp2KpKm_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d11-x01-y02   pbarp2KpKm_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft         900         -          LHCB_2012_I1119400_d11-x01-y03   pbarp2KpKm_y         lhcb2012-pt1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d12-x01-y01   pbarp2KpKm_y         lhcb2012-pt0.0-0.8
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d12-x01-y02   pbarp2KpKm_y         lhcb2012-pt0.8-1.2
+pp        uemb-soft        7000         -          LHCB_2012_I1119400_d12-x01-y03   pbarp2KpKm_y         lhcb2012-pt1.2
+
+# MC only, gap analysis (MC_GAPS) 
+pp        uemb-soft        7000        -          MC_GAPS_fs-fmax              gaps_mc       mcgap-fmax0
+pp        uemb-soft        7000        -          MC_GAPS_fs-cmax              gaps_mc       mcgap-cmax0
+pp        uemb-soft        7000        -          MC_GAPS_fs-gapmax            gaps_mc       mcgap-gapmax0
+pp        uemb-soft        7000        -          MC_GAPS_fs-fmin              gaps_mc       mcgap-fmin0
+pp        uemb-soft        7000        -          MC_GAPS_fs-minfmaxc          gaps_mc       mcgap-minfmaxc0
+pp        uemb-soft        7000        -          MC_GAPS_detfs-fmax           gaps_mc       mcgap-fmax-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-cmax           gaps_mc       mcgap-cmax-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-gapmax         gaps_mc       mcgap-gapmax-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-fmin           gaps_mc       mcgap-fmin-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-minfmaxc       gaps_mc       mcgap-minfmaxc-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-eta            gaps_mc       mcgap-zeta-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-eflow          gaps_mc       mcgap-zeflow-eta5.2
+pp        uemb-soft        7000        -          MC_GAPS_detfs-etflow         gaps_mc       mcgap-zetflow-eta5.2

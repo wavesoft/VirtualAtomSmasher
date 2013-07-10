@@ -1,0 +1,65 @@
+# based on example from Herwig++ 2.4.2 distribution:
+#   share/Herwig++/TVT.in
+
+# Run options:
+cd /Herwig/Generators
+set LHCGenerator:NumberOfEvents %nevts%
+set LHCGenerator:RandomNumberGenerator:Seed %seed%
+set LHCGenerator:DebugLevel 0
+set LHCGenerator:PrintEvent 1
+set LHCGenerator:MaxErrors 100000
+
+# redirect all log output to stdout
+set LHCGenerator:UseStdout true
+
+# do output to a HepMC file
+cd /Herwig/Generators
+insert LHCGenerator:AnalysisHandlers 0 /Herwig/Analysis/HepMCFile
+set /Herwig/Analysis/HepMCFile:PrintEvent 1000000
+set /Herwig/Analysis/HepMCFile:Format GenEvent
+set /Herwig/Analysis/HepMCFile:Filename %outfile%
+# set /Herwig/Analysis/HepMCFile:Units GeV_mm
+
+
+# Beam parameters:
+set LHCGenerator:EventHandler:LuminosityFunction:Energy %energy%
+set LHCGenerator:EventHandler:BeamA /Herwig/Particles/%beamA%
+set LHCGenerator:EventHandler:BeamB /Herwig/Particles/%beamB%
+set LHCGenerator:MaxErrors -1
+
+
+## Process setup ########
+
+## Set up qq -> W -> tau nu_tau process
+cd /Herwig/MatrixElements
+insert SimpleQCD:MatrixElements[0] MEqq2W2ff
+set SimpleQCD:MatrixElements[0]:Process Tau
+
+##########################
+
+
+## Set cuts
+## Use this for hard leading-jets in a certain pT window
+#set /Herwig/Cuts/JetKtCut:MinKT %pTmin%*GeV        # minimum jet pT
+#set /Herwig/Cuts/JetKtCut:MaxKT %pTmax%*GeV        # maximum jet pT
+#
+## Use this for hard leading-jets in a certain mHat window
+#set /Herwig/Cuts/QCDCuts:MHatMin %mHatMin%*GeV        # minimum jet mHat
+#set /Herwig/Cuts/QCDCuts:MHatMax %mHatMax%*GeV        # maximum jet mHat
+
+
+# Make particles with c*tau > 10 mm stable:
+set /Herwig/Decays/DecayHandler:MaxLifeTime 10*mm
+set /Herwig/Decays/DecayHandler:LifeTimeOption Average
+
+
+# tune '%tune%' parameters: -------------------
+#%tuneFile%
+# ---------------------------------------------
+
+
+set /Herwig/UnderlyingEvent/MPIHandler:IdenticalToUE -1
+
+# Run generator
+cd /Herwig/Generators
+run TVT LHCGenerator

@@ -1,0 +1,30 @@
+# Based on LHC tune example from Herwig++ 2.5.2 distribution
+# share/Herwig++/LHC-UE-EE-3.in
+
+cd /Herwig
+create Herwig::O2AlphaS O2AlphaS
+set Model:QCD/RunningAlphaS O2AlphaS
+
+
+## Energy dependent MPI parameters
+# sqrt(s) = 1800 GeV
+set /Herwig/UnderlyingEvent/KtCut:MinKT 2.55
+set /Herwig/UnderlyingEvent/UECuts:MHatMin 5.1
+
+
+## Energy-independent MPI parameters
+# Colour reconnection settings
+set /Herwig/Hadronization/ColourReconnector:ColourReconnection Yes
+set /Herwig/Hadronization/ColourReconnector:ReconnectionProbability 0.54 
+
+# Colour Disrupt settings
+set /Herwig/Partons/RemnantDecayer:colourDisrupt 0.80
+
+# inverse hadron radius
+set /Herwig/UnderlyingEvent/MPIHandler:InvRadius 1.11
+
+
+## MPI model settings
+set /Herwig/UnderlyingEvent/MPIHandler:softInt Yes
+set /Herwig/UnderlyingEvent/MPIHandler:twoComp Yes
+set /Herwig/UnderlyingEvent/MPIHandler:DLmode 2

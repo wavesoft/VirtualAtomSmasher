@@ -1,0 +1,18 @@
+# Upper-Case keys: used in MCPLOTS scripts, lower-case keys: optional info
+#
+# - NJets=num. of final state partons ; 
+# - Process : Alpgen process string
+# - NeWarm=number of events per warmup cycle ; NcWarm=number of warmup cycles
+# - Tot_eff=# (num events after mlm matching)/(num events generated after warm-up) [estimated with p0, exclusive, v2.13]
+
+NJets=0   Process=wjet  NeWarm=1000000    NcWarm=2   mlm_eff=0.85   Kmore=5  Tot_eff=0.6        ecm=7000 
+NJets=1   Process=wjet  NeWarm=5000000    NcWarm=2   mlm_eff=0.45   Kmore=5  Tot_eff=0.06       ecm=7000 
+NJets=2   Process=wjet  NeWarm=5000000    NcWarm=3   mlm_eff=0.30   Kmore=5  Tot_eff=0.001      ecm=7000 
+NJets=3   Process=wjet  NeWarm=2500000    NcWarm=3   mlm_eff=0.20   Kmore=5  Tot_eff=0.0002     ecm=7000 
+NJets=4   Process=wjet  NeWarm=2500000    NcWarm=4   mlm_eff=0.10   Kmore=5  Tot_eff=0.00005    ecm=7000 
+
+NJets=2  Process=Njet  NeWarm=1000000     NcWarm=2   mlm_eff=0.5    Kmore=4   Tot_eff=0.001     ecm=7000
+NJets=3  Process=Njet  NeWarm=5000000     NcWarm=3   mlm_eff=0.2    Kmore=4   Tot_eff=0.0001    ecm=7000
+NJets=4  Process=Njet  NeWarm=10000000    NcWarm=3   mlm_eff=0.1    Kmore=10   Tot_eff=0.0002    ecm=7000
+NJets=5  Process=Njet  NeWarm=10000000    NcWarm=4   mlm_eff=0.05   Kmore=10   Tot_eff=0.000005  ecm=7000
+

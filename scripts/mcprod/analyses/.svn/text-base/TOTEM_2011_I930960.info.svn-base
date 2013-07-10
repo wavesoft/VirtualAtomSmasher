@@ -1,0 +1,37 @@
+Name: TOTEM_2011_I930960
+Year: 2011
+Summary: Measurement of
+Experiment: TOTEM
+Collider: LHC
+SpireID: 9220739
+InspireID: 930960
+Status: UNVALIDATED
+Authors:
+References:
+ - arXiv:1110.1395 [hep-ex]
+RunInfo:
+   softqcdall
+NumEvents: 500000
+NeedCrossSection: no
+Beams: [p+, p+]
+Energies: [7000]
+PtCuts: [0]
+Description:
+  'edit description'
+BibKey: Antchev:2011vs
+BibTeX: '@Article{Antchev:2011vs,
+      author         = "Antchev, G. and Aspell, P. and Atanassov, I. and Avati,
+                        V. and Baechler, J. and others",
+      title          = "{First measurement of the total proton-proton cross
+                        section at the LHC energy of {\surd} s =7 TeV}",
+      journal        = "Europhys.Lett.",
+      volume         = "96",
+      pages          = "21002",
+      doi            = "10.1209/0295-5075/96/21002",
+      year           = "2011",
+      eprint         = "1110.1395",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ex",
+      reportNumber   = "CERN-PH-EP-2011-158, 24-SEPTEMBER-2011",
+      SLACcitation   = "%%CITATION = ARXIV:1110.1395;%%"
+}'

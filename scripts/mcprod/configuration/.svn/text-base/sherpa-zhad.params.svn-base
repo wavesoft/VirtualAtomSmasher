@@ -1,0 +1,82 @@
+# steering file based on example from Sherpa 1.2.2 distribution:
+#   share/SHERPA-MC/Examples/LEP91/Run.dat
+#
+# also, see more details on the example here:
+#   http://projects.hepforge.org/sherpa/doc/SHERPA-MC-1.2.2.html#LEP91
+
+(run){
+  # disable colorizing of text printed on screen:
+  PRETTY_PRINT = Off
+  
+  # number of events:
+  EVENTS = %nevts%
+  
+  # set random seed:
+  # (see section "6.1.3 RANDOM_SEED" of Sherpa manual for details)
+  RANDOM_SEED = %seedA% %seedB%
+  
+  # Event output file:
+  HEPMC2_GENEVENT_OUTPUT = sherpa
+  # full name of output file will be:
+  #  "sherpa.hepmc2g"
+  
+  # LEP: Make particles with c*tau > 100 mm stable:
+  MAX_PROPER_LIFETIME = 100.0
+
+  # disable splitting of HepMC output file:
+  FILE_SIZE = 1000000000
+}(run)
+
+(beam){
+  BEAM_1 =  %beam1%; BEAM_ENERGY_1 = %beamEn%;
+  BEAM_2 =  %beam2%; BEAM_ENERGY_2 = %beamEn%;
+}(beam)
+
+# switch off ISR (LEP data already corrected for ISR effect)
+(isr){
+  ISR_1           = Off
+  ISR_2           = Off
+
+  # switch off lepton PDFs
+  PDF_SET_1 = No
+  PDF_SET_2 = No
+}
+
+## For Four-jet angles, no hadronization, uncomment this
+#(fragmentation){
+#  FRAGMENTATION = Off
+#}(fragmentation)
+
+(processes){
+  Process 11 -11 -> 93 93 93{1};
+  CKKW pow(10,-2.25);
+  Order_EW 2;
+  End process;
+
+  Process 11 -11 -> 5 -5 93{1};
+  CKKW pow(10,-2.25);
+  Order_EW 2;
+  End process;
+}(processes)
+
+#(selector){
+#  # Set cuts
+#  # Use this for hard leading jets in a certain pT window
+#  NJetFinder  2  %pTmin%  0.0  1.0   # set min pT
+#  ## Or this?
+#  #PT 93 %pTmin% %pTmax%
+#
+#  # Use this for hard leading jets in a certain mass window
+#  Mass 93 93 %mHatMin% %mHatMax% 
+#
+#}(selector)
+
+
+(model){
+  ORDER_ALPHAS = 0
+  MASSIVE[5] = 1
+}(model)
+
+(me){
+  ME_SIGNAL_GENERATOR = Internal Comix
+}(me)

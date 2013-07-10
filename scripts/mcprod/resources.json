@@ -1,0 +1,20 @@
+{
+  "sprites" :
+  {
+    "histograms": [
+%histograms%
+    ]
+  },
+  
+  "jobMetaData":
+  {
+    "Beam" : "%beam%",
+    "Process" : "%process%",
+    "Energy" : "%energy% GeV",
+    "Cuts" : "%cuts%",
+    "Generator" : "%generator%",
+    "Version" : "%version%",
+    "Tune" : "%tune%",
+    "Events": "%nevts%"
+  }
+}

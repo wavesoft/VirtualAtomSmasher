@@ -40,10 +40,13 @@ iSFfjjzaWArA/jE0MHSk5s1PusVttlouY/VxO4B774sW8okaog==
 -----END RSA PRIVATE KEY-----
 EOF
 
+# Change permissions as required
+chmod 0700 /root/.ssh/id_rsa
+
 #### Do not modify anything after this ####
 
 # Disable strict host check on github
-echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 # Fetch git repository
 mkdir ${T4T_ROOT}
@@ -59,7 +62,7 @@ mv ${T4T_ROOT}/git/scripts ${T4T_ROOT}/
 ln -s ${T4T_ROOT}/git ${WWW_ROOT}${HTTP_URL}
 chmod a+xr ${WWW_ROOT}${HTTP_URL}
 
-# Create a forwarding URL for people who just come from the landing page
+# Create a redirecting landing page
 cat <<EOF > ${WWW_ROOT}/index.php
 <?php header("Location: ${HTTP_URL}") ?>
 <!DOCTYPE html>

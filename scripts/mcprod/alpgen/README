@@ -1,0 +1,27 @@
+___________________________________________________________________________________
+Files for running Alpgen within the MCPLOTS framework
+-----------------------------------------------------------------------------------
+Full Alpgen hadron-level event generation is done in three steps:
+1) weighted events generation
+2) unweighted events generation
+3) adding PS(MI) 
+Events from step 3) are writen in HepMC framework. 
+
+For running within MCPLOTS the above is scripted so that inputs/outputs as:
+
+Alpgen/PS input parameters -> [scripts] -> HepMC
+
+The Alpgen/PS input parameters are passed as .ini file that instructions blocks:
+[genwgt]  (1)
+[genuwgt] (2)
+[steerPS] (3); PS steering
+[addPS]   (3); Alpgen-params steering
+
+See runRivet.sh/runAll.sh for instructions how to run.
+-----------------------------------------------------------------------------------
+dir contents:
+mcrun_alp        : working directory for 1) and 2) 
+utils_alp        : utils for steps 1),2) and 3)  
+example_dev_alp  : example scripts for running outside run*.sh,
+	           mostly work under development 
+___________________________________________________________________________________

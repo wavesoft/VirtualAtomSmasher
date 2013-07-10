@@ -1,0 +1,28 @@
+# Based on LHC tune example from Herwig++ 2.5.1 distribution
+# share/Herwig++/LHC-UE-EE-2.in
+
+##################################################
+# Override default MPI parameters
+##################################################
+
+
+# Colour reconnection settings
+set /Herwig/Hadronization/ColourReconnector:ColourReconnection Yes
+set /Herwig/Hadronization/ColourReconnector:ReconnectionProbability 0.55 
+
+# Colour Disrupt settings
+set /Herwig/Partons/RemnantDecayer:colourDisrupt 0.15
+
+# inverse hadron radius
+set /Herwig/UnderlyingEvent/MPIHandler:InvRadius 1.1
+
+## for \sqrt(s) = 7000 GeV
+# Min KT parameter
+set /Herwig/UnderlyingEvent/KtCut:MinKT 4.02
+# This should always be 2*MinKT!!
+set  /Herwig/UnderlyingEvent/UECuts:MHatMin 8.04
+
+# MPI model settings
+set /Herwig/UnderlyingEvent/MPIHandler:softInt Yes
+set /Herwig/UnderlyingEvent/MPIHandler:twoComp Yes
+set /Herwig/UnderlyingEvent/MPIHandler:DLmode 3

@@ -1,0 +1,393 @@
+# format is:
+#   [version] [beam] [tune name] [pythia8 tune code]
+
+# version 108.p1:
+8.108.p1  ppbar  default  0
+8.108.p1  pp     default  0
+8.108.p1  ee     default  0
+8.108.p1  ee     montull  101
+
+
+# version 120:
+8.120  ppbar  default  0
+8.120  pp     default  0
+8.120  ee     default  0
+
+# version 125:
+8.125  ppbar  default  0
+8.125  pp     default  0
+8.125  ee     default  0
+
+
+# version 130:
+8.130  ppbar  default  0
+8.130  ppbar  early    1
+8.130  ppbar  tune-1   2
+
+8.130  pp     default  0
+8.130  pp     early    1
+8.130  pp     tune-1   2
+
+8.130  ee     default  0
+8.130  ee     jetset   1
+8.130  ee     montull  2
+8.130  ee     hoeth    3
+
+
+# version 130.p1:
+8.130.p1  ppbar  default  0
+8.130.p1  ppbar  early    1
+8.130.p1  ppbar  tune-1   2
+
+8.130.p1  pp     default  0
+8.130.p1  pp     early    1
+8.130.p1  pp     tune-1   2
+
+8.130.p1  ee     default  0
+8.130.p1  ee     jetset   1
+8.130.p1  ee     montull  2
+8.130.p1  ee     hoeth    3
+
+
+# version 135:
+8.135  ppbar  default  0
+8.135  ppbar  early    1
+8.135  ppbar  tune-1   2
+
+8.135  pp     default  0
+8.135  pp     early    1
+8.135  pp     tune-1   2
+
+8.135  ee     default  0
+8.135  ee     jetset   1
+8.135  ee     montull  2
+8.135  ee     hoeth    3
+
+
+# version 142:
+8.142  ppbar  default  0
+8.142  ppbar  early    1
+8.142  ppbar  tune-1   2
+8.142  ppbar  tune-2c  3
+8.142  ppbar  tune-2m  4
+8.142  ppbar  tune-3c  5
+8.142  ppbar  tune-3m  6
+
+8.142  pp     default  0
+8.142  pp     early    1
+8.142  pp     tune-1   2
+8.142  pp     tune-2c  3
+8.142  pp     tune-2m  4
+8.142  pp     tune-3c  5
+8.142  pp     tune-3m  6
+
+8.142  ee  default  0
+8.142  ee  jetset   1
+8.142  ee  montull  2
+8.142  ee  hoeth    3
+
+
+# version 145:
+8.145  ppbar  default  0
+8.145  ppbar  early    1
+8.145  ppbar  tune-1   2
+8.145  ppbar  tune-2c  3
+8.145  ppbar  tune-2m  4
+8.145  ppbar  tune-4c  5
+
+8.145  pp     default  0
+8.145  pp     early    1
+8.145  pp     tune-1   2
+8.145  pp     tune-2c  3
+8.145  pp     tune-2m  4
+8.145  pp     tune-4c  5
+
+8.145  ee  default  0
+8.145  ee  jetset   1
+8.145  ee  montull  2
+8.145  ee  hoeth    3
+
+
+# version 150:
+8.150  ppbar  default  0
+8.150  ppbar  default-noRap  0
+8.150  ppbar  default-noFsr  0
+8.150  ppbar  early    1
+8.150  ppbar  tune-1   2
+8.150  ppbar  tune-2c  3
+8.150  ppbar  tune-2m  4
+8.150  ppbar  tune-4c  5
+
+8.150  pp     default  0
+8.150  pp     default-noRap  0
+8.150  pp     default-noFsr  0
+8.150  pp     early    1
+8.150  pp     tune-1   2
+8.150  pp     tune-2c  3
+8.150  pp     tune-2m  4
+8.150  pp     tune-4c  5
+
+8.150  ee  default  0
+8.150  ee  default-noRap  0
+8.150  ee  default-noFsr  0
+8.150  ee  jetset   1
+8.150  ee  montull  2
+8.150  ee  hoeth    3
+
+
+# version 153:
+8.153  ppbar  default  0
+8.153  ppbar  default-noRap  0
+8.153  ppbar  default-noFsr  0
+8.153  ppbar  early    1
+8.153  ppbar  tune-1   2
+8.153  ppbar  tune-2c  3
+8.153  ppbar  tune-2m  4
+8.153  ppbar  tune-4c  5
+8.153  ppbar  tune-4cx 6
+
+8.153  pp     default  0
+8.153  pp     default-noRap  0
+8.153  pp     default-noFsr  0
+8.153  pp     early    1
+8.153  pp     tune-1   2
+8.153  pp     tune-2c  3
+8.153  pp     tune-2m  4
+8.153  pp     tune-4c  5
+8.153  pp     tune-4cx 6
+
+8.153  ee  default  0
+8.153  ee  default-noRap  0
+8.153  ee  default-noFsr  0
+8.153  ee  jetset   1
+8.153  ee  montull  2
+8.153  ee  hoeth    3
+
+
+# version 157:
+8.157  ppbar  default  0
+8.157  ppbar  default-noRap  0
+8.157  ppbar  default-noFsr  0
+8.157  ppbar  early    1
+8.157  ppbar  tune-1   2
+8.157  ppbar  tune-2c  3
+8.157  ppbar  tune-2m  4
+8.157  ppbar  tune-4c  5
+8.157  ppbar  tune-4cx 6
+
+8.157  pp     default  0
+8.157  pp     default-noRap  0
+8.157  pp     default-noFsr  0
+8.157  pp     early    1
+8.157  pp     tune-1   2
+8.157  pp     tune-2c  3
+8.157  pp     tune-2m  4
+8.157  pp     tune-4c  5
+8.157  pp     tune-4cx 6
+
+8.157  ee  default  0
+8.157  ee  default-noRap  0
+8.157  ee  default-noFsr  0
+8.157  ee  jetset   1
+8.157  ee  montull  2
+8.157  ee  hoeth    3
+
+
+# version 160:
+8.160  ppbar  default  0
+8.160  ppbar  default-noRap  0
+8.160  ppbar  default-noFsr  0
+8.160  ppbar  early    1
+8.160  ppbar  tune-1   2
+8.160  ppbar  tune-2c  3
+8.160  ppbar  tune-2m  4
+8.160  ppbar  tune-4c  5
+8.160  ppbar  tune-4cx 6
+8.160  ppbar  tune-A2  7
+
+8.160  pp     default  0
+8.160  pp     default-noRap  0
+8.160  pp     default-noFsr  0
+8.160  pp     early    1
+8.160  pp     tune-1   2
+8.160  pp     tune-2c  3
+8.160  pp     tune-2m  4
+8.160  pp     tune-4c  5
+8.160  pp     tune-4cx 6
+8.160  pp     tune-A2  7
+
+8.160  ee  default  0
+8.160  ee  default-noRap  0
+8.160  ee  default-noFsr  0
+8.160  ee  jetset   1
+8.160  ee  montull  2
+8.160  ee  hoeth    3
+
+
+# version 162:
+8.162  ppbar  default  0
+8.162  ppbar  default-noRap  0
+8.162  ppbar  default-noFsr  0
+8.162  ppbar  early    1
+8.162  ppbar  tune-1   2
+8.162  ppbar  tune-2c  3
+8.162  ppbar  tune-2m  4
+8.162  ppbar  tune-4c  5
+8.162  ppbar  tune-4cx 6
+8.162  ppbar  tune-A2  7
+
+8.162  pp     default  0
+8.162  pp     default-noRap  0
+8.162  pp     default-noFsr  0
+8.162  pp     early    1
+8.162  pp     tune-1   2
+8.162  pp     tune-2c  3
+8.162  pp     tune-2m  4
+8.162  pp     tune-4c  5
+8.162  pp     tune-4cx 6
+8.162  pp     tune-A2  7
+
+8.162  ee  default  0
+8.162  ee  default-noRap  0
+8.162  ee  default-noFsr  0
+8.162  ee  jetset   1
+8.162  ee  montull  2
+8.162  ee  hoeth    3
+
+
+# version 163:
+8.163  ppbar  default  0
+8.163  ppbar  default-noRap  0
+8.163  ppbar  default-noFsr  0
+8.163  ppbar  early    1
+8.163  ppbar  tune-1   2
+8.163  ppbar  tune-2c  3
+8.163  ppbar  tune-2m  4
+8.163  ppbar  tune-4c  5
+8.163  ppbar  tune-4cx 6
+8.163  ppbar  tune-A2  7
+
+8.163  pp     default  0
+8.163  pp     default-noRap  0
+8.163  pp     default-noFsr  0
+8.163  pp     early    1
+8.163  pp     tune-1   2
+8.163  pp     tune-2c  3
+8.163  pp     tune-2m  4
+8.163  pp     tune-4c  5
+8.163  pp     tune-4cx 6
+8.163  pp     tune-A2  7
+
+8.163  ee  default  0
+8.163  ee  default-noRap  0
+8.163  ee  default-noFsr  0
+8.163  ee  jetset   1
+8.163  ee  montull  2
+8.163  ee  hoeth    3
+
+
+# version 165:
+8.165  ppbar  default  0
+8.165  ppbar  default-noRap  0
+8.165  ppbar  default-noFsr  0
+8.165  ppbar  default-CD  0
+8.165  ppbar  default-MBR  0
+8.165  ppbar  early    1
+8.165  ppbar  tune-1   2
+8.165  ppbar  tune-2c  3
+8.165  ppbar  tune-2m  4
+8.165  ppbar  tune-4c  5
+8.165  ppbar  tune-4cx 6
+8.165  ppbar  tune-A2  7
+
+8.165  pp     default  0
+8.165  pp     default-noRap  0
+8.165  pp     default-noFsr  0
+8.165  pp     default-CD  0
+8.165  pp     default-MBR  0
+8.165  pp     early    1
+8.165  pp     tune-1   2
+8.165  pp     tune-2c  3
+8.165  pp     tune-2m  4
+8.165  pp     tune-4c  5
+8.165  pp     tune-4cx 6
+8.165  pp     tune-A2  7
+
+8.165  ee  default  0
+8.165  ee  default-noRap  0
+8.165  ee  default-noFsr  0
+8.165  ee  jetset   1
+8.165  ee  montull  2
+8.165  ee  hoeth    3
+
+# version 170:
+8.170  ppbar  default  0
+8.170  ppbar  default-noRap  0
+8.170  ppbar  default-noFsr  0
+8.170  ppbar  default-CD  0
+8.170  ppbar  default-MBR  0
+8.170  ppbar  early    1
+8.170  ppbar  tune-1   2
+8.170  ppbar  tune-2c  3
+8.170  ppbar  tune-2m  4
+8.170  ppbar  tune-4c  5
+8.170  ppbar  tune-4cx 6
+8.170  ppbar  tune-A2  7
+
+8.170  pp     default  0
+8.170  pp     default-noRap  0
+8.170  pp     default-noFsr  0
+8.170  pp     default-CD  0
+8.170  pp     default-MBR  0
+8.170  pp     early    1
+8.170  pp     tune-1   2
+8.170  pp     tune-2c  3
+8.170  pp     tune-2m  4
+8.170  pp     tune-4c  5
+8.170  pp     tune-4cx 6
+8.170  pp     tune-A2  7
+
+8.170  ee  default  0
+8.170  ee  default-noRap  0
+8.170  ee  default-noFsr  0
+8.170  ee  jetset   1
+8.170  ee  montull  2
+8.170  ee  hoeth    3
+
+
+# version 175:
+8.175  ppbar  default  0
+8.175  ppbar  default-noRap  0
+8.175  ppbar  default-noFsr  0
+8.175  ppbar  default-noCR  0
+8.175  ppbar  default-CD  0
+8.175  ppbar  default-MBR  0
+8.175  ppbar  early    1
+8.175  ppbar  tune-1   2
+8.175  ppbar  tune-2c  3
+8.175  ppbar  tune-2m  4
+8.175  ppbar  tune-4c  5
+8.175  ppbar  tune-4cx 6
+8.175  ppbar  tune-A2  7
+
+8.175  pp     default  0
+8.175  pp     default-noRap  0
+8.175  pp     default-noFsr  0
+8.175  pp     default-noCR  0
+8.175  pp     default-CD  0
+8.175  pp     default-MBR  0
+8.175  pp     early    1
+8.175  pp     tune-1   2
+8.175  pp     tune-2c  3
+8.175  pp     tune-2m  4
+8.175  pp     tune-4c  5
+8.175  pp     tune-4cx 6
+8.175  pp     tune-A2  7
+
+8.175  ee  default  0
+8.175  ee  default-noRap  0
+8.175  ee  default-noFsr  0
+8.175  ee  default-noCR  0
+8.175  ee  jetset   1
+8.175  ee  montull  2
+8.175  ee  hoeth    3

@@ -1,0 +1,31 @@
+Name: CMS_EWK_10_012
+Year: 2011
+Summary: Jet production rates in association with W and Z bosons in pp collisions at sqrt(s) = 7 TeV
+Experiment: CMS
+Collider: LHC
+Status: UNVALIDATED
+Authors:
+ - Lovedeep Kaur Saini <lovedeep@cern.ch>
+ - Anil Pratap Singh <anil@cern.ch>
+References:
+ - DOI 10.1007/JHEP01(2012)010
+ - arXiv 1110.3226 [hep-ex]
+RunInfo:
+  Run MC generators with W/Z decaying to leptonic modes at 7 TeV CoM energy.
+  Cuts are leptons pT > 20 GeV and |leading_muon_eta| < 2.1, |secondLeading_muon_eta| < 2.4 and |electron_eta| < 2.5;
+  jets pT > 30 GeV and |eta| < 2.4
+NumEvents: 100000
+Beams: [p+, p+]
+Energies: [7000]
+PtCuts: [20]
+NeedCrossSection: yes
+Description:
+  A study of jet production in association with W and Z bosons
+  for a jet transverse momentum threshold of 30 GeV, using 36 pb^-1 of
+  proton-proton collision data at 7 TeV cms energy has been done.
+  The study includes the measurement of the normalized inclusive rates
+  of jets produced, as well as the ratios of cross-sections and the first test
+  of the Berends-Giele scaling at sqrt(s) = 7 TeV.
+ToDo:
+ - need to discuss with experts
+
