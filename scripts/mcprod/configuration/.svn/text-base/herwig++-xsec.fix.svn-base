@@ -1,4 +1,0 @@
-# Get the cross section right
-# (as advised e.g. in https://herwig.hepforge.org/trac/browser/Tests/Rivet/SppS-900-UE.in)
-create Herwig::MPIXSecReweighter MPIXSecReweighter
-insert LHCGenerator:EventHandler:PostSubProcessHandlers 0 MPIXSecReweighter
