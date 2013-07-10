@@ -7,38 +7,43 @@ set_environment () {
   echo "Setting environment..."
   
   local mode=$1
-  
+
   if [[ "$mode" == "lxbatch" || "$mode" == "boinc" ]] ; then
     # in lxbatch or boinc mode the script has access only to the current directory,
     # repoint the temp directory root to $PWD/tmp
     export TMPDIR="$(pwd)/tmp"
     mkdir -p $TMPDIR || exit 1
   fi
-  
+
   # path to software packages:
   local EXTERNAL=/afs/cern.ch/sw/lcg/external
   if [[ "$mode" == "boinc" ]] ; then
     EXTERNAL=/cvmfs/sft.cern.ch/lcg/external
   fi
-  
+
   # set SLC5 platform name:
-  local LCG_PLATFORM=x86_64-slc5-gcc43-opt
+#  local LCG_PLATFORM=x86_64-slc5-gcc43-opt
+  local LCG_PLATFORM=x86_64-slc6-gcc46-opt
+  local LCG_PLATFORM_GCC=x86_64-slc6
   if [[ "$(uname -m)" != "x86_64" ]] ; then
     LCG_PLATFORM=i686-slc5-gcc43-opt
   fi
-  
-  source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
-  
+
+#  source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
+  source $EXTERNAL/gcc/4.6.3/$LCG_PLATFORM_GCC/setup.sh $EXTERNAL
+
   if [[ "$?" != "0" ]] ; then
     echo "ERROR: fail to set environment (gcc)"
     exit 1
   fi
-  
+
   HEPMCVERSION=2.06.05
   local MCGENERATORS=$EXTERNAL/MCGenerators_hepmc$HEPMCVERSION
-  RIVET=$MCGENERATORS/rivet/1.8.2/$LCG_PLATFORM
+#  RIVET=$MCGENERATORS/rivet/1.8.2/$LCG_PLATFORM
+  RIVET=$MCGENERATORS/rivet/1.8.3b1/$LCG_PLATFORM
   HEPMC=$EXTERNAL/HepMC/$HEPMCVERSION/$LCG_PLATFORM
-  local PYTHON=$EXTERNAL/Python/2.6.5/$LCG_PLATFORM
+#  local PYTHON=$EXTERNAL/Python/2.6.5/$LCG_PLATFORM
+  local PYTHON=$EXTERNAL/Python/2.6.5p2/$LCG_PLATFORM
   local FASTJET=$EXTERNAL/fastjet/2.4.4/$LCG_PLATFORM
   local GSL=$EXTERNAL/GSL/1.10/$LCG_PLATFORM
   
@@ -55,7 +60,8 @@ set_environment () {
   else
     ROOTPRE=/afs/cern.ch/sw/lcg/app/releases
   fi
-  export ROOTSYS=$ROOTPRE/ROOT/5.32.00/$LCG_PLATFORM/root
+#  export ROOTSYS=$ROOTPRE/ROOT/5.32.00/$LCG_PLATFORM/root
+  export ROOTSYS=$ROOTPRE/ROOT/5.34.00/$LCG_PLATFORM/root
   
   echo "MCGENERATORS=$MCGENERATORS"
   echo "RIVET=$RIVET"
