@@ -40,10 +40,10 @@ iSFfjjzaWArA/jE0MHSk5s1PusVttlouY/VxO4B774sW8okaog==
 -----END RSA PRIVATE KEY-----
 EOF
 
+#### Do not modify anything after this ####
+
 # Change permissions as required
 chmod 0700 /root/.ssh/id_rsa
-
-#### Do not modify anything after this ####
 
 # Disable strict host check on github
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
@@ -77,6 +77,9 @@ cat <<EOF > ${WWW_ROOT}/index.php
 	</body>
 </html>
 EOF
+
+# Make mcprod are writable by the server
+chmod -R a+rwx ${T4T_ROOT}/scripts/mcprod
 
 # Launch boot scripts
 cd ${T4T_ROOT}/scripts

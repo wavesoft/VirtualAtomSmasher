@@ -11,7 +11,7 @@ function runRivet($beam, $process, $energy, $tune="default", $generator="pythia8
 
 }
 
-function createTuneFile( $name, $variables=array() ) {
+function createTuneFile( $generator, $name, $variables=array() ) {
 
 	$buf = "";
 	foreach ($variables as $k => $v) {
@@ -23,7 +23,7 @@ function createTuneFile( $name, $variables=array() ) {
 			$buf .= "$k = $v" . "\n";
 		}
 	}
-	file_put_contents("configuration/$name.tune", $buf);
+	file_put_contents("configuration/$generator-$name.tune", $buf);
 
 }
 
@@ -37,17 +37,20 @@ if (isset($_GET['v'])) {
 	$alphaS = floatval($_GET['v']);
 }
 
-// Create a tune file for the parameter
-createTuneFile( "user-tune", array(
-	"TimeShower:alphaSvalue" => $alphaS;
+// Append overridable parameters for the default tune
+createTuneFile( "pythia8", "default", array(
+
+	// We are overwritting only the alphaShower
+	"TimeShower:alphaSvalue" => $alphaS
+
 ));
 
 // Run rivet
-runRivet("ee", "zhad", 91, "user-tune", "pythia8", "8.175");
+runRivet("ee", "zhad", 91.2);
 
 // Load rivet data
 $data_ref = parse_histogram( "dat/ee/zhad/tau/aleph1-charged/91.2/ALEPH_1996_S3486095.dat" );
-$data_rivet = parse_histogram( "dat/ee/zhad/tau/aleph1-charged/91.2/pythia8/8.175/user-tune.dat" );
+$data_rivet = parse_histogram( "dat/ee/zhad/tau/aleph1-charged/91.2/pythia8/8.175/default.dat" );
 
 // Render responses for now
 print_r($data_ref);
