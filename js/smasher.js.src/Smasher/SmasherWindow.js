@@ -13,11 +13,12 @@ _NS_.SmasherFrame = function ( options ) {
     var la = new THREE.AmbientLight( 0x111111 );
     this.scene.add(la);
 
-    this.camera.position.set( 0, -10, 10);
-    this.camera.lookAt(new THREE.Vector3(0,0,0));
+    this.camera.position.set( 0, -200, 100);
+    this.camera.lookAt(new THREE.Vector3(0,-60,0));
 
 
     // Add a spinning cube
+    /*
     var i = 1, sz=4;
     var cb1 = new THREE.CylinderGeometry(0,i,sz, 20, 1, 1, false),
         cb2 = new THREE.CylinderGeometry(0,i,sz, 20, 1, 1, false);
@@ -35,13 +36,35 @@ _NS_.SmasherFrame = function ( options ) {
     var cm = new THREE.MeshPhongMaterial({color: 0xff0000});
     var cmsh = new THREE.Mesh(cg, cm);
     this.scene.add(cmsh);
-
+    */
+    
+    // Add the LHC ring
+    this.lhc = new _NS_.LHCRing();
+    this.scene.add(this.lhc);
     
     // Set environment if defined
     if (op.env !== undefined) this.setEnvironment(op.env);
     
     // Start animation thread
     this.animate();
+
+    $(this).on('hoverenter', function(e) {
+        console.log(e);
+        if (e instanceof _NS_.LHCDipole) {
+            console.log("DA!");
+            e.position.z = 5;
+        }
+    });
+    $(this).on('hoverexit', function(e) {
+        if (e instanceof _NS_.LHCDipole) {
+            console.log("Done!");
+            e.position.z = 0;
+        }
+    });
+
+	var effect = new THREE.ShaderPass( THREE.FXAAShader );
+	this.addPass( effect );
+	
     
 };
 
@@ -78,10 +101,11 @@ _NS_.SmasherFrame.prototype.setEnvironment = function(path, fmt) {
 /**
  * Render & Update objects
  */
-_NS_.SmasherFrame.prototype.render = function() {
+_NS_.SmasherFrame.prototype.render = function( delta ) {
     if (this.controller) this.controller.update();
     if (this.o) { this.o.rotation.z += 0.01; }
     if (this.cmsh) { this.cmsh.rotation.z += 0.01; }
-    _NS_.Viewport.prototype.render.call(this);
+    if (this.lhc) { this.lhc.rotation.z += delta / 5000; }
+    _NS_.Viewport.prototype.render.call(this, delta);
 };
 
