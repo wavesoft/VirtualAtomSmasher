@@ -22,6 +22,8 @@ THREE.EffectComposer = function ( renderer, renderTarget ) {
 	this.writeBuffer = this.renderTarget1;
 	this.readBuffer = this.renderTarget2;
 
+	this.autoRenderScreen = true;
+
 	this.passes = [];
 
 	if ( THREE.CopyShader === undefined )
@@ -58,6 +60,8 @@ THREE.EffectComposer.prototype = {
 		this.writeBuffer = this.renderTarget1;
 		this.readBuffer = this.renderTarget2;
 
+		var lastRenderScreen = false;
+
 		var maskActive = false;
 
 		var pass, i, il = this.passes.length;
@@ -67,6 +71,13 @@ THREE.EffectComposer.prototype = {
 			pass = this.passes[ i ];
 
 			if ( !pass.enabled ) continue;
+
+			// If that's the last pass and we have autoRenderScreen enabled,
+			// switch renderToScreen to true
+			if ((i == il-1) && (this.autoRenderScreen)) {
+				lastRenderScreen = pass.renderToScreen;
+				pass.renderToScreen = true;
+			}
 
 			pass.render( this.renderer, this.writeBuffer, this.readBuffer, delta, maskActive );
 
@@ -87,6 +98,9 @@ THREE.EffectComposer.prototype = {
 				this.swapBuffers();
 
 			}
+
+			if ((i == il-1) && (this.autoRenderScreen))
+				pass.renderToScreen = lastRenderScreen;
 
 			if ( pass instanceof THREE.MaskPass ) {
 

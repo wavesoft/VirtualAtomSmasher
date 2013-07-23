@@ -39,6 +39,13 @@ _NS_.LHCRing = function( config ) {
     shadow.position.set(0,0,-20);
 	this.add(shadow);
 	
+	// Generate the intensity ring
+	this.ringGeometry = new THREE.TorusGeometry( this.radius, 1, 10, this.segments );
+	this.ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, ambient: 0xffffff });
+	this.ringMesh = new THREE.Mesh( this.ringGeometry, this.ringMaterial );
+	this.add( this.ringMesh );
+
+
 }
 
 _NS_.LHCRing.prototype = Object.create( THREE.Object3D.prototype );
