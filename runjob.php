@@ -45,6 +45,11 @@ function parse_histogram( $data, $name ) {
 		$yerrminus = floatval($values[4]);
 		$yerrplus = floatval($values[5]);
 
+		//$yval += rand(0,1000)/5000;
+
+		// Ignore zero values
+		//if ($yval == 0) continue;
+
 		// Do not allow zero yval
 		if ($yval == 0) $yval=0.00000001;
 		if ($yval - $yerrminus == 0) $yerrminus = $yval - 0.00000001;
@@ -137,7 +142,7 @@ createTuneFile( "pythia8", "default", array(
 
 // Calculate number of events
 $numEvents = $_GET['events'];
-if (!isset($numEvents)) $numEvents = 1000;
+if (!isset($numEvents)) $numEvents = 10000;
 
 // Run rivet
 runRivet("ee", "zhad", 91.2, "default", $numEvents);
@@ -146,19 +151,60 @@ runRivet("ee", "zhad", 91.2, "default", $numEvents);
 $data_ref = parse_histofile( "dat/ee/zhad/tau/aleph1-charged/91.2/ALEPH_1996_S3486095.dat" );
 $data_rivet = parse_histofile( "dat/ee/zhad/tau/aleph1-charged/91.2/pythia8/8.175/default.dat" );
 
+// Calculate chi square
+$chi2 = 0; $n = 0; $uncertainty = 0;
+foreach ($data_rivet['hist']['bins'] as $i => $b) {
+	$r = $data_ref['hist']['bins'][$i];
+
+	// (WARNING!!! Assuming that bins are the properly aligned) //
+
+    // compute one element of test statistics:
+    //                     (Theory - Data)^2
+    // X = --------------------------------------------------------
+    //      Sigma_data^2 + Sigma_theory^2 + (uncertainty*Theory)^2
+
+	$theory = $b[3];
+	$data   = $r[3];
+
+	$sigma_theory = ( $theory > $data ) ? $b[3] : $b[4];
+	$sigma_data   = ( $theory > $data ) ? $b[4] : $b[3];
+
+	$nomin = ($theory - $data) * ($theory - $data);
+	$denom = $sigma_data*$sigma_data +
+			 $sigma_theory*$sigma_theory +
+			 ( $uncertainty * $theory) * ( $uncertainty * $theory );
+
+	$chi2 += $nomin / $denom;
+	$n++;
+
+}
+
+$chi2 = $chi2/$n;
 
 // Get jsonP parameter
 $cb = $_GET['cb'];
 if (!isset($cb)) $cb="console.log";
 
+// Calculate unified bounds
+$bounds = array(
+		'x' => array(
+				min( $data_rivet['hist']['bounds']['x'][0], $data_ref['hist']['bounds']['x'][0] ),
+				max( $data_rivet['hist']['bounds']['x'][1], $data_ref['hist']['bounds']['x'][1] ),
+			),
+		'y' => array(
+				min( $data_rivet['hist']['bounds']['y'][0], $data_ref['hist']['bounds']['y'][0] ),
+				max( $data_rivet['hist']['bounds']['y'][1], $data_ref['hist']['bounds']['y'][1] ),
+			)
+	);
+
 // Render javascript
-header("Content-Type: text/javascript");
-echo $cb ."(" . 
-	json_encode(array(
+header("Content-Type: application/x-json");
+echo json_encode(array(
 		'dat' => $data_rivet,
-		'ref' => $data_ref
-	)) 
-	. ");\n";
+		'ref' => $data_ref,
+		'bounds' => $bounds,
+		'chi2' => $chi2
+	));
 
 //echo "\n".print_r($data_rivet);
 

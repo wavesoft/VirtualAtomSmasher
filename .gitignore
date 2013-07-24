@@ -216,3 +216,4 @@ pip-log.txt
 
 # Temp files
 scripts/plotter.cc
+js/d3.js
