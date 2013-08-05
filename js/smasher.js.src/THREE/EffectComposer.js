@@ -141,6 +141,12 @@ THREE.EffectComposer.prototype = {
 
 		renderTarget.width = width;
 		renderTarget.height = height;
+		
+		for (var i=0; i<this.passes.length; i++) {
+		    if (this.passes[i] instanceof THREE.ComposerPass) {
+		        this.passes[i].setSize(width, height);
+		    }
+		}
 
 		this.reset( renderTarget );
 

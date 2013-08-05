@@ -1,0 +1,48 @@
+
+body {
+    background: #000;
+}
+
+#userscreen {
+    position: relative;
+    height: 300px;
+}
+
+#userscreen > #ring {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 0px;
+    margin: 0px;
+    width: 400px;
+    height: 300px;
+    display: block;
+}
+
+#userscreen > #overlay {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 420px;
+    height: 300px;
+    display: block;
+    background: url(img/overlay.png) no-repeat top left;
+}
+
+#userscreen .label {
+    position: absolute;
+    border: solid 1px #fff;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    background: #666;
+}
+
+#userscreen > #lbl_rate {
+    left: 400px;
+    top: 21px;
+}
+
+#chart {
+    margin: 10px;
+}

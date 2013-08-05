@@ -12,11 +12,12 @@ _NS_.Viewport = function(options) {
         this.container = document.createElement('div');
 		document.body.appendChild( this.container );
     } else {
-        this.container = op.container;
+        this.container = $(op.container);
     }
     
+    this.fullscreen = op.fullscreen || false;
     this.bg = op.bg || 0x000000;
-    this.stats = op.stats || true;
+    this.stats = op.stats == undefined ? true : op.stats;
     this.autostop = op.autostop || true;
     this.autohover = op.autohover || true;
 	this.animating = (op.animating == undefined) ? true : op.animating;
@@ -27,8 +28,11 @@ _NS_.Viewport = function(options) {
 	
 	// Setup renderer
     var w=$(this.container).width(), h=$(this.container).height();
+    if (this.fullscreen) { w=$(window).width(); h=$(window).height(); };
+    console.log(w,h);
+
 	this.renderer = new THREE.WebGLRenderer( { antialias: true, clearColor: this.bg, clearAlpha: 1 } );
-	this.container.appendChild(this.renderer.domElement);
+	$(this.container).append(this.renderer.domElement);
 	
 	// Setup scene
 	this.scene = new THREE.Scene();
@@ -41,7 +45,7 @@ _NS_.Viewport = function(options) {
 	// Check if we should add stats
 	if (this.stats) {
 	    this.stats = new Stats();
-		this.container.appendChild( this.stats.domElement );
+	    $(this.container).append( this.stats.domElement );
 		$(this.stats.domElement).css({
 		    'position': 'absolute',
 		    'top': 0, 'left': 0
@@ -50,7 +54,8 @@ _NS_.Viewport = function(options) {
 	
 	// Setup postprocessing composer
     this.composer = new THREE.EffectComposer( this.renderer );
-    this.composer.addPass( new THREE.RenderPass( this.scene, this.camera ) );
+    var r = new THREE.RenderPass( this.scene, this.camera );
+    this.composer.addPass( r );
     this.renderPasses = [ ];
 	
 	// Initialize and bind on event callbacks
@@ -69,7 +74,7 @@ _NS_.Viewport = function(options) {
     	self.mouse.y = - ( (event.pageY - parentOffset.top) / self.height ) * 2 + 1;
     	
 	});
-	
+
 	// Prepare projectors & ray tracers that are used to find a hovered object
 	this.projector = new THREE.Projector();
 	this.raycaster = new THREE.Raycaster();
@@ -90,6 +95,14 @@ _NS_.Viewport = function(options) {
 	});
 	
 };
+
+/**
+ * Add an extra render pass
+ */
+_NS_.Viewport.prototype.insertPass = function(pass, index) {
+    this.renderPasses.splice( index, 0, pass );
+    this.composer.insertPass(pass, index);
+}
 
 /**
  * Add an extra render pass
@@ -130,6 +143,8 @@ _NS_.Viewport.prototype.getHoverObject = function() {
  */
 _NS_.Viewport.prototype.resize = function() {
     var w=$(this.container).width(), h=$(this.container).height();
+    if (this.fullscreen) { w=$(window).width(); h=$(window).height(); };
+    console.log(w,h);
     this.width = w;
     this.height = h;
 	this.renderer.setSize( w,h );
@@ -142,6 +157,7 @@ _NS_.Viewport.prototype.resize = function() {
  * Overridable function to render the content
  */
 _NS_.Viewport.prototype.render = function( delta ) {
+    
     if (this.renderPasses.length == 0) {
         this.renderer.render( this.scene, this.camera );
     } else {

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+      <script type="text/javascript" src="js/three.min.js"></script>
+      <script type="text/javascript" src="js/stats.min.js"></script>
+      <script type="text/javascript" src="js/smasher.js.php"></script>
+      <script type="text/javascript" src="js/shaders/beamshader.js"></script>
+      <script type="text/javascript">
+      
+      $(function() {
+         
+         var v = new M.Viewport({
+            container: "#back3d",
+            bg: 0x000000, //0xf5f5f5,
+            autostop: true,
+            fullscreen: true,
+            stats: false
+         });
+
+         // Setup lighting
+         var l = new THREE.PointLight( 0xffffff );
+         l.position.set(0, 0, 0);
+         v.scene.add(l);
+         
+         v.renderer.sortObjects = false;
+         
+         // Setup beam stuff
+
+         var beamTex1 = THREE.ImageUtils.loadTexture( 'theme/img/beam-1.png' );
+         beamTex1.wrapS = THREE.RepeatWrapping;
+         beamTex1.wrapT = THREE.RepeatWrapping;
+
+         var beamTex2 = THREE.ImageUtils.loadTexture( 'theme/img/beam-2.png' );
+         beamTex2.wrapS = THREE.RepeatWrapping;
+         beamTex2.wrapT = THREE.RepeatWrapping;
+
+      	var beamShader = BeamShader;
+         var beamShaderUniformsL = THREE.UniformsUtils.clone( beamShader.uniforms );
+         var beamShaderUniformsR = THREE.UniformsUtils.clone( beamShader.uniforms );
+         
+         beamShaderUniformsL['tTexture1'].value = beamTex1;
+         beamShaderUniformsL['tTexture2'].value = beamTex2;
+         beamShaderUniformsR['tTexture1'].value = beamTex1;
+         beamShaderUniformsR['tTexture2'].value = beamTex2;
+         
+         beamShaderUniformsL['uColor'].value = new THREE.Color( 0xffaa00 );
+         beamShaderUniformsR['uColor'].value = new THREE.Color( 0x6666FF );
+         
+      	var beamMaterialL = new THREE.ShaderMaterial( {
+      		uniforms: beamShaderUniformsL,
+      		vertexShader: beamShader.vertexShader,
+      		fragmentShader: beamShader.fragmentShader,
+      		transparent: true,
+      		side: THREE.DoubleSide
+      	} );
+      	
+      	var beamMaterialR = new THREE.ShaderMaterial( {
+      		uniforms: beamShaderUniformsR,
+      		vertexShader: beamShader.vertexShader,
+      		fragmentShader: beamShader.fragmentShader,
+      		transparent: true,
+      		side: THREE.DoubleSide
+      	} );
+      	
+         var torusGeom = new THREE.TorusGeometry( 20, 3, 10, 20, Math.PI );
+         var torusMat = new THREE.MeshPhongMaterial({ side: THREE.BackSide, transparent: true, color: 0xffffff, opacity: 0.3 });
+         var torusMesh = new THREE.Mesh( torusGeom, torusMat );
+         v.scene.add( torusMesh );
+
+         var torusGeom2 = new THREE.TorusGeometry( 20, 3.1, 15, 25, Math.PI );
+         var torusMat2 = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.FrontSide, color: 0x99999999 });
+         var torusMesh2 = new THREE.Mesh( torusGeom2, torusMat2 );
+         v.scene.add( torusMesh2 );
+         
+         var beamGeom = new THREE.TorusGeometry( 20, 1.2, 20, 20, Math.PI );
+         var beamMeshL = new THREE.Mesh( beamGeom, beamMaterialL );
+         beamMeshL.rotation.z = Math.PI/2;
+         v.scene.add( beamMeshL );
+         
+         var beamMeshR = new THREE.Mesh( beamGeom, beamMaterialR );
+         beamMeshR.rotation.z = -Math.PI/2;
+         v.scene.add( beamMeshR );
+         
+         var collisionGeom = new THREE.SphereGeometry( 1 );
+         var collisionMat = new THREE.MeshBasicMaterial({ color: 0xEEEEBB });
+         var collisionMesh = new THREE.Mesh( collisionGeom, collisionMat );
+         collisionMesh.position.set( 0, 20, 0 );
+         v.scene.add( collisionMesh );
+
+         v.camera.position.set  ( 0, 0, 0 );
+         v.camera.lookAt(new THREE.Vector3( 0, 1, 0 ));
+         v.camera.rotation.z = Math.PI;
+         
+         v.render = function( delta ) {
+            M.Viewport.prototype.render.call(this, delta);
+            //torusMesh.rotation.z += delta / 5000;
+            //beamMesh.rotation.z += delta/ 5000;
+            beamShaderUniformsL['uTime'].value -= delta/1000;
+            beamShaderUniformsR['uTime'].value += delta/1000;
+            
+         };
+         
+      });
+      
+      </script>
+      <style type="text/css">
+      body {
+         overflow: hidden;
+      }
+      #back3d {
+         position: absolute;
+         left: 0px; top: 0px;
+         width: 100%; height: 100%;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="back3d"></div>
+   </body>
+</html>

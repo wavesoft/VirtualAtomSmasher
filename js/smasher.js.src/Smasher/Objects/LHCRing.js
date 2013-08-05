@@ -32,20 +32,43 @@ _NS_.LHCRing = function( config ) {
 	    this.dipoles.push(dipole_segment);
 	}
 	
-	// Generate the progress marker
-	var g = new THREE.RingGeometry( this.radius-this.thickness/2, this.radius+this.thickness/2, this.segments);
-    var m = new THREE.MeshPhongMaterial({color: 0xff0000, side:THREE.DoubleSide});
-    var shadow = new THREE.Mesh(g,m);
-    shadow.position.set(0,0,-20);
-	this.add(shadow);
+	// Create a position-bound mirror object for the glow scene (rendered after)
+	this.glowObject = new THREE.Object3D();
+	this.glowObject.position = this.position;
+	this.glowObject.rotation = this.rotation;
 	
-	// Generate the intensity ring
+	// Generate the progress marker
+	this.shadowGeometry = new THREE.RingGeometry( this.radius-this.thickness/2, this.radius+this.thickness/2, this.segments);
+    this.shadowMaterial = new THREE.MeshBasicMaterial({color: 0x990000, side:THREE.DoubleSide});
+    this.shadow = new THREE.Mesh( this.shadowGeometry, this.shadowMaterial );
+    this.shadow.position.set(0,0,-20);
+	//this.add(this.shadow);	
+	
+	var shader = THREE.ParticleTextureShader;
+    this.ringMatUniforms = THREE.UniformsUtils.clone( shader.uniforms );
+	this.ringMaterial = new THREE.ShaderMaterial( {
+		uniforms: this.ringMatUniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+	} );
+	
+	this.ringMatUniforms['uScale'].value = 10.0;
+	
+    // Prepare the objects for the blur scene
 	this.ringGeometry = new THREE.TorusGeometry( this.radius, 1, 10, this.segments );
-	this.ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, ambient: 0xffffff });
+	//this.ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 	this.ringMesh = new THREE.Mesh( this.ringGeometry, this.ringMaterial );
-	this.add( this.ringMesh );
-
+	this.glowObject.add( this.ringMesh );
+	
 
 }
 
 _NS_.LHCRing.prototype = Object.create( THREE.Object3D.prototype );
+
+_NS_.LHCRing.prototype.setProgress = function( percent ) {
+    
+}
+
+_NS_.LHCRing.prototype.update = function(delta) {
+    this.ringMatUniforms['uTime'].value += delta / 1000;
+};

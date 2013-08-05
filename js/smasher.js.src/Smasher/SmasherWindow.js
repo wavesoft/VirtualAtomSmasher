@@ -45,9 +45,6 @@ _NS_.SmasherFrame = function ( options ) {
     // Set environment if defined
     if (op.env !== undefined) this.setEnvironment(op.env);
     
-    // Start animation thread
-    this.animate();
-
     $(this).on('hoverenter', function(e) {
         console.log(e);
         if (e instanceof _NS_.LHCDipole) {
@@ -61,10 +58,30 @@ _NS_.SmasherFrame = function ( options ) {
             e.position.z = 0;
         }
     });
+    
+    // Prepare a scene for the blurred objects
+    this.blurScene = new THREE.Scene();
 
-	var effect = new THREE.ShaderPass( THREE.FXAAShader );
-	this.addPass( effect );
+    // Prepare a secondary composer
+    this.blurComposer = new THREE.ComposerPass( this.renderer, this.width, this.height );
+
+    // Prepare the blur render passes
+	this.blurHShaderPass = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+	this.blurVShaderPass = new THREE.ShaderPass( THREE.VerticalBlurShader );
 	
+	// Stack the required render passes
+	this.blurComposer.addPass( new THREE.RenderPass( this.blurScene, this.camera, undefined, new THREE.Color(0x000000) ) );
+	this.blurComposer.addPass( this.blurHShaderPass );
+	this.blurComposer.addPass( this.blurVShaderPass );
+	
+	// Add the composer pass to the current stack
+	this.addPass( this.blurComposer );
+	
+	// Run resize again so it updates the shader stack
+	this.resize();
+    
+    // Start animation thread
+    this.animate();
     
 };
 
@@ -79,6 +96,16 @@ _NS_.SmasherFrame.prototype.updateEnvmap = function() {
     	    this.model.materials[i].envMap = this.envMap;
     	    this.model.materials[i].needsUpdate = true;
     	}
+    }
+}
+
+_NS_.SmasherFrame.prototype.resize = function(w,h) {
+    _NS_.Viewport.prototype.resize.call(this, w, h);
+    
+    // Update blur uniforms
+    if (this.blurVShaderPass !== undefined) {
+    	this.blurVShaderPass.uniforms[ "v" ].value = 2 / this.height;
+        this.blurHShaderPass.uniforms[ "h" ].value = 2 / this.width;
     }
 }
 
