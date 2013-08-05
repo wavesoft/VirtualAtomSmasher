@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Testing heatmap indicator</title>
+	    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="js/Heatmap.js"></script>
+		<script type="text/javascript">
+
+		$(function(){
+
+			var hm = new Heatmap( "#indicator" ),
+				hm2 = new Heatmap( "#indicator2" ),
+				hm3 = new Heatmap( "#indicator3" ),
+				hm4 = new Heatmap( "#indicator4" );
+			hm.update();
+			hm2.update();
+			hm3.update();
+			hm4.update();
+
+			setInterval(function() {
+				var dat=[]; for (var i=0; i<1000; i++) { 
+					var x = Math.random(), y = Math.random();
+					var v = (Math.sin(x*Math.PI*2)*Math.cos(y*Math.PI*2) +1)/2;
+					dat.push([x,y,v]);
+				}; 
+
+				hm.setData(dat); hm.update();
+				hm2.setData(dat); hm2.update();
+				hm3.setData(dat); hm3.update();
+				hm4.setData(dat); hm4.update();
+
+			}, 500);
+
+		});
+
+		</script>
+		<style type="text/css">
+		#indicator, #indicator2, #indicator3, #indicator4 {
+			width: 201px;
+			height: 51px;
+		}
+		#indicator > canvas {
+		}
+		</style>
+	</head>
+	<body>
+		<div id="indicator"></div>
+		<div id="indicator2"></div>
+		<div id="indicator3"></div>
+		<div id="indicator4"></div>
+	</body>
+</html>
