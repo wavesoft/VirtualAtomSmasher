@@ -5,16 +5,28 @@
       <script type="text/javascript" src="js/three.min.js"></script>
       <script type="text/javascript" src="js/stats.min.js"></script>
       <script type="text/javascript" src="js/smasher.js.php"></script>
-      <script type="text/javascript" src="js/shaders/beamshader.js"></script>
+      <script type="text/javascript" src="js/shaders/BeamShader.js"></script>
+      <script type="text/javascript" src="js/shaders/CollisionShader.js"></script>
+      <script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
+      <script type="text/javascript" src="http://code.createjs.com/tweenjs-0.4.1.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap-responsive.min.css" />
+      <link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+
       <script type="text/javascript">
       
+      function animate( object, prop, completed ) {
+
+      }
+
       $(function() {
          
          var v = new M.Viewport({
-            container: "#back3d",
-            bg: 0x000000, //0xf5f5f5,
+            container: "#collider",
+            bg: 0x000000, //0x202020, 0xf5f5f5,
             autostop: true,
-            fullscreen: true,
+            fullscreen: false,
             stats: false
          });
 
@@ -22,8 +34,23 @@
          var l = new THREE.PointLight( 0xffffff );
          l.position.set(0, 0, 0);
          v.scene.add(l);
-         
-         v.renderer.sortObjects = false;
+
+         var l2 = new THREE.PointLight( 0x008080, 1, 20 );
+         l2.position.set(0, 20, 0);
+         l2.visible = false;
+         v.scene.add(l2);
+
+         var l3 = new THREE.PointLight( 0x37FFFF, 1, 20 );
+         l3.position.set(14, 18, 0);
+         l3.visible = false;
+         v.scene.add(l3);
+
+         var l4 = new THREE.PointLight( 0xffaa00, 1, 20 );
+         l4.position.set(-14, 18, 0);
+         l4.visible = false;
+         v.scene.add(l4);
+
+         v.renderer.sortObjects = true;
          
          // Setup beam stuff
 
@@ -45,7 +72,7 @@
          beamShaderUniformsR['tTexture2'].value = beamTex2;
          
          beamShaderUniformsL['uColor'].value = new THREE.Color( 0xffaa00 );
-         beamShaderUniformsR['uColor'].value = new THREE.Color( 0x6666FF );
+         beamShaderUniformsR['uColor'].value = new THREE.Color( 0x37FFFF ); //0x6666FF
          
       	var beamMaterialL = new THREE.ShaderMaterial( {
       		uniforms: beamShaderUniformsL,
@@ -64,40 +91,166 @@
       	} );
       	
          var torusGeom = new THREE.TorusGeometry( 20, 3, 10, 20, Math.PI );
-         var torusMat = new THREE.MeshPhongMaterial({ side: THREE.BackSide, transparent: true, color: 0xffffff, opacity: 0.3 });
+         var torusMat = new THREE.MeshPhongMaterial({ side: THREE.BackSide, transparent: true, color: 0x999999, opacity: 0.4 });
          var torusMesh = new THREE.Mesh( torusGeom, torusMat );
+         torusMesh.visible = false;
          v.scene.add( torusMesh );
 
-         var torusGeom2 = new THREE.TorusGeometry( 20, 3.1, 15, 25, Math.PI );
-         var torusMat2 = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.FrontSide, color: 0x99999999 });
+         var torusGeom2 = new THREE.TorusGeometry( 20, 3.1, 15, 25, Math.PI *2 );
+         var torusMat2 = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.DoubleSide, color: 0xffffff });
          var torusMesh2 = new THREE.Mesh( torusGeom2, torusMat2 );
          v.scene.add( torusMesh2 );
          
          var beamGeom = new THREE.TorusGeometry( 20, 1.2, 20, 20, Math.PI );
          var beamMeshL = new THREE.Mesh( beamGeom, beamMaterialL );
          beamMeshL.rotation.z = Math.PI/2;
+         beamMeshL.visible = false;
          v.scene.add( beamMeshL );
          
          var beamMeshR = new THREE.Mesh( beamGeom, beamMaterialR );
          beamMeshR.rotation.z = -Math.PI/2;
+         beamMeshR.visible = false;
          v.scene.add( beamMeshR );
          
-         var collisionGeom = new THREE.SphereGeometry( 1 );
-         var collisionMat = new THREE.MeshBasicMaterial({ color: 0xEEEEBB });
-         var collisionMesh = new THREE.Mesh( collisionGeom, collisionMat );
-         collisionMesh.position.set( 0, 20, 0 );
-         v.scene.add( collisionMesh );
+         // Collision animation
 
+         var clsnFlareTex1 = THREE.ImageUtils.loadTexture( "theme/img/collision-1.png" );
+         var clsnFlareTex2 = THREE.ImageUtils.loadTexture( "theme/img/collision-2.png" );
+
+         var flareColor = 0xD1FCEE ; //0xFFBD9D;
+         var collisionMaterial1 = new THREE.SpriteMaterial( { map: clsnFlareTex1, useScreenCoordinates: false, color: flareColor, fog: true } );
+         var collisionMaterial2 = new THREE.SpriteMaterial( { map: clsnFlareTex1, useScreenCoordinates: false, color: flareColor, fog: true } );
+         var collisionMaterial3 = new THREE.SpriteMaterial( { map: clsnFlareTex1, useScreenCoordinates: false, color: flareColor, fog: true } );
+
+
+         var collisionSprite1 = new THREE.Sprite( collisionMaterial1 );
+         collisionSprite1.position.set( 0, 19, 0 );
+         collisionSprite1.position.normalize();
+         collisionSprite1.position.multiplyScalar( 1 );
+         collisionSprite1.scale.set( 1, 1, 1 );
+         collisionSprite1.visible = false;
+         v.scene.add( collisionSprite1 );
+
+         var collisionSprite2 = new THREE.Sprite( collisionMaterial2 );
+         collisionSprite2.position = collisionSprite1.position;
+         collisionSprite2.visible = false;
+         v.scene.add( collisionSprite2 );
+
+         var collisionSprite3 = new THREE.Sprite( collisionMaterial3 );
+         collisionSprite3.visible = false;
+         collisionSprite3.position = collisionSprite1.position;
+         v.scene.add( collisionSprite3 );
+
+         /**
+          * This function returns an animation cycle: for the collision flare
+          * 0.0 - 0.2 => { scale: 0.0 - 0.2, opacity: 0.0 - 1.0 },
+          * 0.2 - 0.8 => { scale: 0.2 - 1.0, opacity: 1.0 },
+          * 0.8 - 1.0 => { scale: 1.1 - 1.8, opacity: 1.0 - 0.0 }
+          */
+         function fxCycle(v, maxScale) {
+            if (maxScale == undefined) maxScale = 1.0;
+            if (v < 0.2) {
+               v = v/0.2;
+               return { 
+                  's':   (v * 0.2) * maxScale,
+                  'o': v
+               };
+            } else if (v < 0.8) {
+               v = (v-0.2)/0.6;
+               return { 
+                  's':   (0.2 + v*0.8) * maxScale,
+                  'o': 1.0
+               };
+            } else {
+               v = (v-0.8)/0.2;
+               return { 
+                  's':   (1.0 + v*0.2) * maxScale,
+                  'o': 1.0 - v
+               };
+            }
+         }
+
+
+         /*
          v.camera.position.set  ( 0, 0, 0 );
          v.camera.lookAt(new THREE.Vector3( 0, 1, 0 ));
          v.camera.rotation.z = Math.PI;
-         
+         */
+
+         var rotatingRing = true;
+
+         window.v = v;
+         v.camera.position.set  ( 0, -100, 0 );
+         v.camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
+         v.camera.rotation.z = Math.PI;
+
+         /*
+         $(document.body).mousemove(function(e) {
+            var y = (e.clientY / $(window).height()) - 0.5;
+            var x = (e.clientX / $(window).width()) - 0.5;
+            v.camera.position.z = y * 5;
+            v.camera.position.x = x * 5;
+            v.camera.lookAt(new THREE.Vector3( 0, 20, 0 ));
+         })
+         */
+
+         var anim = [ ];
+         anim.push(createjs.Tween
+            .get(v.camera.position)
+            .wait(500)
+            .to({ 'y': 0 }, 1000)
+            .call(function() {
+               collisionSprite1.visible = true;
+               collisionSprite2.visible = true;
+               collisionSprite3.visible = true;
+               beamMeshR.visible = true;
+               beamMeshL.visible = true;
+               torusMesh.visible = true;
+               torusMat2.needsUpdate = true;
+               l2.visible = true;
+               l3.visible = true;
+               l4.visible = true;
+               rotatingRing = false;
+            })
+         );
+        
+
+         var cTime = 0;
+
          v.render = function( delta ) {
             M.Viewport.prototype.render.call(this, delta);
+
             //torusMesh.rotation.z += delta / 5000;
             //beamMesh.rotation.z += delta/ 5000;
-            beamShaderUniformsL['uTime'].value -= delta/1000;
-            beamShaderUniformsR['uTime'].value += delta/1000;
+            beamShaderUniformsL     ['uTime'].value += delta/1000;
+            beamShaderUniformsR     ['uTime'].value -= delta/1000;
+
+            cTime += delta / 3000;
+
+            collisionSprite1.rotation += delta / 7000;
+            collisionSprite2.rotation -= delta / 8000;
+            collisionSprite3.rotation -= delta / 5000;
+
+            var fx = fxCycle( cTime % 1.0, 0.7 );
+            collisionSprite1.scale.set( fx.s, fx.s, fx.s );
+            collisionMaterial1.opacity = fx.o;
+
+            fx = fxCycle( (cTime + 0.33333) % 1.0, 0.7 );
+            collisionSprite2.scale.set( fx.s, fx.s, fx.s );
+            collisionMaterial2.opacity = fx.o;
+
+            fx = fxCycle( (cTime + 0.66666) % 1.0, 0.7 );
+            collisionSprite3.scale.set( fx.s, fx.s, fx.s );
+            collisionMaterial3.opacity = fx.o;
+
+            // AFTO
+            if (rotatingRing)
+               torusMesh2.rotation.z += delta / 1000;
+
+            //t.tick(delta);
+            for (var i=0; i<anim.length; i++) {
+               anim[i].tick(delta);
+            }
             
          };
          
@@ -107,15 +260,57 @@
       <style type="text/css">
       body {
          overflow: hidden;
+         background: #000;
+         color: #999;
       }
-      #back3d {
+      #collider {
          position: absolute;
-         left: 0px; top: 0px;
-         width: 100%; height: 100%;
+         left: 0px; top: 50%;
+         width: 100%; height: 250px;
+         margin-top: -125px;
       }
+      #loading {
+         position: absolute;
+         display: block;
+         left: 0px; width: 100%;
+         top: 50%; height: 50px;
+         padding-top: 50px;
+      }
+      div#loading-message {
+         width: 250px;
+         margin: auto;
+         margin-top: 5px;
+         font-family: 'Armata', sans-serif;
+         font-size: 10px;
+      }
+      div#loading-message > span#loading-percent {
+         float: right;
+         opacity: 0.5;
+      }
+      div#progressbar {
+         margin: auto;
+         width: 250px;
+         border-top: solid 1px #fff;
+      }
+      div#progressbar > div#progressbar-value {
+         height: 3px;
+         display: block;
+         background: #fff;
+         width: 10%;
+      }
+
       </style>
    </head>
    <body>
-      <div id="back3d"></div>
+      <div id="collider"></div>
+      <div id="loading">
+         <div id="progressbar">
+            <div id="progressbar-value"></div>
+         </div>
+         <div id="loading-message">
+            <span id="loading-text">Initializing</span>
+            <span id="loading-percent">10%</span>
+         </div>
+      </div>
    </body>
 </html>

@@ -38,7 +38,7 @@ _NS_.Viewport = function(options) {
 	this.scene = new THREE.Scene();
 	
 	// Setup camera
-	this.camera = new THREE.PerspectiveCamera( 50, w/h, 0.1, 10000 );
+	this.camera = new THREE.PerspectiveCamera( 40, w/h, 0.1, 10000 );
 	this.camera.position.set( 10, 0, 0);
 	this.camera.lookAt(new THREE.Vector3(0,0,0));
 	
@@ -189,7 +189,7 @@ _NS_.Viewport.prototype.animate = function() {
     }
     
     // Calculate time delta in milliseconds
-    this.render( this.lastFrameTime - time );
+    this.render( time - this.lastFrameTime );
     this.lastFrameTime = time;
 
     // Update statistics
