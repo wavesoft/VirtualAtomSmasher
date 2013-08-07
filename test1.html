@@ -16,9 +16,33 @@
 
       <script type="text/javascript">
       
-      function animate( object, prop, completed ) {
+      var LHCRing = function( config ) {
+         THREE.Object3D.call( this );
+
+         // Setup lighting
+         var l = new THREE.PointLight( 0xffffff );
+         l.position.set(0, 0, 0);
+         this.add(l);
+
+         var l2 = new THREE.PointLight( 0x008080, 1, 20 );
+         l2.position.set(0, 20, 0);
+         l2.visible = false;
+         this.add(l2);
+
+         var l3 = new THREE.PointLight( 0x37FFFF, 1, 20 );
+         l3.position.set(14, 18, 0);
+         l3.visible = false;
+         this.add(l3);
+
+         var l4 = new THREE.PointLight( 0xffaa00, 1, 20 );
+         l4.position.set(-14, 18, 0);
+         l4.visible = false;
+         this.add(l4);
 
       }
+
+      LHCRing.prototype = Object.create( THREE.Object3D.prototype );
+
 
       $(function() {
          
@@ -29,26 +53,6 @@
             fullscreen: false,
             stats: false
          });
-
-         // Setup lighting
-         var l = new THREE.PointLight( 0xffffff );
-         l.position.set(0, 0, 0);
-         v.scene.add(l);
-
-         var l2 = new THREE.PointLight( 0x008080, 1, 20 );
-         l2.position.set(0, 20, 0);
-         l2.visible = false;
-         v.scene.add(l2);
-
-         var l3 = new THREE.PointLight( 0x37FFFF, 1, 20 );
-         l3.position.set(14, 18, 0);
-         l3.visible = false;
-         v.scene.add(l3);
-
-         var l4 = new THREE.PointLight( 0xffaa00, 1, 20 );
-         l4.position.set(-14, 18, 0);
-         l4.visible = false;
-         v.scene.add(l4);
 
          v.renderer.sortObjects = true;
          
@@ -97,7 +101,7 @@
          v.scene.add( torusMesh );
 
          var torusGeom2 = new THREE.TorusGeometry( 20, 3.1, 15, 25, Math.PI *2 );
-         var torusMat2 = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.DoubleSide, color: 0xffffff });
+         var torusMat2 = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.BackSide, color: 0xffffff });
          var torusMesh2 = new THREE.Mesh( torusGeom2, torusMat2 );
          v.scene.add( torusMesh2 );
          
@@ -207,6 +211,7 @@
                beamMeshL.visible = true;
                torusMesh.visible = true;
                torusMat2.needsUpdate = true;
+               torusMat2.side = THREE.DoubleSide;
                l2.visible = true;
                l3.visible = true;
                l4.visible = true;
