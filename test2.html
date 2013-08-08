@@ -4,12 +4,11 @@
       <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
       <script type="text/javascript" src="js/three.min.js"></script>
       <script type="text/javascript" src="js/stats.min.js"></script>
-      <script type="text/javascript" src="js/tween.js"></script>
       <script type="text/javascript" src="js/smasher.js.php"></script>
       <script type="text/javascript" src="js/shaders/BeamShader.js"></script>
       <script type="text/javascript" src="js/shaders/CollisionShader.js"></script>
+      <script type="text/javascript" src="js/cvmwebapi-1.1.js"></script>
       <script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
-      <script type="text/javascript" src="http://code.createjs.com/tweenjs-0.4.1.min.js"></script>
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap-responsive.min.css" />
@@ -149,11 +148,15 @@
 
          // Prepare variables
          this.cTime = 0;
-         this.ringRotationSpeed = 0;
          this.animations = [];
          this.fxTimer = 0;
          this.fxEasing = Easing.easeOutQuad;
          this.fxDelay = 1000;
+         this.fxCompleteCb = null;
+
+         // Animation variables
+         this.ringRotationSpeed = 0;
+         this.collisionOpacity = 0;
 
          // ============================
          //       Setup Camera
@@ -186,87 +189,117 @@
          l.position.set(0, 0, 0);
          this.add(l);
 
-         var l2 = new THREE.PointLight( 0x008080, 1, 20 );
-         l2.position.set(0, 20, 0);
-         l2.visible = false;
+         var l2 = this.lightM = new THREE.PointLight( 0x008080, 0, 20 );
+         l2.position.set(0, -15, 0);
          this.add(l2);
 
-         var l3 = this.lightL = new THREE.PointLight( 0x37FFFF, 1, 20 );
-         l3.position.set(14, 18, 0);
-         l3.visible = false;
+         var l3 = this.lightR = new THREE.PointLight( 0x37FFFF, 0, 20 ); //20 );
+         l3.position.set(-13, 7.5, 0);
          this.add(l3);
 
-         var l4 = this.lightR = new THREE.PointLight( 0xffaa00, 1, 20 );
-         l4.position.set(-14, 18, 0);
-         l4.visible = false;
+         var l4 = this.lightL = new THREE.PointLight( 0xffaa00, 0, 20 );
+         l4.position.set(-13, -7.5, 0);
          this.add(l4);
 
          // ============================
          //    Setup the two beams
          // ============================
 
-         var beamTex1 = THREE.ImageUtils.loadTexture( 'theme/img/beam-1.png' );
+         var beamTex1 = THREE.ImageUtils.loadTexture( 'theme/img/beam-1b.png' );
          beamTex1.wrapS = THREE.RepeatWrapping;
          beamTex1.wrapT = THREE.RepeatWrapping;
 
-         var beamTex2 = THREE.ImageUtils.loadTexture( 'theme/img/beam-2.png' );
+         var beamTex2 = THREE.ImageUtils.loadTexture( 'theme/img/beam-2b.png' );
          beamTex2.wrapS = THREE.RepeatWrapping;
          beamTex2.wrapT = THREE.RepeatWrapping;
 
          var beamShader = BeamShader;
-         var beamShaderUniforms1 = this.beamShaderUniformsL = THREE.UniformsUtils.clone( beamShader.uniforms );
-         var beamShaderUniforms2 = this.beamShaderUniformsR = THREE.UniformsUtils.clone( beamShader.uniforms );
+         var beamShaderUniforms2f = this.beamShaderUniformsLf = THREE.UniformsUtils.clone( beamShader.uniforms );
+         var beamShaderUniforms1f = this.beamShaderUniformsRf = THREE.UniformsUtils.clone( beamShader.uniforms );
+         var beamShaderUniforms2b = this.beamShaderUniformsLb = THREE.UniformsUtils.clone( beamShader.uniforms );
+         var beamShaderUniforms1b = this.beamShaderUniformsRb = THREE.UniformsUtils.clone( beamShader.uniforms );
          
-         beamShaderUniforms2['tTexture1'].value = beamTex1;
-         beamShaderUniforms2['tTexture2'].value = beamTex2;
-         beamShaderUniforms1['tTexture1'].value = beamTex1;
-         beamShaderUniforms1['tTexture2'].value = beamTex2;
+         beamShaderUniforms2f['tTexture1'].value = beamTex1;
+         beamShaderUniforms2f['tTexture2'].value = beamTex2;
+         beamShaderUniforms1f['tTexture1'].value = beamTex1;
+         beamShaderUniforms1f['tTexture2'].value = beamTex2;
+         beamShaderUniforms2b['tTexture1'].value = beamTex1;
+         beamShaderUniforms2b['tTexture2'].value = beamTex2;
+         beamShaderUniforms1b['tTexture1'].value = beamTex1;
+         beamShaderUniforms1b['tTexture2'].value = beamTex2;
          
-         beamShaderUniforms2['uColor'].value = new THREE.Color( 0xffaa00 );
-         beamShaderUniforms1['uColor'].value = new THREE.Color( 0x37FFFF ); //0x6666FF
+         beamShaderUniforms2f['uColor'].value = new THREE.Color( 0xffaa00 );
+         beamShaderUniforms1f['uColor'].value = new THREE.Color( 0x37FFFF ); //0x6666FF
+         beamShaderUniforms2b['uColor'].value = new THREE.Color( 0xffaa00 );
+         beamShaderUniforms1b['uColor'].value = new THREE.Color( 0x37FFFF ); //0x6666FF
          
-         var beamMaterial2 = new THREE.ShaderMaterial( {
-            uniforms: beamShaderUniforms2,
+         var beamMaterial2f = new THREE.ShaderMaterial( {
+            uniforms: beamShaderUniforms2f,
             vertexShader: beamShader.vertexShader,
             fragmentShader: beamShader.fragmentShader,
             transparent: true,
-            side: THREE.DoubleSide
+            side: THREE.FrontSide
+         } );
+
+         var beamMaterial2b = new THREE.ShaderMaterial( {
+            uniforms: beamShaderUniforms2b,
+            vertexShader: beamShader.vertexShader,
+            fragmentShader: beamShader.fragmentShader,
+            transparent: true,
+            side: THREE.BackSide
          } );
          
-         var beamMaterial1 = new THREE.ShaderMaterial( {
-            uniforms: beamShaderUniforms1,
+
+         var beamMaterial1f = new THREE.ShaderMaterial( {
+            uniforms: beamShaderUniforms1f,
             vertexShader: beamShader.vertexShader,
             fragmentShader: beamShader.fragmentShader,
             transparent: true,
-            side: THREE.DoubleSide
+            side: THREE.FrontSide
+         } );
+
+         var beamMaterial1b = new THREE.ShaderMaterial( {
+            uniforms: beamShaderUniforms1b,
+            vertexShader: beamShader.vertexShader,
+            fragmentShader: beamShader.fragmentShader,
+            transparent: true,
+            side: THREE.BackSide
          } );
 
          var beamGeom = new THREE.TorusGeometry( 20, 1.2, 20, 20, Math.PI );
 
-         var beamMesh1 = this.beamMeshL = new THREE.Mesh( beamGeom, beamMaterial1 );
-         beamMesh1.rotation.z = 0;
-         beamMesh1.visible = false;
-         this.add( beamMesh1 );
 
-         var beamMesh2 = this.beamMeshR = new THREE.Mesh( beamGeom, beamMaterial2 );
-         beamMesh2.rotation.z = -Math.PI;
-         beamMesh2.visible = false;
-         this.add( beamMesh2 );
+         var beamMesh1b = this.beamMeshLb = new THREE.Mesh( beamGeom, beamMaterial1b );
+         beamMesh1b.rotation.z = 0;
+         beamMesh1b.rotation.y = Math.PI;
+         this.add( beamMesh1b );
+
+         var beamMesh1f = this.beamMeshLf = new THREE.Mesh( beamGeom, beamMaterial1f );
+         beamMesh1f.rotation.z = 0;
+         beamMesh1f.rotation.y = Math.PI;
+         this.add( beamMesh1f );
+
+         var beamMesh2b = this.beamMeshRb = new THREE.Mesh( beamGeom, beamMaterial2b );
+         beamMesh2b.rotation.z = -Math.PI;
+         this.add( beamMesh2b );
+
+         var beamMesh2f = this.beamMeshRf = new THREE.Mesh( beamGeom, beamMaterial2f );
+         beamMesh2f.rotation.z = -Math.PI;
+         this.add( beamMesh2f );
 
          // ============================
          //  Setup the ring wireframes
          // ============================
 
-         var backgroundMat = this.backgroundMat = new THREE.MeshPhongMaterial({ side: THREE.BackSide, transparent: true, color: 0x999999, opacity: 0.4 });
+         var backgroundMat = this.backgroundMat = new THREE.MeshPhongMaterial({ side: THREE.FrontSide, transparent: true, color: 0x999999, opacity: 0.4 });
          var wireframeMat  = this.wireframeMat = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.BackSide, color: 0xffffff });
 
          var ringBackgroundGeom = new THREE.TorusGeometry( 20, 3, 10, 20, Math.PI );
          var ringBackgroundMesh = this.ringBackgroundMesh = new THREE.Mesh( ringBackgroundGeom, backgroundMat );
          ringBackgroundMesh.rotation.z = Math.PI/2;
-         ringBackgroundMesh.visible = false;
          this.add( ringBackgroundMesh );
 
-         var ringOutlineGeom = new THREE.TorusGeometry( 20, 3.1, 15, 25, Math.PI *2 );
+         var ringOutlineGeom = new THREE.TorusGeometry( 20, 3.1, 18, 25, Math.PI *2 );
          var ringOutlineMesh = this.ringOutlineMesh = new THREE.Mesh( ringOutlineGeom, wireframeMat );
          this.add( ringOutlineMesh );
 
@@ -283,21 +316,18 @@
          var collisionMaterial3 = this.collisionMaterial3 = new THREE.SpriteMaterial( { map: clsnFlareTex1, useScreenCoordinates: false, color: flareColor, fog: true } );
 
          var collisionSprite1 = this.collisionSprite1 = new THREE.Sprite( collisionMaterial1 );
-         collisionSprite1.position.set( 0, 19, 0 );
-         collisionSprite1.position.normalize();
-         collisionSprite1.position.multiplyScalar( 1 );
-         collisionSprite1.scale.set( 1, 1, 1 );
-         collisionSprite1.visible = false;
+         collisionSprite1.position.set( -15, 0, 0 );
+         collisionSprite1.scale.set( 100, 100, 100 );
          this.add( collisionSprite1 );
 
          var collisionSprite2 = this.collisionSprite2 = new THREE.Sprite( collisionMaterial2 );
-         collisionSprite2.position = collisionSprite1.position;
-         collisionSprite2.visible = false;
+         collisionSprite2.position = collisionSprite1.position.clone();
+         collisionSprite2.scale = collisionSprite1.scale.clone();
          this.add( collisionSprite2 );
 
          var collisionSprite3 = this.collisionSprite3 = new THREE.Sprite( collisionMaterial3 );
-         collisionSprite3.visible = false;
-         collisionSprite3.position = collisionSprite1.position;
+         collisionSprite3.position = collisionSprite1.position.clone();
+         collisionSprite3.scale = collisionSprite1.scale.clone();
          this.add( collisionSprite3 );
 
          // ===============================
@@ -307,12 +337,91 @@
          // Target values for various animation parameters
          this.animationTargets = [
             {
-               'object': this.camera.position,
-               'target': new THREE.Vector3( 0, 0, 0 ),
-               'source': this.camera.position.clone(),
-               'vars'  : ['x','y','z']
+               'o': this.camera.position,             // Object
+               't': this.camera.position.clone(),     // Target 
+               's': this.camera.position.clone(),     // Source
+               'v'  : ['x','y','z']                   // Values
             },
+            {
+               'o': this.camera.rotation,
+               't': this.camera.rotation.clone(),
+               's': this.camera.rotation.clone(),
+               'v'  : ['x','y','z']
+            },
+            {
+               'o': this,
+               't': { 'ringRotationSpeed': 0, 'collisionOpacity': 0 },
+               's': { 'ringRotationSpeed': 0, 'collisionOpacity': 0 },
+               'v'  : [ 'ringRotationSpeed', 'collisionOpacity' ]
+            },
+            {
+               'o': this.lightL,
+               't': { 'intensity': 0 },
+               's': { 'intensity': 0 },
+               'v'  : ['intensity']
+            },
+            {
+               'o': this.lightR,
+               't': { 'intensity': 0 },
+               's': { 'intensity': 0 },
+               'v'  : ['intensity']
+            },
+            {
+               'o': this.lightM,
+               't': { 'intensity': 0 },
+               's': { 'intensity': 0 },
+               'v'  : ['intensity']
+            },
+            {
+               'o': beamShaderUniforms1f['uOpacity'],
+               't': { 'value': 0 },
+               's': { 'value': 0 },
+               'v'  : ['value']
+            },
+            {
+               'o': beamShaderUniforms1b['uOpacity'],
+               't': { 'value': 0 },
+               's': { 'value': 0 },
+               'v'  : ['value']
+            },
+            {
+               'o': beamShaderUniforms2f['uOpacity'],
+               't': { 'value': 0 },
+               's': { 'value': 0 },
+               'v'  : ['value']
+            },
+            {
+               'o': beamShaderUniforms2b['uOpacity'],
+               't': { 'value': 0 },
+               's': { 'value': 0 },
+               'v'  : ['value']
+            },
+            {
+               'o': this.backgroundMat,
+               't': { 'opacity': 0 },
+               's': { 'opacity': 0 },
+               'v': [ 'opacity' ]
+            },
+            {
+               'o': this.wireframeMat.color,
+               't': new THREE.Color(0,0,0),
+               's': new THREE.Color(0,0,0),
+               'v': [ 'r','g','b' ]
+            },
+            {
+               'o': this.wireframeMat.emissive,
+               't': new THREE.Color(0,0,0),
+               's': new THREE.Color(0,0,0),
+               'v': [ 'r','g','b' ]
+            }
          ];
+
+         this.setAnimationTarget = function(index, vars) {
+            $.each(vars, (function(k,v) {
+               this.animationTargets[index].s[k] = this.animationTargets[index].o[k];
+               this.animationTargets[index].t[k] = v;
+            }).bind(this));
+         }
 
          /**
           * This function returns an animation cycle: for the collision flare
@@ -320,32 +429,60 @@
           * 0.2 - 0.8 => { scale: 0.2 - 1.0, opacity: 1.0 },
           * 0.8 - 1.0 => { scale: 1.1 - 1.8, opacity: 1.0 - 0.0 }
           */
-         this.fxCycle = function(v, maxScale) {
+         this.fxCycle = function(v, maxScale, maxOpacity) {
             if (maxScale == undefined) maxScale = 1.0;
+            if (maxOpacity == undefined) maxOpacity = 1.0;
             if (v < 0.2) {
                v = v/0.2;
                return { 
                   's':   (v * 0.2) * maxScale,
-                  'o': v
+                  'o': v * maxOpacity
                };
             } else if (v < 0.8) {
                v = (v-0.2)/0.6;
                return { 
                   's':   (0.2 + v*0.8) * maxScale,
-                  'o': 1.0
+                  'o': 1.0 * maxOpacity
                };
             } else {
                v = (v-0.8)/0.2;
                return { 
                   's':   (1.0 + v*0.2) * maxScale,
-                  'o': 1.0 - v
+                  'o': (1.0 - v) * maxOpacity
                };
             }
          }
-
       }
 
       AcceleratorRing.prototype = Object.create( THREE.Object3D.prototype );
+
+
+      /**
+       * Update animation callback
+       */
+      AcceleratorRing.prototype.onAnimationCompleted = function(cb) {
+         this.fxCompleteCb = cb;
+      };
+
+      /**
+       * Update the beam colors
+       */
+      AcceleratorRing.prototype.setBeamColors = function( left, right, collision ) {
+         this.lightL.color.setHex( left );
+         this.beamShaderUniformsLf['uColor'].value.setHex( left );
+         this.beamShaderUniformsLb['uColor'].value.setHex( left );
+
+         this.lightR.color.setHex( right );
+         this.beamShaderUniformsRf['uColor'].value.setHex( right );
+         this.beamShaderUniformsRb['uColor'].value.setHex( right );
+
+         if (collision == undefined) collision = left | right;
+
+         this.collisionMaterial1.color.setHex( collision );
+         this.collisionMaterial2.color.setHex( collision );
+         this.collisionMaterial3.color.setHex( collision );
+
+      };
 
       /**
        * Update state/animation of the LHC Ring
@@ -354,41 +491,57 @@
 
             // Update current time for the animations
             this.cTime += delta / 3000;
-            this.fxTimer += delta;
 
             // Update the beam animation 
-            this.beamShaderUniformsL['uTime'].value -= delta/1000;
-            this.beamShaderUniformsR['uTime'].value += delta/1000;
+            this.beamShaderUniformsLf['uTime'].value += delta/1000;
+            this.beamShaderUniformsRf['uTime'].value += delta/1000;
+            this.beamShaderUniformsLb['uTime'].value += delta/1000;
+            this.beamShaderUniformsRb['uTime'].value += delta/1000;
 
             // Update the sprite animation
             this.collisionSprite1.rotation += delta / 7000;
             this.collisionSprite2.rotation -= delta / 8000;
             this.collisionSprite3.rotation -= delta / 5000;
-            var fx = this.fxCycle( this.cTime % 1.0, 0.7 );
+            var fx = this.fxCycle( this.cTime % 1.0, 10.0, this.collisionOpacity );
             this.collisionSprite1.scale.set( fx.s, fx.s, fx.s );
             this.collisionMaterial1.opacity = fx.o;
-            fx = this.fxCycle( (this.cTime + 0.33333) % 1.0, 0.7 );
+            fx = this.fxCycle( (this.cTime + 0.33333) % 1.0, 10.0, this.collisionOpacity );
             this.collisionSprite2.scale.set( fx.s, fx.s, fx.s );
             this.collisionMaterial2.opacity = fx.o;
-            fx = this.fxCycle( (this.cTime + 0.66666) % 1.0, 0.7 );
+            fx = this.fxCycle( (this.cTime + 0.66666) % 1.0, 10.0, this.collisionOpacity );
             this.collisionSprite3.scale.set( fx.s, fx.s, fx.s );
             this.collisionMaterial3.opacity = fx.o;
 
             // Rotate the wireframe
             if (this.ringRotationSpeed != 0)
-               ringOutlineMesh.rotation.z += delta * this.ringRotationSpeed / 1000;
+               this.ringOutlineMesh.rotation.z += delta * this.ringRotationSpeed / 1000;
 
             // Update animations
-            if (this.fxTimer <= this.fxDelay) {
+            if (this.fxTimer < this.fxDelay) {
+
+               // Wrap to max
+               this.fxTimer += delta;
+               if (this.fxTimer > this.fxDelay) this.fxTimer = this.fxDelay;
+
+               // Animation cycle over each object's variables
                for (var i=0; i<this.animationTargets.length; i++) {
-                  var o = this.animationTargets[i].object,
-                      s = this.animationTargets[i].source,
-                      t = this.animationTargets[i].target,
-                      v = this.animationTargets[i].vars;
-                  for (var j=0; j<v.length; v++) {
-                     o[v[j]] = this.fxEasing(null, this.fxTimer, s[v[j]], t[v[j]], this.fxDelay);
+                  var o = this.animationTargets[i].o,
+                      s = this.animationTargets[i].s,
+                      t = this.animationTargets[i].t,
+                      v = this.animationTargets[i].v;
+                  for (var j=0; j<v.length; j++) {
+                     if (typeof(s) == 'number') {
+                        o[v[j]] = this.fxEasing(null, this.fxTimer, s, t-s, this.fxDelay);
+                     } else {
+                        o[v[j]] = this.fxEasing(null, this.fxTimer, s[v[j]], t[v[j]] - s[v[j]], this.fxDelay);
+                     }
                   }
                }
+
+               // Check for completion
+               if ((this.fxTimer == this.fxDelay) && (this.fxCompleteCb != undefined))
+                  this.fxCompleteCb();
+
             }
 
       };
@@ -398,28 +551,103 @@
        */
       AcceleratorRing.prototype.setView = function(view) {
 
+         this.fxTimer = 0;
+
          if (view == 0) {
 
-            this.camera.position.x = 100;
-            this.camera.position.z = 0;
-            this.camera.rotation.y = Math.PI/2;
+            this.setAnimationTarget(0, { 'x': 100, 'z': 0 });
+            this.setAnimationTarget(1, { 'y': Math.PI/2, 'x': 0   });
+            this.setAnimationTarget(2, { 
+               'ringRotationSpeed': 0,
+               'collisionOpacity': 0
+            });
+
+            this.setAnimationTarget(3, { 'intensity': 0 });
+            this.setAnimationTarget(4, { 'intensity': 0 });
+            this.setAnimationTarget(5, { 'intensity': 0 });
+
+            this.setAnimationTarget(6, { 'value': 0 });
+            this.setAnimationTarget(7, { 'value': 0 });
+            this.setAnimationTarget(8, { 'value': 0 });
+            this.setAnimationTarget(9, { 'value': 0 });
+
+            this.setAnimationTarget(10, { 'opacity': 0 });
+
+            this.setAnimationTarget(11, { 'r': 0.5, 'g': 0.5, 'b': 0.5 });
+            this.setAnimationTarget(12, { 'r': 0.4, 'g': 0.4, 'b': 0.4 });
 
          } else if (view == 1) {
 
-            this.camera.position.x = -5;
-            this.camera.position.z = 0;
-            this.camera.rotation.y = Math.PI/2;
+            this.setAnimationTarget(0, { 'x': 100, 'z': 40 });
+            this.setAnimationTarget(1, { 'y': Math.PI/2 - 0.45, 'x': 0 });
+            this.setAnimationTarget(2, { 
+               'ringRotationSpeed': 1,
+               'collisionOpacity': 0
+            });
+
+            this.setAnimationTarget(3, { 'intensity': 0 });
+            this.setAnimationTarget(4, { 'intensity': 0 });
+            this.setAnimationTarget(5, { 'intensity': 0 });
+
+            this.setAnimationTarget(6, { 'value': 0 });
+            this.setAnimationTarget(7, { 'value': 0 });
+            this.setAnimationTarget(8, { 'value': 0 });
+            this.setAnimationTarget(9, { 'value': 0 });
+
+            this.setAnimationTarget(10, { 'opacity': 0 });
+
+            this.setAnimationTarget(11, { 'r': 0.8, 'g': 0.8, 'b': 0.8 });
+            this.setAnimationTarget(12, { 'r': 0.1, 'g': 0.1, 'b': 0.1 });
 
          } else if (view == 2) {
 
-            this.camera.position.x = 100;
-            this.camera.position.z = 50;
-            this.camera.rotation.y = Math.PI/2 - 0.5;
+            this.setAnimationTarget(0, { 'x': -5, 'z': 0 });
+            this.setAnimationTarget(1, { 'y': Math.PI/2, 'x': 0 });
+            this.setAnimationTarget(2, { 
+               'ringRotationSpeed': 0,
+               'collisionOpacity': 1
+            });
+
+            this.setAnimationTarget(3, { 'intensity': 1 });
+            this.setAnimationTarget(4, { 'intensity': 1 });
+            this.setAnimationTarget(5, { 'intensity': 1 });
+
+            this.setAnimationTarget(6, { 'value': 1 });
+            this.setAnimationTarget(7, { 'value': 0.5 });
+            this.setAnimationTarget(8, { 'value': 1 });
+            this.setAnimationTarget(9, { 'value': 0.5 });
+
+            this.setAnimationTarget(10, { 'opacity': 0.4 });
+
+            this.setAnimationTarget(11, { 'r': 0.2, 'g': 0.2, 'b': 0.2 });
+            this.setAnimationTarget(12, { 'r': 0.2, 'g': 0.2, 'b': 0.2 });
+
+         } else if (view == 3) {
+
+            this.setAnimationTarget(0, { 'x': 100, 'z': 20 });
+            this.setAnimationTarget(1, { 'y': Math.PI/2 - 0.2, 'x': 0.2   });
+            this.setAnimationTarget(2, { 
+               'ringRotationSpeed': 0,
+               'collisionOpacity': 0
+            });
+
+            this.setAnimationTarget(3, { 'intensity': 0 });
+            this.setAnimationTarget(4, { 'intensity': 0 });
+            this.setAnimationTarget(5, { 'intensity': 0 });
+
+            this.setAnimationTarget(6, { 'value': 0 });
+            this.setAnimationTarget(7, { 'value': 0 });
+            this.setAnimationTarget(8, { 'value': 0 });
+            this.setAnimationTarget(9, { 'value': 0 });
+
+            this.setAnimationTarget(10, { 'opacity': 0 });
+
+            this.setAnimationTarget(11, { 'r': 1, 'g': 0, 'b': 0 });
+            this.setAnimationTarget(12, { 'r': 0.4, 'g': 0.4, 'b': 0.4 });
+
          }
 
-         this.collisionSprite1.visible = true;
-         this.collisionSprite2.visible = true;
-         this.collisionSprite3.visible = true;
+         /*
          this.beamMeshR.visible = true;
          this.beamMeshL.visible = true;
          this.ringBackgroundMesh.visible = true;
@@ -427,54 +655,167 @@
          this.lightL.visible = true;
          this.lightR.visible = true;
          this.rotatingRing = false;
+         */
 
       };
 
-      $(function() {
-         
+      function setProgress( percent, text ) {
+         percent = Math.round(percent);
+         $("#loading").removeClass('error');
+         $("#progressbar-value").css({ 'width': percent + '%' });
+         $("#loading-text").html(text);
+         $("#loading-percent").html( percent + "%" );
+      }
+
+      function setError( text ) {
+         $("#loading").addClass('error');
+         $("#progressbar-value").css({ 'width': '100%' });
+         $("#loading-text").html(text);
+         $("#loading-percent").html("");
+      }
+
+      function setText( text ) {
+         $("#loading").removeClass('error');
+         $("#progressbar-value").css({ 'width': '100%' });
+         $("#loading-text").html(text);
+         $("#loading-percent").html("");
+      }
+
+      var lhc;
+
+      /**
+       * Entry point function
+       *
+       * --- Progress events ---
+       *
+       * [00 - 40%] : Setting up environment
+       *        10  : Plugin Ready
+       *     10-40  : Downloading/Installing hypervisor
+       *
+       * [40 - 80%] : Open session
+       */
+
+      var inited = false;
+      $(document).ready(function() {
+         if (inited) return; inited = true;
+
+         // Setup Three.js Viewport
          var v = new M.Viewport({
             container: "#collider",
             bg: 0x000000, //0x202020, 0xf5f5f5,
-            autostop: true,
+            autostop: false,
             fullscreen: false,
             stats: false
          });
 
-         v.renderer.sortObjects = true;
+         v.renderer.sortObjects = false;
 
-         var lhc = new AcceleratorRing( v.camera );
+         // Setup accelerator ring
+         lhc = new AcceleratorRing( v.camera );
          v.scene.add(lhc);
-         window.lhc = lhc;
 
-         /*
-         v.camera.position.set  ( 0, 0, 0 );
-         v.camera.lookAt(new THREE.Vector3( 0, 1, 0 ));
-         v.camera.rotation.z = Math.PI;
-         */
+         // Receive render updates to the accelerator ring
+         v.addUpdateHandler( lhc.update.bind(lhc) );
 
-         window.v = v;
-         /*
-         v.camera.position.set  ( 0, -100, 0 );
-         v.camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
-         v.camera.rotation.z = Math.PI;
-         */
+         /// INITIALIZE UI ///
+         setProgress(0, "Setting up environment");
+         lhc.setView(0);
 
-         /*
-         $(document.body).mousemove(function(e) {
-            var y = (e.clientY / $(window).height()) - 0.5;
-            var x = (e.clientX / $(window).width()) - 0.5;
-            v.camera.position.z = y * 5;
-            v.camera.position.x = x * 5;
-            v.camera.lookAt(new THREE.Vector3( 0, 20, 0 ));
-         })
-         */
+         CVM.debugLogging = true;
+         CVM.markPageLoaded();
 
-         lhc.setView();
+         // Installation events are only between 10-20%
+         CVM.addInstallProgressHandler(function(percent, msg) {
+            var value = percent * 30 / 100;
+            setProgress(10 + value, msg);
+            console.log("InstallProgress = ", 10+value);
+         });
 
-         v.render = function( delta ) {
-            M.Viewport.prototype.render.call(this, delta);
-            lhc.update( delta );
-         };
+         // Initialize CernVM
+         CVM.startCVMWebAPI(
+            function(plugin) {
+               setProgress(20, "Establishing session");
+
+               // Plugin progress events (session itialization are between 20 and 60)
+               plugin.addEventListener('progress', function(percent, msg) {
+                  var value = percent * 40 / 100;
+                  setProgress(40 + value, msg);
+                  console.log("pluginProgress = ", 40 + value);
+               });
+
+               // Start session
+               plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
+
+                  window.s = session;
+
+                  // Session progress events (session open/resume are between 80 and 100)
+                  session.addEventListener('progress', function(percent, msg) {
+                     var value = percent * 20 / 100;
+                     setProgress(80 + value, msg);
+                     console.log("sessionProgress = ", 80 + value);
+                  });
+
+                  session.addEventListener('error', function(msg) {
+                     lhc.setView(3);
+                     setError( msg );
+                  });
+
+                  session.addEventListener('open', function() {
+                     setText("Preparing your accelerator");
+                     lhc.setView(1);
+                  });
+
+                  session.addEventListener('start', function() {
+                     setText("Preparing your accelerator");
+                     lhc.setView(1);
+                  });
+
+                  session.addEventListener('stop', function() {
+                     setText("Your accelerator is closed");
+                     lhc.setView(0);
+                  });
+
+                  session.addEventListener('apiAvailable', function() {
+                     lhc.setView(2);
+                  });
+
+                  session.addEventListener('apiUnavailable', function() {
+                     setText("Preparing your accelerator");
+                     lhc.setView(1);
+                  });
+
+                  // Handle various session states
+                  if (session.state == 2) {
+
+                     // OPEN -> START
+                     session.start();
+
+                  } else if ((session.state == 3) || (session.state == 4)) {
+
+                     // STARTED(-ING) -> Update view
+                     lhc.setView(1);
+                     setText("Preparing your accelerator");
+
+                  }
+
+
+               }, function (err_msg) {
+
+                  // Could not request session
+                  lhc.setView(3);
+                  setError( err_msg );
+
+               });
+
+            },
+            function(e) {
+               lhc.setView(3);
+               setError(e);
+            },
+            
+            // Let the plugin initialize the environment
+            true
+         );
          
       });
       
@@ -518,9 +859,27 @@
          height: 3px;
          display: block;
          background: #fff;
-         width: 10%;
       }
 
+      div#loading.error span { color: #f00; }
+      div#loading.error div#progressbar { border-top: solid 1px #f00; }
+      div#loading.error div#progressbar-value { background: #f00; }
+
+      div#upper-controls {
+         height: 35%;
+         position: absolute;
+         left: 0px;
+         top: 0px;
+         width: 100%;
+      }
+
+      div#lower-controls {
+         height: 35%;
+         position: absolute;
+         left: 0px;
+         bottom: 0px;
+         width: 100%;
+      }
       </style>
    </head>
    <body>
@@ -533,7 +892,17 @@
             <span id="loading-text">Initializing</span>
             <span id="loading-percent">10%</span>
          </div>
-         <div><a href="#" class="btn btn-inverse">Test</a></div>
       </div>
+      <div id="upper-controls">
+      </div>
+      <div id="lower-controls">
+         <!--
+         <a href="javascript:lhc.setView(0)" class="btn btn-inverse">Setting Up</a>
+         <a href="javascript:lhc.setView(1)" class="btn btn-inverse">Preparing</a>
+         <a href="javascript:lhc.setView(2)" class="btn btn-inverse">Running</a>
+         <a href="javascript:lhc.setView(3)" class="btn btn-danger">Error</a>
+         -->
+      </div>
+
    </body>
 </html>

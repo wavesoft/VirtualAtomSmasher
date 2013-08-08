@@ -18,10 +18,13 @@ _NS_.Viewport = function(options) {
     this.fullscreen = op.fullscreen || false;
     this.bg = op.bg || 0x000000;
     this.stats = op.stats == undefined ? true : op.stats;
-    this.autostop = op.autostop || true;
-    this.autohover = op.autohover || true;
+    this.autostop = op.autostop == undefined ? true : op.autostop;
+    this.autohover = op.autohover == undefined ? true : op.autohover;
 	this.animating = (op.animating == undefined) ? true : op.animating;
-    
+        
+    // Stack of objects that should receive update events
+    this.updateListeners = [ ];
+
     // Setup variables
     var self=this;
 	this.lastFrameTime = Date.now();
@@ -82,7 +85,7 @@ _NS_.Viewport = function(options) {
     
 	// Start animation, unless otherwise told
 	if (this.animating) this.animate();
-	
+
 	// Register autostop handlers
 	$(window).blur(function() {
 	    if (self.autostop) self.animating=false;
@@ -95,6 +98,22 @@ _NS_.Viewport = function(options) {
 	});
 	
 };
+
+/**
+ * Add a listener that will receive update events
+ */
+_NS_.Viewport.prototype.addUpdateHandler = function(handler) {
+    this.updateListeners.push(handler);
+}
+
+/**
+ * Remove an update event listener
+ */
+_NS_.Viewport.prototype.removeUpdateHandler = function(handler) {
+    var i = this.updateListeners.indexOf(handler);
+    if (i<0) return;
+    this.updateListeners.splice(i,1);
+}
 
 /**
  * Add an extra render pass
@@ -158,6 +177,16 @@ _NS_.Viewport.prototype.resize = function() {
  */
 _NS_.Viewport.prototype.render = function( delta ) {
     
+    // Send update events
+    for (var i=0; i<this.updateListeners.length; i++) {
+        try{
+            this.updateListeners[i]( delta );
+        } catch(ex) {
+            console.warn("Update exception: " + ex.toString());
+        }
+    }
+
+    // Render
     if (this.renderPasses.length == 0) {
         this.renderer.render( this.scene, this.camera );
     } else {
