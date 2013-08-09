@@ -7,7 +7,8 @@
       <script type="text/javascript" src="js/smasher.js.php"></script>
       <script type="text/javascript" src="js/shaders/BeamShader.js"></script>
       <script type="text/javascript" src="js/shaders/CollisionShader.js"></script>
-      <script type="text/javascript" src="js/cvmwebapi-1.1.js"></script>
+      <script type="text/javascript" src="js/cvmwebapi-1.2.js"></script>
+      <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
       <script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
@@ -16,133 +17,6 @@
 
       <script type="text/javascript">
       
-      var Easing = {
-         easeInQuad: function (x, t, b, c, d) {
-            return c*(t/=d)*t + b;
-         },
-         easeOutQuad: function (x, t, b, c, d) {
-            return -c *(t/=d)*(t-2) + b;
-         },
-         easeInOutQuad: function (x, t, b, c, d) {
-            if ((t/=d/2) < 1) return c/2*t*t + b;
-            return -c/2 * ((--t)*(t-2) - 1) + b;
-         },
-         easeInCubic: function (x, t, b, c, d) {
-            return c*(t/=d)*t*t + b;
-         },
-         easeOutCubic: function (x, t, b, c, d) {
-            return c*((t=t/d-1)*t*t + 1) + b;
-         },
-         easeInOutCubic: function (x, t, b, c, d) {
-            if ((t/=d/2) < 1) return c/2*t*t*t + b;
-            return c/2*((t-=2)*t*t + 2) + b;
-         },
-         easeInQuart: function (x, t, b, c, d) {
-            return c*(t/=d)*t*t*t + b;
-         },
-         easeOutQuart: function (x, t, b, c, d) {
-            return -c * ((t=t/d-1)*t*t*t - 1) + b;
-         },
-         easeInOutQuart: function (x, t, b, c, d) {
-            if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
-            return -c/2 * ((t-=2)*t*t*t - 2) + b;
-         },
-         easeInQuint: function (x, t, b, c, d) {
-            return c*(t/=d)*t*t*t*t + b;
-         },
-         easeOutQuint: function (x, t, b, c, d) {
-            return c*((t=t/d-1)*t*t*t*t + 1) + b;
-         },
-         easeInOutQuint: function (x, t, b, c, d) {
-            if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
-            return c/2*((t-=2)*t*t*t*t + 2) + b;
-         },
-         easeInSine: function (x, t, b, c, d) {
-            return -c * Math.cos(t/d * (Math.PI/2)) + c + b;
-         },
-         easeOutSine: function (x, t, b, c, d) {
-            return c * Math.sin(t/d * (Math.PI/2)) + b;
-         },
-         easeInOutSine: function (x, t, b, c, d) {
-            return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
-         },
-         easeInExpo: function (x, t, b, c, d) {
-            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
-         },
-         easeOutExpo: function (x, t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-         },
-         easeInOutExpo: function (x, t, b, c, d) {
-            if (t==0) return b;
-            if (t==d) return b+c;
-            if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
-            return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
-         },
-         easeInCirc: function (x, t, b, c, d) {
-            return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
-         },
-         easeOutCirc: function (x, t, b, c, d) {
-            return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
-         },
-         easeInOutCirc: function (x, t, b, c, d) {
-            if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
-            return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
-         },
-         easeInElastic: function (x, t, b, c, d) {
-            var s=1.70158;var p=0;var a=c;
-            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-            if (a < Math.abs(c)) { a=c; var s=p/4; }
-            else var s = p/(2*Math.PI) * Math.asin (c/a);
-            return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
-         },
-         easeOutElastic: function (x, t, b, c, d) {
-            var s=1.70158;var p=0;var a=c;
-            if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-            if (a < Math.abs(c)) { a=c; var s=p/4; }
-            else var s = p/(2*Math.PI) * Math.asin (c/a);
-            return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
-         },
-         easeInOutElastic: function (x, t, b, c, d) {
-            var s=1.70158;var p=0;var a=c;
-            if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
-            if (a < Math.abs(c)) { a=c; var s=p/4; }
-            else var s = p/(2*Math.PI) * Math.asin (c/a);
-            if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
-            return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
-         },
-         easeInBack: function (x, t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*(t/=d)*t*((s+1)*t - s) + b;
-         },
-         easeOutBack: function (x, t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-         },
-         easeInOutBack: function (x, t, b, c, d, s) {
-            if (s == undefined) s = 1.70158; 
-            if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
-            return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
-         },
-         easeInBounce: function (x, t, b, c, d) {
-            return c - Easing.easeOutBounce (x, d-t, 0, c, d) + b;
-         },
-         easeOutBounce: function (x, t, b, c, d) {
-            if ((t/=d) < (1/2.75)) {
-               return c*(7.5625*t*t) + b;
-            } else if (t < (2/2.75)) {
-               return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-            } else if (t < (2.5/2.75)) {
-               return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-            } else {
-               return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-            }
-         },
-         easeInOutBounce: function (x, t, b, c, d) {
-            if (t < d/2) return Easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
-            return Easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
-         }
-      };
-
       var AcceleratorRing = function( camera ) {
          THREE.Object3D.call( this );
 
@@ -150,7 +24,7 @@
          this.cTime = 0;
          this.animations = [];
          this.fxTimer = 0;
-         this.fxEasing = Easing.easeOutQuad;
+         this.fxEasing = jQuery.easing.easeOutQuad;
          this.fxDelay = 1000;
          this.fxCompleteCb = null;
 
@@ -659,29 +533,156 @@
 
       };
 
-      function setProgress( percent, text ) {
+      /**
+       * =================================================================
+       *  Local Functions for the UI animation
+       * =================================================================
+       */
+
+      /**
+       * Display a rotating progress messages
+       */
+      var rotatingProgressTimer = 0;
+      function setRotatingProgress( messages ) {
+         var currentMessageID = 0,
+             showNextProgress = function() {
+               progressMessage( messages[currentMessageID++] );
+               if (currentMessageID < messages.length)
+                  rotatingProgressTimer = setTimeout(showNextProgress, Math.round() * 5000 + 800 );
+            };
+         showNextProgress();
+      }
+
+      /**
+       * Cancel message rotation
+       */
+      function progressCancelRotating() {
+         if (rotatingProgressTimer == 0) return;
+         clearTimeout(rotatingProgressTimer);
+         rotatingProgressTimer = 0;
+      }
+
+      /**
+       * Roll-in an animating text entry on the progress bar
+       */
+      var progressCurrentText = "loading-text-1";
+      function progressAnimateText( message ) {
+
+         // Fade out the past
+         $(progressCurrentText).fadeOut(100);
+
+         // Switch between past and current text messages
+         if (progressCurrentText == "loading-text-1") {
+            progressCurrentText = "loading-text-2";
+         } else {
+            progressCurrentText = "loading-text-1";
+         }
+
+         // Scroll-in the current
+
+
+      };
+
+      /**
+       * Update progress bar
+       */
+      function progressUpdate( percent, text ) {
          percent = Math.round(percent);
+         progressCancelRotating();
+         $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': percent + '%' });
          $("#loading-text").html(text);
          $("#loading-percent").html( percent + "%" );
       }
 
-      function setError( text ) {
+      /**
+       * Display an error on the progress bar without progress indicator
+       */
+      function progressError( text ) {
+         progressCancelRotating();
+         $("#loading").fadeIn(500);
          $("#loading").addClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
          $("#loading-text").html(text);
          $("#loading-percent").html("");
       }
 
-      function setText( text ) {
+      /**
+       * Display a message on the progress bar without progress indicator
+       */
+      function progressMessage( text ) {
+         progressCancelRotating();
+         $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
          $("#loading-text").html(text);
          $("#loading-percent").html("");
       }
 
-      var lhc;
+      function showPowerControls() {
+         $("#power-controls").fadeIn(500);
+      }
+
+      function hidePowerControls() {
+         $("#power-controls").fadeOut(500, function() {
+            $("#power-controls").hide();
+         });
+      }
+
+      function showProgress() {
+         $("#loading").fadeIn(500);
+      }
+
+      function hideProgress() {
+         $("#loading").fadeOut(500);
+      }
+
+      function showDashboard() {
+         $("#upper-controls").fadeIn(500);
+         $("#lower-controls").fadeIn(500);
+      }
+
+      function hideDashboard() {
+         $("#upper-controls").fadeOut(500, function() {
+            $("#upper-controls").hide();
+         });
+         $("#lower-controls").fadeOut(500, function() {
+            $("#lower-controls").hide();
+         });
+      }
+
+      function aceleratorStop() {
+         v_session.hibernate();
+         hideDashboard();
+         setTimeout(function() {
+            progressMessage("Ramping-down the accelerator");
+         }, 500);
+      }
+
+      function acceleratorStart() {
+         v_session.start();
+         hidePowerControls();
+         progressMessage("Ramping-up the accelerator");
+      }
+
+      /**
+       * =================================================================
+       *  Higher-level functions
+       * =================================================================
+       */
+
+      var lhc, v_session;
+
+      function setPreparingView() {
+         lhc.setView(1);
+         progressRotatingMessages(
+               "Contacting your accelerator",
+               "Establishing controls",
+               "Calibrating timers"
+            );
+      }
+
 
       /**
        * Entry point function
@@ -718,28 +719,30 @@
          v.addUpdateHandler( lhc.update.bind(lhc) );
 
          /// INITIALIZE UI ///
-         setProgress(0, "Setting up environment");
+         $("#upper-controls").hide();
+         $("#lower-controls").hide();
+         $("#power-controls").hide();
+         progressUpdate(0, "Setting up environment");
          lhc.setView(0);
 
          CVM.debugLogging = true;
-         CVM.markPageLoaded();
 
          // Installation events are only between 10-20%
          CVM.addInstallProgressHandler(function(percent, msg) {
             var value = percent * 30 / 100;
-            setProgress(10 + value, msg);
+            progressUpdate(10 + value, msg);
             console.log("InstallProgress = ", 10+value);
          });
 
          // Initialize CernVM
          CVM.startCVMWebAPI(
             function(plugin) {
-               setProgress(20, "Establishing session");
+               progressUpdate(20, "Establishing session");
 
                // Plugin progress events (session itialization are between 20 and 60)
                plugin.addEventListener('progress', function(percent, msg) {
                   var value = percent * 40 / 100;
-                  setProgress(40 + value, msg);
+                  progressUpdate(40 + value, msg);
                   console.log("pluginProgress = ", 40 + value);
                });
 
@@ -747,42 +750,7 @@
                plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
 
                   window.s = session;
-
-                  // Session progress events (session open/resume are between 80 and 100)
-                  session.addEventListener('progress', function(percent, msg) {
-                     var value = percent * 20 / 100;
-                     setProgress(80 + value, msg);
-                     console.log("sessionProgress = ", 80 + value);
-                  });
-
-                  session.addEventListener('error', function(msg) {
-                     lhc.setView(3);
-                     setError( msg );
-                  });
-
-                  session.addEventListener('open', function() {
-                     setText("Preparing your accelerator");
-                     lhc.setView(1);
-                  });
-
-                  session.addEventListener('start', function() {
-                     setText("Preparing your accelerator");
-                     lhc.setView(1);
-                  });
-
-                  session.addEventListener('stop', function() {
-                     setText("Your accelerator is closed");
-                     lhc.setView(0);
-                  });
-
-                  session.addEventListener('apiAvailable', function() {
-                     lhc.setView(2);
-                  });
-
-                  session.addEventListener('apiUnavailable', function() {
-                     setText("Preparing your accelerator");
-                     lhc.setView(1);
-                  });
+                  v_session = session;
 
                   // Handle various session states
                   if (session.state == 2) {
@@ -794,23 +762,70 @@
 
                      // STARTED(-ING) -> Update view
                      lhc.setView(1);
-                     setText("Preparing your accelerator");
+                     progressMessage("Preparing your accelerator");
 
                   }
+
+
+                  // Session progress events (session open/resume are between 80 and 100)
+                  session.addEventListener('progress', function(percent, msg) {
+                     var value = percent * 20 / 100;
+                     progressUpdate(80 + value, msg);
+                     console.log("sessionProgress = ", 80 + value);
+                  });
+
+                  session.addEventListener('error', function(msg) {
+                     lhc.setView(3);
+                     progressError( msg );
+                  });
+
+                  session.addEventListener('sessionStateChange', function(newState) {
+                     if (newState == 2) { // Open Session
+                        progressMessage("Your accelerator is closed");
+                        lhc.setView(0);
+                        showPowerControls();
+                        hideDashboard();
+
+                     } else if ((newState == 3) || (newState == 4)) { // Started 
+                        progressMessage("Preparing your accelerator");
+                        lhc.setView(1);
+                        hidePowerControls();
+                        hideDashboard();
+
+                     } else if (newState == 6) { // Paused
+                        progressMessage("Your accelerator is frozen");
+                        lhc.setView(1);
+                        showPowerControls();
+                        hideDashboard();
+
+                     }
+                  });
+
+                  session.addEventListener('apiAvailable', function() {
+                     lhc.setView(2);
+                     hideProgress();
+                     showDashboard();
+                  });
+
+                  session.addEventListener('apiUnavailable', function() {
+                     progressMessage("Disconnected from the accelerator");
+                     lhc.setView(1);
+                     hideDashboard();
+                  });
 
 
                }, function (err_msg) {
 
                   // Could not request session
                   lhc.setView(3);
-                  setError( err_msg );
+                  progressError( err_msg );
 
                });
 
             },
             function(e) {
                lhc.setView(3);
-               setError(e);
+               progressError(e);
             },
             
             // Let the plugin initialize the environment
@@ -850,6 +865,13 @@
          float: right;
          opacity: 0.5;
       }
+
+      div#loading-message span##loading-text, div#loading-message span##loading-text-2 {
+         display: block;
+         width: 250px;
+         left: 0px; top: 0px;
+      }
+
       div#progressbar {
          margin: auto;
          width: 250px;
@@ -880,6 +902,15 @@
          bottom: 0px;
          width: 100%;
       }
+
+      div#power-controls {
+         position: absolute;
+         left: 0px;
+         width: 100%;
+         top: 65%;
+         text-align: center;
+      }
+
       </style>
    </head>
    <body>
@@ -889,13 +920,20 @@
             <div id="progressbar-value"></div>
          </div>
          <div id="loading-message">
-            <span id="loading-text">Initializing</span>
+            <span id="loading-text"></span>
+            <span id="loading-text-2"></span>
             <span id="loading-percent">10%</span>
          </div>
+      </div>
+      <div id="power-controls">
+         <a href="javascript:;" onclick="acceleratorStart()" class="btn btn-success">Start your accelerator</a>
       </div>
       <div id="upper-controls">
       </div>
       <div id="lower-controls">
+         <div style="text-align:right; padding-top: 30px">
+            <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-danger">Shut Down</a>
+         </div>
          <!--
          <a href="javascript:lhc.setView(0)" class="btn btn-inverse">Setting Up</a>
          <a href="javascript:lhc.setView(1)" class="btn btn-inverse">Preparing</a>
