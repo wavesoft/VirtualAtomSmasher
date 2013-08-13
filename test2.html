@@ -565,22 +565,34 @@
       /**
        * Roll-in an animating text entry on the progress bar
        */
-      var progressCurrentText = "loading-text-1";
+      var progressCurrentText = "#loading-text-1";
       function progressAnimateText( message ) {
 
          // Fade out the past
-         $(progressCurrentText).fadeOut(100);
+         $(progressCurrentText).stop(true, true);
+         $(progressCurrentText).animate({
+            'opacity': 0
+         }, 200, 'easeOutQuad');
 
          // Switch between past and current text messages
-         if (progressCurrentText == "loading-text-1") {
-            progressCurrentText = "loading-text-2";
+         if (progressCurrentText == "#loading-text-1") {
+            progressCurrentText = "#loading-text-2";
          } else {
-            progressCurrentText = "loading-text-1";
+            progressCurrentText = "#loading-text-1";
          }
 
          // Scroll-in the current
-
-
+         $(progressCurrentText).stop(true, true);
+         $(progressCurrentText).html( message );
+         $(progressCurrentText).css({
+            'opacity': 0,
+            'top': 25
+         });
+         $(progressCurrentText).animate({
+            'opacity': 1,
+            'top': 0
+         }, 200, 'easeOutQuad');
+         
       };
 
       /**
@@ -592,7 +604,7 @@
          $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': percent + '%' });
-         $("#loading-text").html(text);
+         progressAnimateText(text);
          $("#loading-percent").html( percent + "%" );
       }
 
@@ -604,7 +616,7 @@
          $("#loading").fadeIn(500);
          $("#loading").addClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
-         $("#loading-text").html(text);
+         progressAnimateText(text);
          $("#loading-percent").html("");
       }
 
@@ -616,7 +628,7 @@
          $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
-         $("#loading-text").html(text);
+         progressAnimateText(text);
          $("#loading-percent").html("");
       }
 
@@ -747,7 +759,7 @@
                });
 
                // Start session
-               plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
+               plugin.requestSession( 'http://test.local/smasher/sign.php', function(session) {
 
                   window.s = session;
                   v_session = session;
@@ -855,6 +867,7 @@
          padding-top: 50px;
       }
       div#loading-message {
+         position: relative;
          width: 250px;
          margin: auto;
          margin-top: 5px;
@@ -862,14 +875,19 @@
          font-size: 10px;
       }
       div#loading-message > span#loading-percent {
-         float: right;
+         position: absolute;
+         right: 0px;
+         top: 0px;
          opacity: 0.5;
       }
 
-      div#loading-message span##loading-text, div#loading-message span##loading-text-2 {
+      div#loading-message div#loading-text-1, 
+      div#loading-message div#loading-text-2 {
+         position: absolute;
          display: block;
+         text-align: left;
          width: 250px;
-         left: 0px; top: 0px;
+         left: 0px;
       }
 
       div#progressbar {
@@ -883,7 +901,7 @@
          background: #fff;
       }
 
-      div#loading.error span { color: #f00; }
+      div#loading.error div, div#loading.error span { color: #f00; }
       div#loading.error div#progressbar { border-top: solid 1px #f00; }
       div#loading.error div#progressbar-value { background: #f00; }
 
@@ -920,8 +938,8 @@
             <div id="progressbar-value"></div>
          </div>
          <div id="loading-message">
-            <span id="loading-text"></span>
-            <span id="loading-text-2"></span>
+            <div id="loading-text-1"></div>
+            <div id="loading-text-2"></div>
             <span id="loading-percent">10%</span>
          </div>
       </div>
