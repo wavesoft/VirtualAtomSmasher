@@ -543,12 +543,12 @@
        * Display a rotating progress messages
        */
       var rotatingProgressTimer = 0;
-      function setRotatingProgress( messages ) {
+      function progressRotatingMessages( messages ) {
          var currentMessageID = 0,
              showNextProgress = function() {
                progressMessage( messages[currentMessageID++] );
                if (currentMessageID < messages.length)
-                  rotatingProgressTimer = setTimeout(showNextProgress, Math.round() * 5000 + 800 );
+                  rotatingProgressTimer = setTimeout(showNextProgress, Math.random() * 5000 + 2000 );
             };
          showNextProgress();
       }
@@ -572,7 +572,7 @@
          $(progressCurrentText).stop(true, true);
          $(progressCurrentText).animate({
             'opacity': 0
-         }, 200, 'easeOutQuad');
+         }, 200);
 
          // Switch between past and current text messages
          if (progressCurrentText == "#loading-text-1") {
@@ -591,7 +591,7 @@
          $(progressCurrentText).animate({
             'opacity': 1,
             'top': 0
-         }, 200, 'easeOutQuad');
+         }, 200, 'easeOutExpo');
          
       };
 
@@ -688,11 +688,44 @@
 
       function setPreparingView() {
          lhc.setView(1);
-         progressRotatingMessages(
-               "Contacting your accelerator",
-               "Establishing controls",
-               "Calibrating timers"
-            );
+         progressRotatingMessages([
+
+               "Configuring network",
+               "Starting critical services",
+               "Preparing environment",
+               "Preparing accelerator software",
+
+               "Contacting time services",
+               "Calibrating timers",
+
+               "Discovering environment",
+               "Connecting to controller interface",
+               "Connecting to CERN",
+               "Authorizing client",
+               "Mounting network filesystems",
+
+               "Configuring job manager",
+
+               "Downloading simulator components",
+               "Downloading physics configuration",
+               "Downloading reference data",
+
+               "Starting work queue",
+               "Starting simulator",
+
+               "Probe injection beam",
+               "Beam dumped",
+               "Physics injection beam",
+               "Preparing ramp",
+               "Ramping accelerator",
+               "Reached flat top",
+               "Squeezing beams",
+               "Adjusting beams",
+               "Stable physics beams",
+
+               "Waiting for physics job"
+
+            ]);
       }
 
 
@@ -759,7 +792,7 @@
                });
 
                // Start session
-               plugin.requestSession( 'http://test.local/smasher/sign.php', function(session) {
+               plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
 
                   window.s = session;
                   v_session = session;
@@ -773,8 +806,7 @@
                   } else if ((session.state == 3) || (session.state == 4)) {
 
                      // STARTED(-ING) -> Update view
-                     lhc.setView(1);
-                     progressMessage("Preparing your accelerator");
+                     setPreparingView();
 
                   }
 
@@ -799,8 +831,8 @@
                         hideDashboard();
 
                      } else if ((newState == 3) || (newState == 4)) { // Started 
-                        progressMessage("Preparing your accelerator");
-                        lhc.setView(1);
+
+                        setPreparingView();
                         hidePowerControls();
                         hideDashboard();
 
