@@ -1009,14 +1009,20 @@
                   // Check if this VM is already bound to a BOINC account
                   // (Since we are pausing/resuming the floppy cannot be changed!)
                   var boincUser = session.getProperty("/boinc/name");
-                  if ((boincUser != "") && (localBoincInfo == null)) {
+                  if (boincUser != "") {
+
+                     // Disable logout
                      $("#boinc-logout").hide();
-                     localBoincInfo = {
-                        name: boincUser,
-                        id: session.getProperty("/boinc/id"),
-                        authenticator: session.getProperty("/boinc/auth")
-                     };
-                     boincUpdateStatus(false);
+
+                     // Update local info too
+                     if (localBoincInfo == null) {
+                        localBoincInfo = {
+                           name: boincUser,
+                           id: session.getProperty("/boinc/id"),
+                           authenticator: session.getProperty("/boinc/auth")
+                        };
+                        boincUpdateStatus(false);
+                     }
                   }
 
 
