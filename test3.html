@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test</title>
+		<script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
+    	<link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
+    	<link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
+    	<link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap-responsive.min.css" />
+    	<script type="text/javascript">
+
+    	var targetDateZ = Date.parse("September 27, 2013 00:00:00 GMT+0200"),
+    		targetDate = Date.parse("August 19, 2013 15:30:00 GMT+0200"),
+    		updateFunction = function( day, hour, min, seconds, isCompleted ) {
+
+    			console.log(day,hour,min,seconds, isCompleted);
+
+    		};
+
+		/**
+		 * Schedule a countdown to the target date, calling the specified
+		 * function when a tick occurs.
+		 */
+		function startCountdown( targetDateStr, callbackFunction ) {
+			var lastSeconds=0, clockID, targetDate = Date.parse(targetDateStr);
+
+			// Check for completion on load
+			if (targetDate - Date.now() < 0) {
+				callbackFunction(0,0,0,0,true);
+				return;
+			}
+
+			// Start clock
+			clockID = setInterval(function() {
+				var diff = Math.floor(targetDate - Date.now()) / 1000,
+					d=0, h=0, m=0, s=0;
+
+				// Check if it's passed
+				if (diff < 0) {
+					callbackFunction(0,0,0,0,true);
+					clearInterval(clockID);
+					return;
+				}
+
+				// Check if we haven't actually changed
+				// a second yet
+				s = Math.floor(diff % 60);
+				if (s == lastSeconds) {
+					return;
+				}
+				lastSeconds = s;
+
+				// Pass 1
+				m = diff / 60;
+				h = m / 60;
+				d = h / 24;
+
+				// Pass 2
+				m = Math.floor(m % 60);
+				h = Math.floor(h % 60);
+				d = Math.floor(d);
+
+				callbackFunction(d,h,m,s,false);
+
+			},500);
+		}
+
+		startCountdown("August 19, 2013 15:30:00 GMT+0200", function( day, hour, min, seconds, isCompleted ) {
+		      if (isCompleted) {
+		         console.log("Reached countdown target!");
+		      } else {
+		         console.log("Remaining " + day + " days, " + hour + " hours, " + min + " minutes and " + seconds + " seconds");
+		      }	
+		});
+
+    	</script>
+	</head>
+	<body>
+		<div class="container">
+			<br />
+
+			<a href="#" class="btn btn-large btn-success">Join now!</a>
+
+		</div>
+	</body>
+</html>

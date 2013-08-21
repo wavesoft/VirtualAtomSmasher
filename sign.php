@@ -45,6 +45,7 @@ $data = array(
     'ram' => 1024,
     'cpus' => 1,
     'disk' => 10240,
+    'userData' => '${boinc_config}',
     'diskURL' => 'http://dl.dropboxusercontent.com/u/27667029/cors-enabled.vdi.gz',
     'diskChecksum' => '5b0e2a763cef752420ee79e5ea2fa41c7b4a43788b1b45bacc58e974ebac70c3',
     'flags'=> 12

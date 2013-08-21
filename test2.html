@@ -7,8 +7,9 @@
       <script type="text/javascript" src="js/smasher.js.php"></script>
       <script type="text/javascript" src="js/shaders/BeamShader.js"></script>
       <script type="text/javascript" src="js/shaders/CollisionShader.js"></script>
-      <script type="text/javascript" src="js/cvmwebapi-1.2.js"></script>
       <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+      <script type="text/javascript" src="js/md5.js"></script>
+      <script type="text/javascript" src="http://cernvm.cern.ch/releases/webapi/js/cvmwebapi-latest.js"></script>
       <script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
@@ -544,11 +545,16 @@
        */
       var rotatingProgressTimer = 0;
       function progressRotatingMessages( messages ) {
+         if (rotatingProgressTimer != 0) clearTimeout(rotatingProgressTimer);
          var currentMessageID = 0,
+             rotatingProgressTimer = 1, // << Just for the if check in the showNextProgress function
              showNextProgress = function() {
-               progressMessage( messages[currentMessageID++] );
-               if (currentMessageID < messages.length)
+               if (rotatingProgressTimer == 0) return;
+               progressMessage( messages[currentMessageID++], true );
+               if (currentMessageID < messages.length) {
+                  clearTimeout(rotatingProgressTimer);
                   rotatingProgressTimer = setTimeout(showNextProgress, Math.random() * 5000 + 2000 );
+               }
             };
          showNextProgress();
       }
@@ -623,13 +629,17 @@
       /**
        * Display a message on the progress bar without progress indicator
        */
-      function progressMessage( text ) {
+      function progressMessage( text, pending ) {
          progressCancelRotating();
          $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
          progressAnimateText(text);
-         $("#loading-percent").html("");
+         if (!pending) {
+            $("#loading-percent").html("");
+         } else {
+            $("#loading-percent").html("<img src=\"theme/img/ajax-dots.gif\" />");
+         }
       }
 
       function showPowerControls() {
@@ -668,14 +678,191 @@
          v_session.hibernate();
          hideDashboard();
          setTimeout(function() {
-            progressMessage("Ramping-down the accelerator");
+            progressMessage("Ramping-down the accelerator", true);
          }, 500);
       }
 
       function acceleratorStart() {
-         v_session.start();
+
+         var boincInfo = boincGetInfo();
+         if (!boincInfo) {
+            v_session.start( localBoincInfo );
+         } else {
+            var boincStr = "BOINC_USERNAME=" + boincInfo.name + "\n" + 
+                           "BOINC_AUTHENTICATOR=" + boincInfo.authenticator + "\n" + 
+                           "BOINC_USERID=" + boincInfo.id + "\n";
+            console.log("Starting with BOINC_Config", boincStr);
+            v_session.start({
+               'boinc_config': boincStr
+            })
+         }
+
          hidePowerControls();
-         progressMessage("Ramping-up the accelerator");
+         progressMessage("Ramping-up the accelerator", true);
+      }
+
+      function acceleratorRDP() {
+         v_session.openRDPWindow();
+      }
+
+      /**
+       * =================================================================
+       *  BOINC-Specific functions
+       * =================================================================
+       */
+
+
+      var localBoincInfo = null;
+      function boincGetInfo() {
+         if (localBoincInfo != null) return localBoincInfo;
+         if (!localStorage.getItem("boinc-id")) {
+            return false;
+         } else {
+            return localBoincInfo = {
+               id: localStorage.getItem("boinc-id"),
+               name: localStorage.getItem("boinc-name"),
+               authenticator: localStorage.getItem("boinc-auth")
+            };
+         }
+      }
+
+      function boincLogin() {
+         $("#boinc-error-msg").hide();
+         $("#boinc-login-form").fadeIn();
+      }
+
+      function boincLogout() {
+         localBoincInfo = null;
+         localStorage.removeItem("boinc-id");
+         localStorage.removeItem("boinc-name");
+         localStorage.removeItem("boinc-auth");
+         boincUpdateStatus( true );
+      }
+
+      function boincUpdateStatus( fade ) {
+         var bInfo = boincGetInfo();
+         if (!bInfo) {
+            if (!fade) {
+               $("#boinc-login").show();
+               $("#boinc-status").hide();
+            } else {
+               $("#boinc-status").fadeOut(250, function() {
+                  $("#boinc-login").fadeIn(250);
+               });
+            }
+         } else {
+            $("#boinc-name").html(bInfo.name);
+            if (!fade) {
+               $("#boinc-login").hide();
+               $("#boinc-status").show();
+            } else {
+               $("#boinc-login").fadeOut(250, function() {
+                  $("#boinc-status").fadeIn(250);
+               });
+            }
+         }
+      }
+
+      function boincDoLogin() {
+         var uEmail = $("#boinc-login-email").val(),
+             uPassword = $("#boinc-login-password").val(),
+             uRemember = $("#boinc-login-remember").prop("checked");
+
+         $("#boinc-error-msg").hide();
+         $("#boinc-login-form input").prop("disabled", true);
+         $("#boinc-login-form button").prop("disabled", true);
+         $("#boinc-login-submit").html("Loading...");
+
+         var arg_email = escape(uEmail),
+             arg_password = md5( uPassword + arg_email.toLowerCase() );
+
+         var boincBaseURL = "http://lhcathome2.cern.ch/test4theory";
+
+         // =============================================================
+         // Validate account and get BOINC authenticator
+         var jqxhr = $.ajax( {
+            url: boincBaseURL+"/lookup_account.php?email_addr="+arg_email+"&passwd_hash="+arg_password+"&get_opaque_auth=1",
+            dataType: 'xml'
+         })
+         // =============================================================
+             .done(function( msg ) {
+               // Successful response
+               if (msg.firstChild.tagName == "error") {
+                  $("#boinc-error-msg").html( "Login error: " + msg.getElementsByTagName("error_msg")[0].textContent );
+                  $("#boinc-error-msg").fadeIn();
+               } else {
+
+                  // We got the authenticator
+                  var authenticator = msg.getElementsByTagName("authenticator")[0].textContent;
+                  if (!authenticator) {
+                     $("#boinc-error-msg").html( "Unable to identify the authenticator" );
+                     $("#boinc-error-msg").fadeIn();
+                  }
+
+                  // =============================================================
+                  // Now try to get more information about the user
+                  $.ajax({
+                     url: boincBaseURL+"/am_get_info.php?account_key="+authenticator,
+                     dataType: 'xml'
+                  })
+                  // =============================================================
+                     .done(function( msg ) {
+
+                        // Handle response
+                        if (msg.firstChild.tagName == "error") {
+                           $("#boinc-error-msg").html( "User info error: " + msg.getElementsByTagName("error_msg")[0].textContent );
+                           $("#boinc-error-msg").fadeIn();
+                        } else {
+
+                           // Populate local info
+                           localBoincInfo = {
+
+                              'id'           : msg.getElementsByTagName('id')[0].textContent,
+                              'name'         : msg.getElementsByTagName('name')[0].textContent,
+                              'authenticator': authenticator
+
+                           };
+
+                           // If user clicked remember me, store authenticator in local store
+                           // otherwise, clean previous traces.
+                           if (uRemember) {
+                              localStorage.setItem("boinc-id", localBoincInfo.id);
+                              localStorage.setItem("boinc-name", localBoincInfo.name);
+                              localStorage.setItem("boinc-auth", localBoincInfo.authenticator);
+                           } else {
+                              localStorage.removeItem("boinc-id");
+                              localStorage.removeItem("boinc-name");
+                              localStorage.removeItem("boinc-auth");
+                           }
+
+                           // Hide window and upate status
+                           $("#boinc-login-form").fadeOut();
+                           boincUpdateStatus(true);
+
+                        }
+
+                     }).fail(function( msg ) {
+                        // I/O Error
+                        $("#boinc-error-msg").html("Connunication error: " + msg);
+                        $("#boinc-error-msg").fadeIn();
+                     });
+
+               }
+             })
+
+             .fail(function( msg ) {
+               // I/O Error
+               $("#boinc-error-msg").html("Connunication error: " + msg);
+               $("#boinc-error-msg").fadeIn();
+             })
+
+             .always(function() {
+               // In any case, restore the layout
+               $("#boinc-login-form input").prop("disabled", false);
+               $("#boinc-login-form button").prop("disabled", false);
+               $("#boinc-login-submit").html("Login");
+             });
+
       }
 
       /**
@@ -689,6 +876,8 @@
       function setPreparingView() {
          lhc.setView(1);
          progressRotatingMessages([
+
+               "Connecting to your instance",
 
                "Configuring network",
                "Starting critical services",
@@ -767,6 +956,8 @@
          $("#upper-controls").hide();
          $("#lower-controls").hide();
          $("#power-controls").hide();
+         $("#boinc-login-form").hide();
+         boincUpdateStatus();
          progressUpdate(0, "Setting up environment");
          lhc.setView(0);
 
@@ -801,12 +992,8 @@
                   if (session.state == 2) {
 
                      // OPEN -> START
-                     session.start();
-
-                  } else if ((session.state == 3) || (session.state == 4)) {
-
-                     // STARTED(-ING) -> Update view
-                     setPreparingView();
+                     showPowerControls();
+                     //session.start();
 
                   }
 
@@ -957,9 +1144,31 @@
          position: absolute;
          left: 0px;
          width: 100%;
-         top: 65%;
+         top: 70%;
          text-align: center;
       }
+
+      div#boinc-login-form {
+         display: block;
+         position: absolute;
+         left: 0px;
+         width: 100%;
+         top: 50%;
+         height: 300px;
+         margin-top: -150px;
+      }
+
+      div#boinc-login-form > div {
+         display: block;
+         margin: auto;
+         width: 450px; 
+         background: #333;
+      }
+
+      div#boinc-login-form > div > form {
+         margin: 0px;
+      }
+
 
       </style>
    </head>
@@ -976,12 +1185,15 @@
          </div>
       </div>
       <div id="power-controls">
-         <a href="javascript:;" onclick="acceleratorStart()" class="btn btn-success">Start your accelerator</a>
+         <p><a href="javascript:;" onclick="acceleratorStart()" class="btn btn-large btn-warning">Start your accelerator</a></p>
+         <p id="boinc-login"><a href="javascript:;" onclick="boincLogin()" class="btn btn-mini btn-inverse">Connect your LHC@Home 2.0 BOINC Account</a></p>
+         <p id="boinc-status"><small>Connected with BOINC user <span id="boinc-name" class="text-info">user</span></small> <a href="javascript:;" onclick="boincLogout()" class="btn btn-mini btn-inverse">Disconnect</a></p>
       </div>
       <div id="upper-controls">
       </div>
       <div id="lower-controls">
          <div style="text-align:right; padding-top: 30px">
+            <a href="javascript:;" onclick="acceleratorRDP()" class="btn">Open Display</a>&nbsp;
             <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-danger">Shut Down</a>
          </div>
          <!--
@@ -990,6 +1202,40 @@
          <a href="javascript:lhc.setView(2)" class="btn btn-inverse">Running</a>
          <a href="javascript:lhc.setView(3)" class="btn btn-danger">Error</a>
          -->
+      </div>
+      <div id="boinc-login-form">
+         <div class="well">
+            <form class="form-horizontal">
+               <fieldset>
+                  <legend>BOINC Log-in</legend>
+                  <p>If you have an <a href="http://lhcathome2.cern.ch/test4theory/" target="_blank">LHC@Home 2.0 Test4Theory</a> account, you can fill-in your account information below in order to collect your BOINC credits:</p>
+                  <div class="alert alert-error" id="boinc-error-msg">&nbsp;</div>
+                  <div class="control-group">
+                     <label class="control-label" for="boinc-login-email">Email</label>
+                     <div class="controls">
+                        <input type="text" id="boinc-login-email" placeholder="Email">
+                     </div>
+                  </div>
+                  <div class="control-group">
+                     <label class="control-label" for="boinc-login-password">Password</label>
+                     <div class="controls">
+                        <input type="password" id="boinc-login-password" placeholder="Password">
+                     </div>
+                  </div>
+                  <div class="control-group">
+                     <div class="controls">
+                        <label class="checkbox">
+                           <input type="checkbox" checked="checked" id="boinc-login-remember"> Remember me
+                        </label>
+                     </div>
+                  </div>
+                  <div class="form-actions">
+                     <button onclick="boincDoLogin()" id="boinc-login-submit" type="button" class="btn btn-primary">Login</button>
+                     <button onclick="$('#boinc-login-form').fadeOut()" type="button" class="btn">Cancel</button>
+                  </div>
+               </fieldset>
+            </form>
+         </div>
       </div>
 
    </body>
