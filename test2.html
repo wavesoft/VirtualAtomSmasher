@@ -9,7 +9,7 @@
       <script type="text/javascript" src="js/shaders/CollisionShader.js"></script>
       <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
       <script type="text/javascript" src="js/md5.js"></script>
-      <script type="text/javascript" src="http://cernvm.cern.ch/releases/webapi/js/cvmwebapi-latest.js"></script>
+      <script type="text/javascript" src="http://cernvm.cern.ch/releases/webapi/js/cvmwebapi-1.3.js"></script>
       <script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
@@ -688,13 +688,22 @@
          if (!boincInfo) {
             v_session.start( localBoincInfo );
          } else {
+
+            // Prepare BOINC string
             var boincStr = "BOINC_USERNAME=" + boincInfo.name + "\n" + 
                            "BOINC_AUTHENTICATOR=" + boincInfo.authenticator + "\n" + 
                            "BOINC_USERID=" + boincInfo.id + "\n";
             console.log("Starting with BOINC_Config", boincStr);
             v_session.start({
                'boinc_config': boincStr
-            })
+            });
+            v_session.setProperty("/boinc/name", boincInfo.name);
+            v_session.setProperty("/boinc/id", boincInfo.id);
+            v_session.setProperty("/boinc/auth", boincInfo.authenticator);
+
+            // You cannot disconnect now
+            $("#boinc-logout").hide();
+
          }
 
          hidePowerControls();
@@ -997,6 +1006,19 @@
 
                   }
 
+                  // Check if this VM is already bound to a BOINC account
+                  // (Since we are pausing/resuming the floppy cannot be changed!)
+                  var boincUser = session.getProperty("/boinc/name");
+                  if ((boincUser != "") && (localBoincInfo == null)) {
+                     $("#boinc-logout").hide();
+                     localBoincInfo = {
+                        name: boincUser,
+                        id: session.getProperty("/boinc/id"),
+                        authenticator: session.getProperty("/boinc/auth")
+                     };
+                     boincUpdateStatus(false);
+                  }
+
 
                   // Session progress events (session open/resume are between 80 and 100)
                   session.addEventListener('progress', function(percent, msg) {
@@ -1187,7 +1209,7 @@
       <div id="power-controls">
          <p><a href="javascript:;" onclick="acceleratorStart()" class="btn btn-large btn-warning">Start your accelerator</a></p>
          <p id="boinc-login"><a href="javascript:;" onclick="boincLogin()" class="btn btn-mini btn-inverse">Connect your LHC@Home 2.0 BOINC Account</a></p>
-         <p id="boinc-status"><small>Connected with BOINC user <span id="boinc-name" class="text-info">user</span></small> <a href="javascript:;" onclick="boincLogout()" class="btn btn-mini btn-inverse">Disconnect</a></p>
+         <p id="boinc-status"><small>Connected with BOINC user <span id="boinc-name" class="text-info">user</span></small> <a href="javascript:;" id="boinc-logout" onclick="boincLogout()" class="btn btn-mini btn-inverse">Disconnect</a></p>
       </div>
       <div id="upper-controls">
       </div>
