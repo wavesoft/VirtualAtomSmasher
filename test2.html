@@ -642,13 +642,13 @@
          }
       }
 
-      function showPowerControls() {
-         $("#power-controls").fadeIn(500);
+      function showLaunchControls() {
+         $("#launch-controls").fadeIn(500);
       }
 
-      function hidePowerControls() {
-         $("#power-controls").fadeOut(500, function() {
-            $("#power-controls").hide();
+      function hideLaunchControls() {
+         $("#launch-controls").fadeOut(500, function() {
+            $("#launch-controls").hide();
          });
       }
 
@@ -706,7 +706,7 @@
 
          }
 
-         hidePowerControls();
+         hideLaunchControls();
          progressMessage("Ramping-up the accelerator", true);
       }
 
@@ -926,6 +926,77 @@
             ]);
       }
 
+      function presentLicense( cbAccept, cbDecline ) {
+         var o = document.createElement('div'),
+             c = document.createElement('div'),
+             cControls = document.createElement('div'),
+             cHeader = document.createElement('div'),
+             fLicense = document.createElement('iframe'),
+             lnkOk = document.createElement('input'),
+             lnkCancel = document.createElement('input');
+
+         lnkOk.innerHTML = 'Accept';
+         lnkCancel.innerHTML = 'Decline';
+         fLicense.src = 'https://www.virtualbox.org/wiki/VirtualBox_PUEL';
+         fLicense.width = 700;
+         fLicense.height = 450;
+         fLicense.frameBorder = 0;
+
+         // Prepare buttons
+         lnkOk.type = 'button';
+         lnkOk.value = 'Accept License';
+         lnkCancel.type = 'button';
+         lnkCancel.value = 'Decline License';
+         lnkOk.onclick = function() {
+            document.body.removeChild(o);
+            if (cbAccept) cbAccept();
+         };
+         lnkCancel.onclick = function() {
+            document.body.removeChild(o);
+            if (cbDecline) cbDecline();
+         };
+
+         // Outer container
+         o.style['display'] = 'block';
+         o.style['position'] = 'absolute';
+         o.style['width'] = '100%';
+         o.style['height'] = '580px';
+         o.style['margin'] = '-300px 0px 0px 0px';
+         o.style['left'] = '0px';
+         o.style['top'] = '50%';
+         o.style['font'] = '14px Verdana, Helvetica, Tahoma, Arial';
+         o.appendChild(c);
+
+         // Actual container
+         c.style['width'] = '705px';
+         c.style['height'] = '580px';
+         c.style['margin'] = 'auto';
+         c.style['background'] = '#999';
+         c.style['border'] = 'solid 2px #999';
+         c.style['borderRadius'] = '5px';
+
+         // Header
+         cHeader.style['color'] = '#fff';
+         cHeader.style['background'] = '#999';
+         cHeader.style['height'] = '70px';
+         cHeader.style['padding'] = '8px';
+         cHeader.innerHTML = '<p>The CernVM WebAPI is going to install the VirtualBox Extension Pack which is licensed under VirtualBox Personal Use and Evaluation License (PUEL) License.</p><p>You must accept it to continue:</p>';
+
+         // Controls container
+         cControls.style['background'] = '#999';
+         cControls.style['padding'] = '6px';
+         cControls.style['textAlign'] = 'center';
+
+         // Nest layout
+         c.appendChild(cHeader);
+         c.appendChild(fLicense);
+         c.appendChild(cControls);
+         cControls.appendChild(lnkOk);
+         cControls.appendChild(lnkCancel);
+
+         document.body.appendChild( o );
+      }
+
 
       /**
        * Entry point function
@@ -943,32 +1014,52 @@
       $(document).ready(function() {
          if (inited) return; inited = true;
 
-         // Setup Three.js Viewport
-         var v = new M.Viewport({
-            container: "#collider",
-            bg: 0x000000, //0x202020, 0xf5f5f5,
-            autostop: false,
-            fullscreen: false,
-            stats: false
-         });
+         presentLicense();
+         return;
 
-         v.renderer.sortObjects = false;
-
-         // Setup accelerator ring
-         lhc = new AcceleratorRing( v.camera );
-         v.scene.add(lhc);
-
-         // Receive render updates to the accelerator ring
-         v.addUpdateHandler( lhc.update.bind(lhc) );
-
-         /// INITIALIZE UI ///
+         // Reset UI
+         $("#not-supported-msg").hide();
          $("#upper-controls").hide();
          $("#lower-controls").hide();
-         $("#power-controls").hide();
+         $("#launch-controls").hide();
          $("#boinc-login-form").hide();
          boincUpdateStatus();
          progressUpdate(0, "Setting up environment");
-         lhc.setView(0);
+         $("body").removeClass('not-ready');
+
+         // Check for WebGL Errors
+         try {
+
+            // Setup Three.js Viewport
+            var v = new M.Viewport({
+               container: "#collider",
+               bg: 0x000000, //0x202020, 0xf5f5f5,
+               autostop: false,
+               fullscreen: false,
+               stats: false
+            });
+
+            v.renderer.sortObjects = false;
+
+            // Setup accelerator ring
+            lhc = new AcceleratorRing( v.camera );
+            v.scene.add(lhc);
+
+            // Receive render updates to the accelerator ring
+            v.addUpdateHandler( lhc.update.bind(lhc) );
+
+            // Default view
+            lhc.setView(0);
+
+         } catch (e) {
+
+            // WebGL Error
+            $("#not-supported-msg").fadeIn();
+            $("#loading").hide();
+            return;
+
+         }
+
 
          CVM.debugLogging = true;
 
@@ -1001,7 +1092,7 @@
                   if (session.state == 2) {
 
                      // OPEN -> START
-                     showPowerControls();
+                     showLaunchControls();
                      //session.start();
 
                   }
@@ -1042,19 +1133,19 @@
                      if (newState == 2) { // Open Session
                         progressMessage("Your accelerator is closed");
                         lhc.setView(0);
-                        showPowerControls();
+                        showLaunchControls();
                         hideDashboard();
 
                      } else if ((newState == 3) || (newState == 4)) { // Started 
 
                         setPreparingView();
-                        hidePowerControls();
+                        hideLaunchControls();
                         hideDashboard();
 
                      } else if (newState == 6) { // Paused
                         progressMessage("Your accelerator is frozen");
                         lhc.setView(1);
-                        showPowerControls();
+                        showLaunchControls();
                         hideDashboard();
 
                      }
@@ -1168,7 +1259,7 @@
          width: 100%;
       }
 
-      div#power-controls {
+      div#launch-controls {
          position: absolute;
          left: 0px;
          width: 100%;
@@ -1197,11 +1288,38 @@
          margin: 0px;
       }
 
+      div#not-supported-msg {
+         position: absolute;
+         left: 0px; width: 100%;
+         height: 300px; margin-top: -150px; top: 50%;
+      }
+
+      div#not-supported-msg > div {
+         display: block;
+         margin: auto;
+         width: 500px;
+         padding-left: 150px;
+         background: #333 url(theme/img/time-traveller.png) no-repeat 10px center;
+      }
+
+      body.not-ready #upper-controls,
+      body.not-ready #lower-controls,
+      body.not-ready #launch-controls,
+      body.not-ready #boinc-login-form,
+      body.not-ready #loading
+       {
+         display: none;
+      }
+
 
       </style>
    </head>
-   <body>
+   <body class="not-ready">
+
+      <!-- WebGL Graphics -->
       <div id="collider"></div>
+
+      <!-- Loading screen -->
       <div id="loading">
          <div id="progressbar">
             <div id="progressbar-value"></div>
@@ -1212,11 +1330,15 @@
             <span id="loading-percent">10%</span>
          </div>
       </div>
-      <div id="power-controls">
+
+      <!-- Launch controls -->
+      <div id="launch-controls">
          <p><a href="javascript:;" onclick="acceleratorStart()" class="btn btn-large btn-warning">Start your accelerator</a></p>
          <p id="boinc-login"><a href="javascript:;" onclick="boincLogin()" class="btn btn-mini btn-inverse">Connect your LHC@Home 2.0 BOINC Account</a></p>
          <p id="boinc-status"><small>Connected with BOINC user <span id="boinc-name" class="text-info">user</span></small> <a href="javascript:;" id="boinc-logout" onclick="boincLogout()" class="btn btn-mini btn-inverse">Disconnect</a></p>
       </div>
+
+      <!-- Webapp Client UI -->
       <div id="upper-controls">
       </div>
       <div id="lower-controls">
@@ -1224,13 +1346,9 @@
             <a href="javascript:;" onclick="acceleratorRDP()" class="btn">Open Display</a>&nbsp;
             <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-danger">Shut Down</a>
          </div>
-         <!--
-         <a href="javascript:lhc.setView(0)" class="btn btn-inverse">Setting Up</a>
-         <a href="javascript:lhc.setView(1)" class="btn btn-inverse">Preparing</a>
-         <a href="javascript:lhc.setView(2)" class="btn btn-inverse">Running</a>
-         <a href="javascript:lhc.setView(3)" class="btn btn-danger">Error</a>
-         -->
       </div>
+
+      <!-- BOINC Login -->
       <div id="boinc-login-form">
          <div class="well">
             <form class="form-horizontal">
@@ -1263,6 +1381,18 @@
                   </div>
                </fieldset>
             </form>
+         </div>
+      </div>
+
+      <!-- Unsupported browser -->
+      <div id="not-supported-msg">
+         <div class="well well-large">
+            <div>
+               <h2>Hello time traveler!</h2>
+               <p>It seems that your browser or your hardware does not support WebGL, which is an essential component for this website.</p>
+               <p>Why don't you try installing the latest <a href="http://www.mozilla.org/firefox">Mozilla Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a>?<br />It might solve this problem.</p>
+               <p><em>I'll be here, waiting in the future for you...</em></p>
+            </div>
          </div>
       </div>
 
