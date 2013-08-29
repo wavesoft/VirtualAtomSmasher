@@ -166,8 +166,8 @@
          //  Setup the ring wireframes
          // ============================
 
-         var backgroundMat = this.backgroundMat = new THREE.MeshPhongMaterial({ side: THREE.FrontSide, transparent: true, color: 0x999999, opacity: 0.4 });
-         var wireframeMat  = this.wireframeMat = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.BackSide, color: 0xffffff });
+         var backgroundMat = this.backgroundMat = new THREE.MeshPhongMaterial({ side: THREE.FrontSide, transparent: true, color: 0x000000, opacity: 0.4 });
+         var wireframeMat  = this.wireframeMat = new THREE.MeshPhongMaterial({ wireframe: true, side: THREE.BackSide, color: 0x000000 });
 
          var ringBackgroundGeom = new THREE.TorusGeometry( 20, 3, 10, 20, Math.PI );
          var ringBackgroundMesh = this.ringBackgroundMesh = new THREE.Mesh( ringBackgroundGeom, backgroundMat );
@@ -215,7 +215,7 @@
                'o': this.camera.position,             // Object
                't': this.camera.position.clone(),     // Target 
                's': this.camera.position.clone(),     // Source
-               'v'  : ['x','y','z']                   // Values
+               'v'  : ['x','y','z']                   // Value names
             },
             {
                'o': this.camera.rotation,
@@ -427,6 +427,7 @@
       AcceleratorRing.prototype.setView = function(view) {
 
          this.fxTimer = 0;
+         this.view = view;
 
          if (view == 0) {
 
@@ -522,16 +523,6 @@
 
          }
 
-         /*
-         this.beamMeshR.visible = true;
-         this.beamMeshL.visible = true;
-         this.ringBackgroundMesh.visible = true;
-         this.backgroundMat.side = THREE.DoubleSide;
-         this.lightL.visible = true;
-         this.lightR.visible = true;
-         this.rotatingRing = false;
-         */
-
       };
 
       /**
@@ -543,36 +534,70 @@
       /**
        * Display a rotating progress messages
        */
-      var rotatingProgressTimer = 0;
+      var rotatingProgressTimer = 0,
+          rotatingActive = false,
+          rotatingMessages = [];
+      function __resetNestProgress() {
+         clearTimeout(rotatingProgressTimer);
+         rotatingActive = false;
+         rotatingMessages = [];
+         rotatingProgressTimer = 0;
+      }
+      function __showNestProgress() {
+
+         // Make sure we don't have any left-over
+         // timer running...
+         if (!rotatingActive) return;
+         if (rotatingMessages.length == 0) return;
+
+         // Display message
+         var msg = rotatingMessages.shift();
+         progressMessage(msg, true, true);
+
+         // Reset queue when we are done
+         if (rotatingMessages.length == 0) {
+            __resetNestProgress();
+         } else {
+            // Otherwise schedule next tick
+            rotatingProgressTimer = setTimeout(__showNestProgress, Math.random() * 5000 + 2000 );
+         }
+      }
+
+      /**
+       * Setup rotating messages
+       */
       function progressRotatingMessages( messages ) {
-         if (rotatingProgressTimer != 0) clearTimeout(rotatingProgressTimer);
-         var currentMessageID = 0,
-             rotatingProgressTimer = 1, // << Just for the if check in the showNextProgress function
-             showNextProgress = function() {
-               if (rotatingProgressTimer == 0) return;
-               progressMessage( messages[currentMessageID++], true );
-               if (currentMessageID < messages.length) {
-                  clearTimeout(rotatingProgressTimer);
-                  rotatingProgressTimer = setTimeout(showNextProgress, Math.random() * 5000 + 2000 );
-               }
-            };
-         showNextProgress();
+
+         // Set messages
+         rotatingMessages = messages;
+
+         // Start rotation if not active
+         if (!rotatingActive) {
+            rotatingActive = true;
+            __showNestProgress();
+         }
+
       }
 
       /**
        * Cancel message rotation
        */
       function progressCancelRotating() {
-         if (rotatingProgressTimer == 0) return;
-         clearTimeout(rotatingProgressTimer);
-         rotatingProgressTimer = 0;
+         if (!rotatingActive) return;
+         __resetNestProgress();
       }
 
       /**
        * Roll-in an animating text entry on the progress bar
        */
-      var progressCurrentText = "#loading-text-1";
+      var progressCurrentText = "#loading-text-1",
+          lastProgressText = "";
       function progressAnimateText( message ) {
+
+         // Do nothing if the last text is excactly the same
+         // with the new one
+         if (lastProgressText == message) return;
+         lastProgressText = message;
 
          // Fade out the past
          $(progressCurrentText).stop(true, true);
@@ -629,8 +654,8 @@
       /**
        * Display a message on the progress bar without progress indicator
        */
-      function progressMessage( text, pending ) {
-         progressCancelRotating();
+      function progressMessage( text, pending, preserveRotatingMessages ) {
+         if (!preserveRotatingMessages) progressCancelRotating();
          $("#loading").fadeIn(500);
          $("#loading").removeClass('error');
          $("#progressbar-value").css({ 'width': '100%' });
@@ -657,6 +682,7 @@
       }
 
       function hideProgress() {
+         progressCancelRotating();
          $("#loading").fadeOut(500);
       }
 
@@ -679,6 +705,14 @@
          hideDashboard();
          setTimeout(function() {
             progressMessage("Ramping-down the accelerator", true);
+         }, 500);
+      }
+
+      function aceleratorCleanup() {
+         v_session.close();
+         hideDashboard();
+         setTimeout(function() {
+            progressMessage("Dismantling the accelerator", true);
          }, 500);
       }
 
@@ -710,8 +744,26 @@
          progressMessage("Ramping-up the accelerator", true);
       }
 
-      function acceleratorRDP() {
+      function acceleratorRDP( href ) {
          v_session.openRDPWindow();
+      }
+
+      function acceleratorOpenRDP() {
+         var resolution = v_session.__session.resolution,
+             resParts = resolution.split("x");
+         var rdpObjectReference = window.open(
+            "http://cernvm.cern.ch/releases/webapi/webrdp/webclient.html#" + v_session.rdpURL + "," + resParts[0] + "," + resParts[1] , "cernvmRDP");
+         window.w = rdpObjectReference;
+      }
+
+      function acceleratorSetRDPURL( a ) {
+         var resolution = v_session.__session.resolution,
+             resParts = resolution.split("x");
+         a.href = "http://cernvm.cern.ch/releases/webapi/webrdp/webclient.html#" + v_session.rdpURL + "," + resParts[0] + "," + resParts[1];
+      }
+
+      function acceleratorLogs() {
+         var windowObjectReference = window.open(v_session.apiURL + "/logs" , "cernvmLogs");
       }
 
       /**
@@ -926,77 +978,6 @@
             ]);
       }
 
-      function presentLicense( cbAccept, cbDecline ) {
-         var o = document.createElement('div'),
-             c = document.createElement('div'),
-             cControls = document.createElement('div'),
-             cHeader = document.createElement('div'),
-             fLicense = document.createElement('iframe'),
-             lnkOk = document.createElement('input'),
-             lnkCancel = document.createElement('input');
-
-         lnkOk.innerHTML = 'Accept';
-         lnkCancel.innerHTML = 'Decline';
-         fLicense.src = 'https://www.virtualbox.org/wiki/VirtualBox_PUEL';
-         fLicense.width = 700;
-         fLicense.height = 450;
-         fLicense.frameBorder = 0;
-
-         // Prepare buttons
-         lnkOk.type = 'button';
-         lnkOk.value = 'Accept License';
-         lnkCancel.type = 'button';
-         lnkCancel.value = 'Decline License';
-         lnkOk.onclick = function() {
-            document.body.removeChild(o);
-            if (cbAccept) cbAccept();
-         };
-         lnkCancel.onclick = function() {
-            document.body.removeChild(o);
-            if (cbDecline) cbDecline();
-         };
-
-         // Outer container
-         o.style['display'] = 'block';
-         o.style['position'] = 'absolute';
-         o.style['width'] = '100%';
-         o.style['height'] = '580px';
-         o.style['margin'] = '-300px 0px 0px 0px';
-         o.style['left'] = '0px';
-         o.style['top'] = '50%';
-         o.style['font'] = '14px Verdana, Helvetica, Tahoma, Arial';
-         o.appendChild(c);
-
-         // Actual container
-         c.style['width'] = '705px';
-         c.style['height'] = '580px';
-         c.style['margin'] = 'auto';
-         c.style['background'] = '#999';
-         c.style['border'] = 'solid 2px #999';
-         c.style['borderRadius'] = '5px';
-
-         // Header
-         cHeader.style['color'] = '#fff';
-         cHeader.style['background'] = '#999';
-         cHeader.style['height'] = '70px';
-         cHeader.style['padding'] = '8px';
-         cHeader.innerHTML = '<p>The CernVM WebAPI is going to install the VirtualBox Extension Pack which is licensed under VirtualBox Personal Use and Evaluation License (PUEL) License.</p><p>You must accept it to continue:</p>';
-
-         // Controls container
-         cControls.style['background'] = '#999';
-         cControls.style['padding'] = '6px';
-         cControls.style['textAlign'] = 'center';
-
-         // Nest layout
-         c.appendChild(cHeader);
-         c.appendChild(fLicense);
-         c.appendChild(cControls);
-         cControls.appendChild(lnkOk);
-         cControls.appendChild(lnkCancel);
-
-         document.body.appendChild( o );
-      }
-
 
       /**
        * Entry point function
@@ -1010,12 +991,10 @@
        * [40 - 80%] : Open session
        */
 
-      var inited = false;
+      var inited = false,
+          isTimeTraveller = false;
       $(document).ready(function() {
          if (inited) return; inited = true;
-
-         presentLicense();
-         return;
 
          // Reset UI
          $("#not-supported-msg").hide();
@@ -1027,160 +1006,230 @@
          progressUpdate(0, "Setting up environment");
          $("body").removeClass('not-ready');
 
-         // Check for WebGL Errors
-         try {
+         // Prepare two functions that start the system after a delay
+         // not to completely freeze the browser
 
-            // Setup Three.js Viewport
-            var v = new M.Viewport({
-               container: "#collider",
-               bg: 0x000000, //0x202020, 0xf5f5f5,
-               autostop: false,
-               fullscreen: false,
-               stats: false
-            });
+         //////////////////////////////////////////////////////////
+         function setupWebGL() {
+         //////////////////////////////////////////////////////////
 
-            v.renderer.sortObjects = false;
+            // Check for WebGL Errors
+            try {
 
-            // Setup accelerator ring
-            lhc = new AcceleratorRing( v.camera );
-            v.scene.add(lhc);
+               // Setup Three.js Viewport
+               var v = new M.Viewport({
+                  container: "#collider",
+                  bg: 0x000000, //0x202020, 0xf5f5f5,
+                  autostop: false,
+                  fullscreen: false,
+                  stats: false
+               });
 
-            // Receive render updates to the accelerator ring
-            v.addUpdateHandler( lhc.update.bind(lhc) );
+               v.renderer.sortObjects = false;
 
-            // Default view
-            lhc.setView(0);
+               // Setup accelerator ring
+               lhc = new AcceleratorRing( v.camera );
+               v.scene.add(lhc);
 
-         } catch (e) {
+               // Receive render updates to the accelerator ring
+               v.addUpdateHandler( lhc.update.bind(lhc) );
 
-            // WebGL Error
-            $("#not-supported-msg").fadeIn();
-            $("#loading").hide();
-            return;
+               // Default view
+               lhc.setView(0);
+
+            } catch (e) {
+
+               // WebGL Error
+               $("#not-supported-msg").fadeIn();
+               $("#loading").hide();
+
+               // The user is from the past
+               isTimeTraveller = true;
+               return;
+
+            }
 
          }
 
+         //////////////////////////////////////////////////////////
+         function setupCVM() {
+         //////////////////////////////////////////////////////////
 
-         CVM.debugLogging = true;
+            CVM.debugLogging = true;
 
-         // Installation events are only between 10-20%
-         CVM.addInstallProgressHandler(function(percent, msg) {
-            var value = percent * 30 / 100;
-            progressUpdate(10 + value, msg);
-            console.log("InstallProgress = ", 10+value);
-         });
+            // Installation events are only between 10-20%
+            CVM.addInstallProgressHandler(function(percent, msg) {
+               var value = percent * 30 / 100;
+               progressUpdate(10 + value, msg);
+               console.log("InstallProgress = ", 10+value);
+            });
 
-         // Initialize CernVM
-         CVM.startCVMWebAPI(
-            function(plugin) {
-               progressUpdate(20, "Establishing session");
+            // Initialize CernVM
+            CVM.startCVMWebAPI(
+               function(plugin) {
+                  progressUpdate(20, "Establishing session");
 
-               // Plugin progress events (session itialization are between 20 and 60)
-               plugin.addEventListener('progress', function(percent, msg) {
-                  var value = percent * 40 / 100;
-                  progressUpdate(40 + value, msg);
-                  console.log("pluginProgress = ", 40 + value);
-               });
-
-               // Start session
-               plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
-
-                  window.s = session;
-                  v_session = session;
-
-                  // Handle various session states
-                  if (session.state == 2) {
-
-                     // OPEN -> START
-                     showLaunchControls();
-                     //session.start();
-
-                  }
-
-                  // Check if this VM is already bound to a BOINC account
-                  // (Since we are pausing/resuming the floppy cannot be changed!)
-                  var boincUser = session.getProperty("/boinc/name");
-                  if (boincUser != "") {
-
-                     // Disable logout
-                     $("#boinc-logout").hide();
-
-                     // Update local info too
-                     if (localBoincInfo == null) {
-                        localBoincInfo = {
-                           name: boincUser,
-                           id: session.getProperty("/boinc/id"),
-                           authenticator: session.getProperty("/boinc/auth")
-                        };
-                        boincUpdateStatus(false);
-                     }
-                  }
-
-
-                  // Session progress events (session open/resume are between 80 and 100)
-                  session.addEventListener('progress', function(percent, msg) {
-                     var value = percent * 20 / 100;
-                     progressUpdate(80 + value, msg);
-                     console.log("sessionProgress = ", 80 + value);
+                  // Plugin progress events (session itialization are between 20 and 60)
+                  plugin.addEventListener('progress', function(percent, msg) {
+                     var value = percent * 40 / 100;
+                     progressUpdate(40 + value, msg);
+                     console.log("pluginProgress = ", 40 + value);
                   });
 
-                  session.addEventListener('error', function(msg) {
+                  // Start session
+                  //plugin.requestSession( 'http://labs.wavesoft.gr/t4t/sign.php', function(session) {
+                  plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
+
+                     window.s = session;
+                     v_session = session;
+
+                     // Handle various session states
+                     if (session.state == 2) {
+
+                        // OPEN -> START
+                        showLaunchControls();
+                        //session.start();
+
+                     }
+
+                     // Check if this VM is already bound to a BOINC account
+                     // (Since we are pausing/resuming the floppy cannot be changed!)
+                     var boincUser = session.getProperty("/boinc/name");
+                     if (boincUser != "") {
+
+                        // Disable logout
+                        $("#boinc-logout").hide();
+
+                        // Update local info too
+                        if (localBoincInfo == null) {
+                           localBoincInfo = {
+                              name: boincUser,
+                              id: session.getProperty("/boinc/id"),
+                              authenticator: session.getProperty("/boinc/auth")
+                           };
+                           boincUpdateStatus(false);
+                        }
+                     }
+
+
+                     // Session progress events (session open/resume are between 80 and 100)
+                     session.addEventListener('progress', function(percent, msg) {
+                        var value = percent * 20 / 100;
+                        progressUpdate(80 + value, msg);
+                        console.log("sessionProgress = ", 80 + value);
+                     });
+
+                     session.addEventListener('error', function(msg) {
+                        lhc.setView(3);
+                        progressError( msg );
+                     });
+
+                     session.addEventListener('sessionStateChange', function(newState) {
+
+                        if (newState == 2) { // Open Session
+                           progressMessage("Your accelerator is closed");
+                           lhc.setView(0);
+                           showLaunchControls();
+                           hideDashboard();
+
+                        } else if ((newState == 3) || (newState == 4)) { // Started 
+
+                           setPreparingView();
+                           hideLaunchControls();
+                           hideDashboard();
+
+                        } else if (newState == 6) { // Paused
+                           progressMessage("Your accelerator is frozen");
+                           lhc.setView(0);
+                           showLaunchControls();
+                           hideDashboard();
+
+                        } else if (newState == 0) { // Closed (?! Destroyed??)
+                           progressMessage("Your accelerator is destroyed");
+                           lhc.setView(0);
+                           showLaunchControls();
+                           hideDashboard();
+
+                           // We have the VM Destroyed. This means
+                           // we can change a user
+                           $("#boinc-logout").show();
+                           boincUpdateStatus(false);
+
+                        }
+                     });
+
+                     session.addEventListener('apiAvailable', function() {
+                        lhc.setView(2);
+                        hideProgress();
+                        showDashboard();
+                     });
+
+                     session.addEventListener('apiUnavailable', function() {
+
+                        // This is valid only when fired when the VM is running
+                        if (lhc.view != 0) {
+                           progressMessage("Disconnected from the accelerator");
+                           lhc.setView(1);
+                           hideDashboard();
+
+                           // Check if the session is also lost
+                           session.__session.update();
+                           setTimeout(function() {
+                              if ((session.state == 2) && (lhc.view != 0)) {
+
+                                 progressMessage("Your accelerator is closed");
+                                 lhc.setView(0);
+                                 showLaunchControls();
+                                 hideDashboard();
+
+                              }
+                           }, 1000);
+                        }
+
+                     });
+
+
+                  }, function (err_msg) {
+
+                     // Could not request session
                      lhc.setView(3);
-                     progressError( msg );
+                     progressError( err_msg );
+
                   });
 
-                  session.addEventListener('sessionStateChange', function(newState) {
-                     if (newState == 2) { // Open Session
-                        progressMessage("Your accelerator is closed");
-                        lhc.setView(0);
-                        showLaunchControls();
-                        hideDashboard();
-
-                     } else if ((newState == 3) || (newState == 4)) { // Started 
-
-                        setPreparingView();
-                        hideLaunchControls();
-                        hideDashboard();
-
-                     } else if (newState == 6) { // Paused
-                        progressMessage("Your accelerator is frozen");
-                        lhc.setView(1);
-                        showLaunchControls();
-                        hideDashboard();
-
-                     }
-                  });
-
-                  session.addEventListener('apiAvailable', function() {
-                     lhc.setView(2);
-                     hideProgress();
-                     showDashboard();
-                  });
-
-                  session.addEventListener('apiUnavailable', function() {
-                     progressMessage("Disconnected from the accelerator");
-                     lhc.setView(1);
-                     hideDashboard();
-                  });
-
-
-               }, function (err_msg) {
-
-                  // Could not request session
+               },
+               function(e) {
                   lhc.setView(3);
-                  progressError( err_msg );
+                  progressError(e);
+               },
+               
+               // Let the plugin initialize the environment
+               true
+            );
 
-               });
+         }
 
-            },
-            function(e) {
-               lhc.setView(3);
-               progressError(e);
-            },
-            
-            // Let the plugin initialize the environment
-            true
-         );
+         // Delaied-initialization
+         progressUpdate(0, "Starting WebGL");
+         setTimeout(function() {
+
+            // Setup WebGL
+            setupWebGL();
+
+            // Schedule CVM initialization
+            progressUpdate(0, "Starting CernVM WebAPI");
+            setTimeout(function() {
+
+               // Skip initialization if webgl failed
+               if (isTimeTraveller) return;
+
+               // Setup CernVM
+               setupCVM();
+
+            }, 500);
+
+         }, 500);
+
          
       });
       
@@ -1343,8 +1392,12 @@
       </div>
       <div id="lower-controls">
          <div style="text-align:right; padding-top: 30px">
-            <a href="javascript:;" onclick="acceleratorRDP()" class="btn">Open Display</a>&nbsp;
-            <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-danger">Shut Down</a>
+            <!-- <a href="javascript:;" onmousedown="acceleratorSetRDPURL(this)" target="_blank" class="btn btn-inverse"><i class="icon-eye-open"></i> Open Display</a>&nbsp; -->
+            <a href="javascript:;" onclick="acceleratorOpenRDP()" class="btn btn-inverse"><i class="icon-eye-open"></i> Open Display</a>&nbsp;
+            <a href="javascript:;" onclick="acceleratorLogs()" class="btn btn-inverse"><i class="icon-book"></i> Open Logs</a>&nbsp;
+            <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-warning"><i class="icon-chevron-down icon-white"></i> Power off</a>&nbsp;
+            <a href="javascript:;" onclick="aceleratorCleanup()" class="btn btn-danger"><i class="icon-remove-circle icon-white"></i> Destroy</a>
+            &nbsp; &nbsp;
          </div>
       </div>
 
@@ -1389,7 +1442,7 @@
          <div class="well well-large">
             <div>
                <h2>Hello time traveler!</h2>
-               <p>It seems that your browser or your hardware does not support WebGL, which is an essential component for this website.</p>
+               <p>It seems that your browser or your hardware from the past does not support WebGL, which is an essential component for this website.</p>
                <p>Why don't you try installing the latest <a href="http://www.mozilla.org/firefox">Mozilla Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a>?<br />It might solve this problem.</p>
                <p><em>I'll be here, waiting in the future for you...</em></p>
             </div>
