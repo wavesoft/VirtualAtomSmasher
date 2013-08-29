@@ -27,29 +27,32 @@
 	    			'height'				: o.height || 400,
 	    			'flip'					: o.flip == undefined ? false : o.flip,
 	    			'caps'					: o.caps == undefined ? false : o.caps,
+
 	    			'gradient'				: o.gradient == undefined ? true : o.gradient,
+	    			'gradientMinOpacity'	: o.gradientMinOpacity || 0.3,
+	    			'gradientMaxOpacity'	: o.gradientMaxOpacity || 0.8,
 
 	    			'topUsers'				: o.topUsers || 5,
 	    			'bottomUsers'			: o.bottomUsers || 5,
 
 	    			'animationDelay'		: o.animationDelay || 2000,
 
-	    			'userColor' 			: o.userColor || '#999',
+	    			'userColor' 			: o.userColor || '#FFF',
 	    			'userHoverColor'		: o.userHoverColor || '#FFF',
 	    			'userSelfColor'			: o.userSelfColor || '#F90',
 	    			'userSelfHoverColor'	: o.userSelfHoverColor || '#F90',
 	    			'userBackColor'			: o.userBackColor || '#000',
-	    			'userHoverBackColor'	: o.userHoverBackColor || '#000',
+	    			'userHoverBackColor'	: o.userHoverBackColor || '#555',
 	    			'userBackOpacity'		: o.userBackOpacity || 0,
 	    			'userBackHoverOpacity'	: o.userBackHoverOpacity || 0.6,
-	    			'lineColor'				: o.lineColor || '#fff',
-	    			'separatorColor'		: o.separatorColor || '#999',
-	    			'separatorOpacity'		: o.separatorOpacity || 0.15,
+	    			'lineColor'				: o.lineColor || '#FFF',
+	    			'separatorColor'		: o.separatorColor || '#F90',
+	    			'separatorOpacity'		: o.separatorOpacity || 0.4,
 	    			'bulletColor'			: o.bulletColor || '#666',
-	    			'bulletHoverColor'		: o.bulletHoverColor || '#fff',
+	    			'bulletHoverColor'		: o.bulletHoverColor || '#FFF',
 	    			'bulletSelfColor'		: o.bulletSelfColor || '#F90',
 	    			'bulletSelfHoverColor'	: o.bulletSelfColor || '#F90',
-	    			'backgroundColor'		: o.backgroundColor || '#2f2f2f'
+	    			'backgroundColor'		: o.backgroundColor || '#000'
 	    		};
 
 	    		// Setup users
@@ -185,18 +188,32 @@
 					.attr("height", 1)
 					.attr("y", config.height/3 )
 					.attr("fill", "url(#separator-gradient)");
+
+				var centerOffset = config.flip 
+					? config.width/2 - uframeArrOffset - vbarCapSize - 8 
+					: config.width/2 + uframeArrOffset + vbarCapSize - 15;
 				sepDataGroup.append("use")
 					.attr("y", config.height/3*2 )
-					.attr("x", config.width/2 - uframeArrOffset - vbarCapSize - 8 )
+					.attr("x", centerOffset )
 					.attr("xlink:href", "#ico-newbie");
 				sepDataGroup.append("use")
 					.attr("y", config.height/3 - 20 )
-					.attr("x", config.width/2 - uframeArrOffset - vbarCapSize - 8 )
+					.attr("x", centerOffset )
 					.attr("xlink:href", "#ico-crown");
 
 				// Function to map credit value to pixels
 				function credit2pixel( credit ) {
-					return ( (credit - minCredit) / (maxCredit - minCredit) ) * (config.height - (3 * vbarPadding) - uframeHeight/2 );
+					var a = (credit - minCredit) / (maxCredit - minCredit),
+					    b = (config.height - (3 * vbarPadding) - uframeHeight/2 );
+					return (1-a) * b;
+				}
+
+				// Gradient opacity
+				function gradientOpacity( credit ) {
+					var a = (credit - minCredit) / (maxCredit - minCredit),
+					    b = (config.gradientMaxOpacity - config.gradientMinOpacity),
+					    c = Math.sin( a * Math.PI ) * b + config.gradientMinOpacity; 
+					return c;
 				}
 
 				// Function to prepare path
@@ -223,7 +240,7 @@
 						.style("opacity", function(d, i) {
 							if (d.me) return 1;
 							if (!config.gradient) return 1;
-							return Math.sin( ( (d.credit - minCredit) / (maxCredit - minCredit) ) * Math.PI ) * 0.4 + 0.1;
+							return gradientOpacity( d.credit );
 						});
 
 					object
@@ -239,7 +256,7 @@
 						.style("opacity", function(d, i) {
 							if (d.me) return 1;
 							if (!config.gradient) return 1;
-							return Math.sin( ( (d.credit - minCredit) / (maxCredit - minCredit) ) * Math.PI ) * 0.4 + 0.1;
+							return gradientOpacity( d.credit );
 						})
 						.style("fill", function(d, i) {
 							return d.me ? config.userSelfColor : config.userColor;
@@ -253,13 +270,13 @@
 						.style("opacity", function(d, i) {
 							if (d.me) return 1;
 							if (!config.gradient) return 1;
-							return Math.sin( ( (d.credit - minCredit) / (maxCredit - minCredit) ) * Math.PI ) * 0.4 + 0.1;
+							return gradientOpacity( d.credit );
 						})
 						.style("fill", function(d, i) {
 							return d.me ? config.userSelfColor : config.userColor;
 						})
 						.text(function(d, i) {
-							return "Credit: " + formatNumber(d.credit);
+							return "#" + formatNumber(d.credit);
 						});
 
 					object
@@ -390,22 +407,20 @@
 						activeElement = null;
 					}
 
+					// Sort the users
+					var sData = data.slice(0);
+					sData.sort(function(a,b) { return b.credit - a.credit });
+
 					// First, normalize the credits
-					for (var i=0; i<data.length; i++) {
-						if (i == 0) {
-							minCredit = maxCredit = data[i].credit;
-						} else {
-							if (minCredit < data[i].credit)
-								minCredit = data[i].credit;
-							if (maxCredit > data[i].credit)
-								maxCredit = data[i].credit;
-						}
-					}
+					maxCredit = sData[0].credit;
+					minCredit = sData[sData.length-1].credit;
+					console.log(sData);
 
 					// Then calculate the position of the separator lines
+					var a=sData.length-config.bottomUsers, b=config.topUsers-1;
 					var separatorPos = [
-						( credit2pixel( data[ config.topUsers - 1 ].credit ) + credit2pixel( data[ config.topUsers ].credit ) ) /2 + uframeHeight/2,
-						( credit2pixel( data[ data.length - config.bottomUsers ].credit ) + credit2pixel( data[ data.length - config.bottomUsers + 1 ].credit ) ) /2 + uframeHeight/2
+						credit2pixel( sData[a].credit ),
+						credit2pixel( sData[b].credit ) + uframeHeight
 					];
 
 					/* Do the D3 update-enter-exit sequence */
@@ -413,7 +428,7 @@
 					// (1a) Update
 					var p = updateUser(
 						svg.selectAll("g.uframegroup")
-				    	.data( data )
+				    	.data( sData )
 				    );
 					// (1b) Enter
 					updateUser( makeUser( p.enter() ) )
@@ -430,20 +445,20 @@
 						.data(separatorPos)
 						.transition()
 						.duration(config.animationDelay)
-						.attr("y", function(d,i) { return d + ((i==1) ? -20 : 0); });
+						.attr("y", function(d,i) { return d + ((i==1) ? -25 : 5); });
 
 				}
 			};
 
 			var users = [];
 			var uid = 8;
-			var u = new UsersBar("#d3-users", { width: 250, height: 250, flip: true });
+			var u = new UsersBar("#d3-users", { width: 250, height: 250, flip: false });
 			window.u = u;
 
 			window.updateUsers = function() {
 				users = [];
 				var k=Math.round(Math.random() * 10000000);
-				for (var i=0; i<12; i++) {
+				for (var i=0; i<15; i++) {
 					//Math.round(Math.random() * 10000000)
 					users.push({
 						'credit': k,
@@ -460,6 +475,11 @@
     	});
 
     	</script>
+    	<style type="text/css">
+    	body {
+    		background: #000;
+    	}
+    	</style>
 
 	</head>
 
