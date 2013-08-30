@@ -1841,10 +1841,32 @@
          background-color: #222;
       }
 
+      div#upper-controls > div#control-bar > div.btn-group {
+         height: 40px;
+         width: 100%;
+         background: #45484d; /* Old browsers */
+         background: -moz-linear-gradient(top, #45484d 0%, #262626 100%); /* FF3.6+ */
+         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#262626)); /* Chrome,Safari4+ */
+         background: -webkit-linear-gradient(top, #45484d 0%,#262626 100%); /* Chrome10+,Safari5.1+ */
+         background: -o-linear-gradient(top, #45484d 0%,#262626 100%); /* Opera 11.10+ */
+         background: -ms-linear-gradient(top, #45484d 0%,#262626 100%); /* IE10+ */
+         background: linear-gradient(to bottom, #45484d 0%,#262626 100%); /* W3C */
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#262626',GradientType=0 ); /* IE6-9 */         
+         border-radius: 0px 0px 10px 10px ;
+      }
+
       div#upper-controls > div#machine-status {
          width: 20%;
          margin: 8px;
          float: left;
+      }
+
+      div#controls-accelerator {
+         margin-top: 10px;
+      }
+
+      div#controls-accelerator td > div {
+         height: 90px;
       }
 
       body.not-ready #upper-controls,
@@ -1852,10 +1874,38 @@
       body.not-ready #launch-controls,
       body.not-ready #boinc-login-form,
       body.not-ready #loading
-       {
+      {
          display: none;
       }
 
+      span.led {
+         background-image: url(theme/img/leds.png);
+         display: inline-block;
+         height: 10px;
+         width: 10px;
+         overflow: hidden;
+      }
+
+      span.led-red {
+         background-position: 0px 0px;
+      }
+
+      span.led-green {
+         background-position: -20px 0px;
+      }
+
+      .active > span.led-red {
+         background-position: -10px 0px;
+      }
+
+      .active > span.led-green {
+         background-position: -30px 0px;
+      }
+
+      div#controls-accelerator .btn {
+         margin: 4px;
+         width: 90%;
+      }
 
       </style>
    </head>
@@ -1900,7 +1950,7 @@
          <div id="control-bar" >
 
             <!-- NavBar -->
-            <div class="input-append input-prepend">
+            <div class="btn-group">
                <a href="javascript:;" onclick="acceleratorOpenRDP()" class="btn btn-inverse"><i class="icon-eye-open"></i> Open Display</a>&nbsp;
                <a href="javascript:;" onclick="acceleratorLogs()" class="btn btn-inverse"><i class="icon-book"></i> Open Logs</a>&nbsp;
                <a href="javascript:;" onclick="aceleratorStop()" class="btn btn-warning"><i class="icon-chevron-down icon-white"></i> Power off</a>&nbsp;
@@ -1908,23 +1958,32 @@
             </div>
 
             <!-- Tunes -->
-            <br />
-            <div class="well">
+            <div id="controls-accelerator">
+               <h5 class="h-title">Accelerator Controls</h5>
+               <table width="100%">
+                  <tr>
+                     <td>
+                        <input type="text" class="dial" data-width="90" data-height="70" data-fgColor="#999" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
+                        <br /><small>% CPU</small>
+                     </td>
+                     <td>
+                        <input type="text" class="dial" data-width="90" data-height="70" data-fgColor="#999" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
+                        <br /><small>Update Rate</small>
+                     </td>
+                     <td>
+                        <input type="text" class="dial" data-width="90" data-height="70" data-fgColor="#999" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
+                        <br /><small>This is a text</small>
+                     </td>
+                     <td>
 
-               <div class="row-fluid">
-                  <div class="span4">
-                     <input type="text" class="dial" data-width="90" data-fgColor="#F90" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
-                     <p>Test</p>
-                  </div>
-                  <div class="span4">
-                     <input type="text" class="dial" data-width="90" data-fgColor="#F90" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
-                     <p>Test</p>
-                  </div>
-                  <div class="span4">
-                     <input type="text" class="dial" data-width="90" data-fgColor="#F90" data-bgColor="#333" data-skin="tron" data-min="0" data-max="100" data-thickness=".3" data-angleOffset="-125" data-angleArc="250">
-                     <p>Test</p>
-                 </div>
-               </div>
+                        <button class="btn btn-mini btn-inverse" data-toggle="button" style="text-align: left"><span class="led led-red"></span> Offline</button> <br />
+                        <button class="btn btn-mini btn-inverse" data-toggle="button" style="text-align: left"><span class="led led-red"></span> Daemonize</button> <br />
+                        <button class="btn btn-inverse">Apply</button>
+
+                     </td>
+                  </tr>
+               </table>
+
             </div>
 
          </div>
@@ -1988,6 +2047,11 @@
                <p><em>I'll be here, waiting in the future for you...</em></p>
             </div>
          </div>
+      </div>
+
+      <!-- Loading messages -->
+      <div id="loading-msg">
+
       </div>
 
    </body>
