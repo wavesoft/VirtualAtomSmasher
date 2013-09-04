@@ -100,6 +100,8 @@ list_runs () {
       fi
       mul "$mode $conf - herwig++ 2.6.0 @ $nevt $seed" "default LHC-UE-EE-4 LHC-UE-EE-4-CTEQ6L1 LHC-UE-EE-SCR-CTEQ6L1"
       mul "$mode $conf - herwig++ 2.6.1a @ $nevt $seed" "default LHC-UE-EE-4 LHC-UE-EE-4-CTEQ6L1 LHC-UE-EE-SCR-CTEQ6L1"
+      mul "$mode $conf - herwig++ 2.6.2 @ $nevt $seed" "default LHC-UE-EE-4 LHC-UE-EE-4-CTEQ6L1 LHC-UE-EE-SCR-CTEQ6L1"
+      mul "$mode $conf - herwig++ 2.6.3 @ $nevt $seed" "default LHC-UE-EE-4 LHC-UE-EE-4-CTEQ6L1 LHC-UE-EE-SCR-CTEQ6L1"
     fi
     
     # Herwig++ with POWHEG (only for Drell-Yan)
@@ -117,6 +119,8 @@ list_runs () {
       fi
       mul "$mode $conf - herwig++powheg 2.6.0 @ $nevt $seed" "default LHC-UE-EE-4"
       mul "$mode $conf - herwig++powheg 2.6.1a @ $nevt $seed" "default LHC-UE-EE-4"
+      mul "$mode $conf - herwig++powheg 2.6.2 @ $nevt $seed" "default LHC-UE-EE-4"
+      mul "$mode $conf - herwig++powheg 2.6.3 @ $nevt $seed" "default LHC-UE-EE-4"
       # note: LHC-UE-EE-*-CTEQ6L1 is not run as "herwig++powheg-z" require MRST-NLO PDF set
     fi
     
@@ -137,6 +141,9 @@ list_runs () {
       echo "$mode $conf - sherpa 1.3.1 default $nevt $seed"
       echo "$mode $conf - sherpa 1.4.0 default $nevt $seed"
       echo "$mode $conf - sherpa 1.4.1 default $nevt $seed"
+      echo "$mode $conf - sherpa 1.4.2 default $nevt $seed"
+      echo "$mode $conf - sherpa 1.4.3 default $nevt $seed"
+      echo "$mode $conf - sherpa 1.4.3.2 default $nevt $seed"
     fi 
 
     # Phojet:

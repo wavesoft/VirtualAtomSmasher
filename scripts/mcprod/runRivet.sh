@@ -1,49 +1,45 @@
 #!/bin/bash
 
-C_DIR=$(pwd)
-
 # setup paths and environment to run Rivet
 set_environment () {
   echo "Setting environment..."
   
   local mode=$1
-
+  
   if [[ "$mode" == "lxbatch" || "$mode" == "boinc" ]] ; then
     # in lxbatch or boinc mode the script has access only to the current directory,
     # repoint the temp directory root to $PWD/tmp
     export TMPDIR="$(pwd)/tmp"
     mkdir -p $TMPDIR || exit 1
   fi
-
+  
   # path to software packages:
   local EXTERNAL=/afs/cern.ch/sw/lcg/external
   if [[ "$mode" == "boinc" ]] ; then
     EXTERNAL=/cvmfs/sft.cern.ch/lcg/external
   fi
-
+  
   # set SLC5 platform name:
-#  local LCG_PLATFORM=x86_64-slc5-gcc43-opt
-  local LCG_PLATFORM=x86_64-slc6-gcc46-opt
-  local LCG_PLATFORM_GCC=x86_64-slc6
+  local LCG_PLATFORM=x86_64-slc5-gcc43-opt
   if [[ "$(uname -m)" != "x86_64" ]] ; then
     LCG_PLATFORM=i686-slc5-gcc43-opt
   fi
-
-#  source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
-  source $EXTERNAL/gcc/4.6.3/$LCG_PLATFORM_GCC/setup.sh $EXTERNAL
-
+  
+  # use gcc 4.3.2 on SLC5 and system default gcc (4.4) on SLC6
+  if grep -q "SLC release 5" /etc/redhat-release ; then
+    source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
+  fi
+  
   if [[ "$?" != "0" ]] ; then
     echo "ERROR: fail to set environment (gcc)"
     exit 1
   fi
-
+  
   HEPMCVERSION=2.06.05
   local MCGENERATORS=$EXTERNAL/MCGenerators_hepmc$HEPMCVERSION
-#  RIVET=$MCGENERATORS/rivet/1.8.2/$LCG_PLATFORM
-  RIVET=$MCGENERATORS/rivet/1.8.3b1/$LCG_PLATFORM
+  RIVET=$MCGENERATORS/rivet/1.8.2/$LCG_PLATFORM
   HEPMC=$EXTERNAL/HepMC/$HEPMCVERSION/$LCG_PLATFORM
-#  local PYTHON=$EXTERNAL/Python/2.6.5/$LCG_PLATFORM
-  local PYTHON=$EXTERNAL/Python/2.6.5p2/$LCG_PLATFORM
+  local PYTHON=$EXTERNAL/Python/2.6.5/$LCG_PLATFORM
   local FASTJET=$EXTERNAL/fastjet/2.4.4/$LCG_PLATFORM
   local GSL=$EXTERNAL/GSL/1.10/$LCG_PLATFORM
   
@@ -60,8 +56,7 @@ set_environment () {
   else
     ROOTPRE=/afs/cern.ch/sw/lcg/app/releases
   fi
-#  export ROOTSYS=$ROOTPRE/ROOT/5.32.00/$LCG_PLATFORM/root
-  export ROOTSYS=$ROOTPRE/ROOT/5.34.00/$LCG_PLATFORM/root
+  export ROOTSYS=$ROOTPRE/ROOT/5.32.00/$LCG_PLATFORM/root
   
   echo "MCGENERATORS=$MCGENERATORS"
   echo "RIVET=$RIVET"
@@ -715,7 +710,6 @@ run () {
   
   echo "Clean tmp ..."
   cd $workd
-  mv $tmp_hepmc $C_DIR/generator.hepmc
   rm -rf $tmpd
   echo ""
   
@@ -774,9 +768,10 @@ if [[ "$#" != "11" ]] ; then
   echo "  ./runRivet.sh local ppbar uemb-soft    1800 -  -     sherpa            1.2.3        default       100 456"
   echo "  ./runRivet.sh local ee    zhad         91.2 -  -     vincia            1.0.24_8.142 jeppsson2     100 123"
   echo "  ./runRivet.sh local ee    zhad         91.2 -  -     vincia            1.0.25_8.150 jeppsson3     100 123"
-  echo "  ./runRivet.sh local pp    winclusive   7000 10 0,1   alpgenpythia6     2.1.4_6.425  350-CTEQ5L  100 123"
+  echo "  ./runRivet.sh local pp    winclusive   7000 10 0,1   alpgenpythia6     2.1.4_6.425  350-CTEQ5L    100 123"
   echo "  ./runRivet.sh local pp    jets         7000 10 2,0   alpgenherwigjimmy 2.1.3e_6.520 default-CTEQ6L1   100 123"
   echo "  ./runRivet.sh local pp    uemb-hard    7000 -  -     epos              1.99.crmc.v3400 default    100 123"
+  echo "  ./runRivet.sh local pp    uemb-soft    7000 -  -     phojet            1.12a        default       100 123"
   exit 1
 fi
 

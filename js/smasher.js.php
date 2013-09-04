@@ -31,6 +31,7 @@ echo file_get_contents("smasher.js.src/Smasher/SmasherWindow.js");
 echo file_get_contents("smasher.js.src/Smasher/LHCWindow.js");
 echo file_get_contents("smasher.js.src/Smasher/Shaders/ParticleTextureShader.js");
 
+echo file_get_contents("smasher.js.src/Smasher/Objects/AcceleratorRing.js");
 echo file_get_contents("smasher.js.src/Smasher/Objects/LHCDipole.js");
 echo file_get_contents("smasher.js.src/Smasher/Objects/LHCRing.js");
 

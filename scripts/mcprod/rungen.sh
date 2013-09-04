@@ -13,15 +13,16 @@ set_environment () {
   fi
 
   # set SLC5 platform name:
-#  LCG_PLATFORM=x86_64-slc5-gcc43-opt
-  LCG_PLATFORM=x86_64-slc6-gcc46-opt
-  LCG_PLATFORM_GCC=x86_64-slc6
+  LCG_PLATFORM=x86_64-slc5-gcc43-opt
   if [[ "$(uname -m)" != "x86_64" ]] ; then
     LCG_PLATFORM=i686-slc5-gcc43-opt
   fi
 
-#  source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
-  source $EXTERNAL/gcc/4.6.3/$LCG_PLATFORM_GCC/setup.sh $EXTERNAL
+  # use gcc 4.3.2 on SLC5 and system default gcc (4.4) on SLC6
+  if grep -q "release 5" /etc/redhat-release ; then
+    source $EXTERNAL/gcc/4.3.2/$LCG_PLATFORM/setup.sh $EXTERNAL
+  fi
+  
   if [[ "$?" != "0" ]] ; then
     echo "ERROR: fail to set environment (gcc)"
     exit 1
@@ -30,7 +31,7 @@ set_environment () {
   MCGENERATORS=$EXTERNAL/MCGenerators_hepmc$hepmcversion
   HEPMC=$EXTERNAL/HepMC/$hepmcversion/$LCG_PLATFORM
   local AGILE=$MCGENERATORS/agile/1.4.0/$LCG_PLATFORM
-  local PYTHON=$EXTERNAL/Python/2.6.5p2/$LCG_PLATFORM
+  local PYTHON=$EXTERNAL/Python/2.6.5/$LCG_PLATFORM
   
   export PYTHONPATH=$AGILE/lib/python2.6/site-packages:$PYTHONPATH
   export LD_LIBRARY_PATH=$HEPMC/lib:$AGILE/lib:$PYTHON/lib:$LD_LIBRARY_PATH
@@ -54,7 +55,6 @@ set_environment () {
   echo "AGILE_GEN_PATH=$AGILE_GEN_PATH"
   echo "AGILE_PARAM_PATH=$AGILE_PARAM_PATH"
   echo "LHAPDF=$LHAPDF"
-  echo "PYTHON=$PYTHON"
   echo ""
   
   # check paths to essential parts of machinery:
@@ -988,6 +988,7 @@ if [[ "$#" != "13" ]] ; then
   echo "  ./rungen.sh local pp    winclusive   7000 10 2,5,1 alpgenpythia6      2.1.3e_6.425 z2-CTEQ6L1 100 123 2.06.05 /tmp/out.hepmc"
   echo "  ./rungen.sh local pp    jets         7000 10 2,9,1 alpgenherwigjimmy  2.1.3e_6.520  default-CTEQ6L1 100 123 2.06.05 /tmp/out.hepmc"
   echo "  ./rungen.sh local pp    uemb-hard    7000 - - epos     1.99.crmc.v3400    default     100 123 2.06.05 /tmp/out.hepmc"
+  echo "  ./rungen.sh local pp    uemb-soft    7000 - - phojet   1.12a              default     100 123 2.06.05 /tmp/out.hepmc"
   exit 1
 fi
 

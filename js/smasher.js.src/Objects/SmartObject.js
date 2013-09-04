@@ -7,8 +7,8 @@ _NS_.SmartObject = function(cfg) {
 	// Process parameters
 	var params = cfg.parameters || {}; this.varValues = { }; this.varConfig = { };
 	$.each(params, function(k,v) {
-		if (v.default == undefined) v.default = 0;
-		this.varValues[k] = v.default;
+		if (v['default'] == undefined) v['default'] = 0;
+		this.varValues[k] = v['default'];
 		this.varConfig[k] = v;
 	});
 

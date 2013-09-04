@@ -7,21 +7,159 @@
 	    <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
 	    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="js/circularHeatChart.js" charset="utf-8"></script>
 		<script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
     	<script type="text/javascript">
 
     	$(function() {
 
-    		var id = "#d3-plot",
-    			config = {
-    				'width': 200,
-    				'height': 200
-    			};
+            var HistoChart = function( id, options ) {
+                var o = options || { };
+                var config = this.config = {
+                  'width'           : o.width  || 400,
+                  'height'          : o.height || 400,
 
-    		var svg = d3.select(id).append("svg")
-				.attr("width", config.width)
-				.attr("height", config.height);
+                  'innerRadius'     : o.innerRadius || 20,
+                  'segmentHeight'   : o.segmentHeight || 10,
+                  'bins'            : o.bins || 10,
 
+                  'domain'          : o.domain || [ 0.0, 100.0 ],
+                  'colors'          : o.colors || [ '#000', '#FC0' ]
+                }
+
+                // Calculate center
+                var cX = config.width / 2,
+                    cY = config.height / 2;
+
+                // Setup users
+                var svg = this.svg = d3.select(id).append("svg")
+                  .attr("width", config.width)
+                  .attr("height", config.height);
+
+                // Private variables
+                var nSectors = 1,
+                    nSegments = config.bins,
+                    rSectorSize = 0,
+                    rCurrentSector = 0;
+
+                // Prepare the color domain
+                var color = d3.scale.linear().domain(config.domain).range(config.colors);
+
+                // Make the rotatable, main g
+                var mainG = svg.append("g")
+                    .attr("x", cX)
+                    .attr("y", cY);
+
+
+                // Recalculate sector dimentions
+                function setSectorCount( num ) {
+                    nSectors = num;
+                    rSectorSize = Math.PI * 2 / nSectors;
+                }
+
+                // Update Pie chart
+                function updateSector( pies ) {
+                    //console.log("-- ENTER --");
+                    pies.selectAll("path")
+                         .transition()
+                         .duration(1000)
+                        .attr("d", function(d, i) {
+
+                            //console.log("-- LOOP ", i, d, "---");
+
+                            // Find points of interest
+                            var rMin = config.innerRadius + config.segmentHeight*i,
+                                rMax = config.innerRadius + config.segmentHeight*(i+1),
+                                x1 = cX + Math.cos(rCurrentSector) * rMin,
+                                y1 = cY + Math.sin(rCurrentSector) * rMin,
+                                x2 = cX + Math.cos(rCurrentSector + rSectorSize / 2) * rMin,
+                                y2 = cY + Math.sin(rCurrentSector + rSectorSize / 2) * rMin;
+                                x3 = cX + Math.cos(rCurrentSector + rSectorSize) * rMin,
+                                y3 = cY + Math.sin(rCurrentSector + rSectorSize) * rMin,
+                                x4 = cX + Math.cos(rCurrentSector) * rMax,
+                                y4 = cY + Math.sin(rCurrentSector) * rMax,
+                                x5 = cX + Math.cos(rCurrentSector + rSectorSize / 2) * rMax,
+                                y5 = cY + Math.sin(rCurrentSector + rSectorSize / 2) * rMax;
+                                x6 = cX + Math.cos(rCurrentSector + rSectorSize) * rMax,
+                                y6 = cY + Math.sin(rCurrentSector + rSectorSize) * rMax;
+
+                            if (i == nSegments-1)
+                                rCurrentSector += rSectorSize;
+
+                            // Draw the path
+                            return "M" + x1 + "," + y1 + 
+                                   "A180,180" + " 0 0 1 " + x3 + "," + y3 +
+                                   "L" + x6 + "," + y6 +
+                                   "A180,180" + " 0 0 0 " + x4 + "," + y4 +
+                                   "Z";
+
+                        })
+                        .style("fill", function(d,i) {
+                            return color(d[i]);
+                        });
+
+                    return pies;
+                }
+
+                // Create pie chart components
+                function makePie( svg ) {
+                    console.log("NEW");
+                    var g = svg.append("g")
+                        .attr("class", "pie");
+                    for (var i=0; i<config.bins; i++) {
+                        g.append("path");
+                    }
+                    return g;
+                }
+
+                /* Update pie contents */
+                this.update = function( data ) {
+                    /* Do the D3 update-enter-exit sequence */
+
+                    // Reset sector position and length
+                    setSectorCount( data.length );
+                    rCurrentSector = 0;
+
+                    // (1a) Update
+                    var p = updateSector(
+                        svg.selectAll("g.pie")
+                        .data( data )
+                    );
+
+                    // (1b) Enter
+                    updateSector( makePie( p.enter() ) );
+
+                    // (1c) Exit
+                    p.exit().remove(); 
+
+                }
+
+
+            };
+
+            var chart = new HistoChart('#d3-plot', {
+            });
+
+            var data = [ ], set = [ ];
+            for (var j=0; j<10; j++) {
+                set = [ ];
+                for (var i=0; i<10; i++) {
+                    set.push(Math.random()*100);
+                }
+                data.push(set);
+            }
+
+            window.update = function() {
+                var u = Math.round(Math.random() * 20 );
+                for (var j=0; j<u; j++) {
+                    for (var i=0; i<10; i++) {
+                        data[j][i] = Math.random()*100;
+                    }
+                }
+                chart.update(data);
+
+            }
+            window.update();
 
     	});
 
@@ -30,6 +168,9 @@
     	body {
     		background: #000;
     	}
+        svg path {
+            stroke: none;
+        }
     	</style>
 
 	</head>
@@ -39,6 +180,9 @@
 			<h1>Histogram Demo</h1>
 			<div id="d3-plot">
 			</div>
+            <div class="well" style="display: inline-block;">
+                <div style="width: 380px; height: 210px; display: inline-block;">&nbsp;</div>
+            </div>
 		</div>
 	</body>
 </html>

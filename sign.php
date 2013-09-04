@@ -39,6 +39,7 @@ function sign_data( $data, $salt, $pkey ) {
     
 } 
 
+/*
 $data = array(
     'name' => 'LHC@Home',
     'secret' => 'cernvm',
@@ -49,6 +50,17 @@ $data = array(
     'diskURL' => 'http://dl.dropboxusercontent.com/u/27667029/cors-enabled.vdi.gz',
     'diskChecksum' => '5b0e2a763cef752420ee79e5ea2fa41c7b4a43788b1b45bacc58e974ebac70c3',
     'flags'=> 12
+);
+*/
+$data = array(
+    'name' => 'LHC@Home-Micro',
+    'secret' => 'cernvm',
+    'ram' => 1024,
+    'cpus' => 1,
+    'disk' => 10240,
+    'userData' => "[amiconfig]\nplugins=cernvm\n[cernvm]\ncontextualization_key=873d5414e10945109bc4cd9315aff967\n",
+    'version' => '1.11',
+    'flags'=> 1 
 );
 
 echo json_encode( sign_data( $data, $_GET['cvm_salt'], "C:/Users/icharala/Local/Shared/private.pem" ) );
