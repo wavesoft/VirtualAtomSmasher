@@ -9,45 +9,58 @@
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="js/circularHeatChart.js" charset="utf-8"></script>
 		<script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
     	<script type="text/javascript">
 
     	$(function() {
 
+            var testData = {"dat":{"plot":{"FullRange":"1","Title":"Thrust minor, $m$ (charged)","XLabel":"$m$","YLabel":"$1\/N \\, \\text{d}{N}\/\\text{d}{m}$"},"hist":{"bins":[[0,0.01,0.02,0.193875,0.00148429,0.00148429],[0.02,0.03,0.04,3.34374,0.00616417,0.00616417],[0.04,0.045,0.05,7.87552,0.0133787,0.0133787],[0.05,0.055,0.06,9.9815,0.0150616,0.0150616],[0.06,0.065,0.07,10.7716,0.0156464,0.0156464],[0.07,0.075,0.08,10.4561,0.0154155,0.0154155],[0.08,0.09,0.1,8.87063,0.01004,0.01004],[0.1,0.11,0.12,6.35608,0.00849872,0.00849872],[0.12,0.13,0.14,4.23401,0.00693641,0.00693641],[0.14,0.15,0.16,2.71869,0.00555826,0.00555826],[0.16,0.18,0.2,1.40447,0.00282488,0.00282488],[0.2,0.22,0.24,0.569057,0.00179813,0.00179813],[0.24,0.26,0.28,0.237392,0.00116139,0.00116139],[0.28,0.3,0.32,0.0978012,0.000745445,0.000745445],[0.32,0.34,0.36,0.0395625,0.000474117,0.000474117],[0.36,0.38,0.4,0.0153295,0.000295127,0.000295127],[0.4,0.425,0.45,0.00449091,0.000142875,0.000142875],[0.45,0.475,0.5,0.000804546,6.04733e-5,6.04733e-5]],"bounds":{"x":[0,0.5],"y":[0.000804546,10.7716]}},"meta":{"beam":"ee","crosssection":"41418.3","cuts":"aleph1-charged","energy":"91.2","generator":"pythia8","nevts":"4400000","observable":"Tminor","params":"-","process":"zhad","revision":"%revision%","rivet":"1.8.2","seed":"47 46 45 44 43 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 16 15 14 13 12 11 10 9 8 7 6 4 5 3 2 1","specific":"-","tune":"default","version":"8.170"},"stat":{"AidaPath":"\/ALEPH_1996_S3486095\/d04-x01-y01"}},"ref":{"plot":{"LogY":"1","Title":"Thrust minor, $m$ (charged)","XLabel":"$m$","YLabel":"$1\/N \\, \\text{d}{N}\/\\text{d}{m}$"},"hist":{"bins":[[0,0.01,0.02,0.1776,0.03028283,0.03028283],[0.02,0.03,0.04,3.237,0.1523187,0.1523187],[0.04,0.045,0.05,8.107,0.1353514,0.1353514],[0.05,0.055,0.06,10.45,0.08602325,0.08602325],[0.06,0.065,0.07,11.27,0.09433981,0.09433981],[0.07,0.075,0.08,10.89,0.08602325,0.08602325],[0.08,0.09,0.1,9.003,0.06053924,0.06053924],[0.1,0.11,0.12,6.208,0.04770744,0.04770744],[0.12,0.13,0.14,4.043,0.03661967,0.03661967],[0.14,0.15,0.16,2.536,0.0286007,0.0286007],[0.16,0.18,0.2,1.299,0.01923538,0.01923538],[0.2,0.22,0.24,0.526,0.01065317,0.01065317],[0.24,0.26,0.28,0.2208,0.007049113,0.007049113],[0.28,0.3,0.32,0.0946,0.005060632,0.005060632],[0.32,0.34,0.36,0.0371,0.003088689,0.003088689],[0.36,0.38,0.4,0.0141,0.001923538,0.001923538],[0.4,0.425,0.45,0.0039,0.0009848858,0.0009848858],[0.45,0.475,0.5,0.00064,0.0003201562,0.0003201562]],"bounds":{"x":[0,0.5],"y":[0.00064,11.27]}}},"bounds":{"x":[0,0.5],"y":[0.00064,11.27]},"chi2":0.0060458514165948};
+
+            /**
+             * ================================================================
+             *  Graphical component for the Analysis Chart
+             * ----------------------------------------------------------------
+             * This is the function plotter that renders the current analysis
+             * histogram. 
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
             var ActiveAnalysisChart = function( id, options ) {
                 var o = options || { };
                 var config = this.config = {
-                  'width'           : o.width  || 400,
-                  'height'          : o.height || 400,
+                  'width'           : o.width  || 350,
+                  'height'          : o.height || 200,
 
                   'xscale'          : o.xscale || d3.scale.linear(),
-                  'yscale'          : o.xscale || d3.scale.linear(),
+                  'yscale'          : o.xscale || d3.scale.log(),
 
-                  'marginLeft'      : o.marginLeft || 5,
-                  'marginTop'       : o.marginTop || 5,
-                  'marginRight'     : o.marginRight || 5,
-                  'chamferSize'     : o.chamferSize || 15
+                  'chamferSize'     : o.chamferSize || 15,
+                  'scrollerSize'    : o.scrollerSize || 20,
+
+                  'domainOffsetX'   : o.domainOffsetX || [ 0.05, 0.05 ],
+                  'domainOffsetY'   : o.domainOffsetY || [ 0.0005, 5]
                 }
 
                 // Extract frequently-used components
                 var x = config.xscale,
                     y = config.yscale;
 
-                // Setup users
-                var svg = this.svg = d3.select(id).append("svg")
+                // Setup SVG container
+                var svg = id;
+                if (typeof(id) == 'string') {
+                    svg = this.svg = d3.select(id).append("svg")
                       .attr("width", config.width)
                       .attr("height", config.height)
-                      .attr("class", "chart-aa");
+                }
+                svg.attr("class", "chart-aa");
 
-                // Prepare scales
-                var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .orient("bottom");
-                var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left");
+                /* ======================== */
+                /* === Background frame === */
+                /* ======================== */
 
                 // Prepare frame
-                var pFrame = svg.append("path")
+                var pFrame = this.pFrame = svg.append("path")
                     .attr("class", "back")
                     .attr("d", function(d,i) {
                         return "M" + config.chamferSize + " 0" +
@@ -59,44 +72,361 @@
                             "Z";
                     });
 
-                // Prepare background grid
-                function buildGrid( where, width, height, offsetX, offsetY ) {
-                    var pBackGrid = svg.append("g");
-                    
+                /* ============== */
+                /* === X-Axis === */
+                /* ============== */
+                
+                // Range
+                x.range([
+                    config.chamferSize + 2 , 
+                    config.width-config.chamferSize-config.scrollerSize
+                ]);
+
+                // D3 configuration for the axes
+                var xAxisHigh = d3.svg.axis()
+                    .scale(x)
+                    .tickFormat(function(d,i) { 
+                        if ((i==1) || (i==5) || (i==10)) { 
+                            return d; 
+                        } else { 
+                            return ""; 
+                        } 
+                    })
+                    .tickSize([10])
+                    .orient("top");
+
+                var xAxisLow = d3.svg.axis()
+                    .scale(x)
+                    .tickFormat(function() { return ""; })
+                    .tickSize([5])
+                    .ticks([50])
+                    .orient("top");
+
+                var xGridlines = d3.svg.axis()
+                    .scale(x)
+                    .tickFormat(function() { return ""; })
+                    .tickSize([ config.height ])
+                    .ticks([10])
+                    .orient("top");
+
+                // SVG Components for the axes
+                var gXAxisHigh = this.gXAxisHigh = svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(" +
+                    0 + "," + 
+                    (config.height - 2) + 
+                    ")")
+                  .call(xAxisHigh);
+
+                var gXAxisLow = this.gXAxisLow = svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(" +
+                    0 + "," + 
+                    (config.height - 2) + 
+                    ")")
+                  .call(xAxisLow);
+
+                var gXGridlines = this.gXGridlines = svg.append("g")
+                  .attr("class", "x axis gridline")
+                  .attr("transform", "translate(" +
+                    0 + "," + 
+                    (config.height - 2) + 
+                    ")")
+                  .call(xGridlines);
+
+
+                /* ============== */
+                /* === Y-Axis === */
+                /* ============== */
+                
+                // Range
+                y.range([
+                    config.chamferSize, 
+                    config.height-config.chamferSize
+                ]);
+
+                // D3 configuration for the axes
+                var yAxisHigh = d3.svg.axis()
+                    .scale(y)
+                    .tickSize([5])
+                    .orient("right");
+
+                /*
+                var yAxisLow = d3.svg.axis()
+                    .scale(y)
+                    .tickFormat(function() { return ""; })
+                    .tickSize([10])
+                    .tickSize([5])
+                    .ticks([20])
+                    .orient("right");
+                */
+
+                var yGridlines = d3.svg.axis()
+                    .scale(x)
+                    .tickFormat(function() { return ""; })
+                    .tickSize([ config.width-config.chamferSize-config.scrollerSize ])
+                    .ticks([10])
+                    .orient("right");
+
+                // SVG Components for the axes
+                /*
+                var gYAxisLow = this.gYAxisLow = svg.append("g")
+                  .attr("class", "y axis")
+                  .attr("transform", "translate(2,0)")
+                  .call(yAxisLow);
+                */
+
+                var gYAxisHigh = this.gYAxisHigh = svg.append("g")
+                  .attr("class", "y axis")
+                  .attr("transform", "translate(2,0)")
+                  .call(yAxisHigh);
+
+                var gYGridlines = this.gYGridlines = svg.append("g")
+                  .attr("class", "y axis gridline")
+                  .attr("transform", "translate(2,0)")
+                  .call(yGridlines);
+
+                /* ============== */
+                /* ==== Plot ==== */
+                /* ============== */
+
+                // Initial bin data
+                var initialData = [ ];
+                for (var i=0; i<21; i++) {
+                    initialData.push([0,0,0,0,0,0]);
                 }
 
+                // Line mapper for the histograms
+                var lineMapper = this.line = d3.svg.line()
+                    .x(function(d) { return x(d[1]); })
+                    .y(function(d) { return y(d[3]); })
+                    .defined(function(d) { return d[3] != 0; });
+
+                // Data line
+                var gLineDat = this.gLineDat = svg.append("path")
+                    .data( initialData )
+                    .attr("class", "line-dat");
+
+                // Reference line
+                var gLineRef = this.gLineRef = svg.append("path")
+                    .data( initialData )
+                    .attr("class", "line-ref");
+
+                // Error bars
+                var gErrorBars = this.gErrorBars = svg.append("g")
+                    .data( initialData )
+                    .attr("")
+
+                function updateErrorBar( g ) {
+                    var ebarRadius = 2, 
+                        ebarOffsets = ebarRadius * 0.7071067812;
+
+                    // Make path 
+                    g.select("path")
+                        .attr("d", function(d,i) {
+                            var a = y(d[3]), b = y(d[3] - d[4]),c = y(d[3] + d[5]),
+                                topError = Number(-ebarRadius-(b-a)).toFixed(2), bottomError = Number(ebarRadius+(a-c)).toFixed(2),sOffset = ebarOffsets.toFixed(2);
+
+                            return "M-" + ebarRadius + " " + topError + "L" + ebarRadius + " " + topError +
+                                   "M-" + ebarRadius + " " + bottomError + "L" + ebarRadius + " " + bottomError +
+                                   "M0 "+ topError + "L0 " + bottomError;
+
+                            return "M-" + sOffset + " -" + sOffset +
+                                   "A" + ebarRadius + " " + ebarRadius + " 0 0 1 " + sOffset + " -" + sOffset +
+                                   "M0 " + (-ebarRadius) + "L0 " + topError +
+                                   "M" + sOffset + " -" + sOffset +
+                                   "A" + ebarRadius + " " + ebarRadius + " 0 0 1 " + sOffset + " " + sOffset +
+                                   "M0 " + ebarRadius + "L0 " + bottomError;
+                        });
+
+                    // Move
+                    g.transition().attr("transform", function(d,i){
+                        return "translate("+x(d[1])+","+y(d[3])+")"
+                    });
+
+                    return g;
+                }
+
+                function createErrorBar( where ) {
+                    var g = where.append("g").attr("class", "error-bar");
+                    g.append("path");
+                    return g;
+                }
 
                 // Update
                 this.update = function( data ) {
 
-                }
+                    // Update domain bounds from data
+                    x.domain([ data.bounds.x[0] - config.domainOffsetX[0] , data.bounds.x[1] + config.domainOffsetX[1] ] );
+                    y.domain([ data.bounds.y[1] + config.domainOffsetY[1], data.bounds.y[0] - config.domainOffsetY[0] ]);  
 
+                    // Update axis configuration
+                    xAxisLow.scale(x);
+                    xAxisHigh.scale(x);
+                    xGridlines.scale(x);
+                    //yAxisLow.scale(y);
+                    yAxisHigh.scale(y);
+                    yGridlines.scale(y);
+
+                    // Update axes
+                    gXAxisHigh.call(xAxisHigh);
+                    gXAxisLow.call(xAxisLow);
+                    gXGridlines.call(xGridlines);
+                    gYAxisHigh.call(yAxisHigh);
+                    //gYAxisLow.call(yAxisLow);
+                    gYGridlines.call(yGridlines);
+
+                    // Update data
+                    gLineDat.data( [data.dat.hist.bins] );
+                    gLineDat.transition().attr("d", lineMapper);
+                    gLineRef.data( [data.ref.hist.bins] );
+                    gLineRef.transition().attr("d", lineMapper);
+
+                    // (1a) Update
+                    var p = updateErrorBar(
+                        svg.selectAll("g.error-bar")
+                        .data( data.dat.hist.bins )
+                    );
+                    // (1b) Enter
+                    updateErrorBar( createErrorBar( p.enter() ) )
+                    // (1c) Exit
+                    p.exit().remove();
+
+                }
             };
 
-            var chart = new ActiveAnalysisChart('#d3-plot', {
-            });
+            /**
+             * ================================================================
+             *  The corner window which contains the current analysis info
+             * ----------------------------------------------------------------
+             * This class renders the widow with the function plotter, the active
+             * statistics and some meta-info.
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
+            var ActiveAnalysisWindow = function(id, options ) {
+                var o = options || { };
+                var config = this.config = {
+                  'width'           : o.width  || 400,
+                  'height'          : o.height || 300,
 
-            chart.update({
-                'bounds': {
-
+                  'title'           : o.title  || "Current analysis",
+                  'titleWidth'      : o.titleWidth || 183,
+                  'chamferSize'     : o.chamferSize || 15
                 }
-            })
+
+                // Setup SVG container
+                var svg = id;
+                if (typeof(id) == 'string') {
+                    svg = this.svg = d3.select(id).append("svg")
+                      .attr("width", config.width)
+                      .attr("height", config.height)
+                }
+                svg.attr("class", "win-aa");
+
+                // Generate path line coordinates
+                var pathCoords = [
+                    [ 15, 0 ],
+                    [ 15 + config.titleWidth, 0 ],
+                    [ 15 + config.titleWidth + 15, 15 ], // +15 chamfer
+                    [ 15 + config.titleWidth + 25, 15 ], // +10 right
+                    [ 15 + config.titleWidth + 43, 33 ], // +18 chamfer
+                    [ config.width - 8, 33 ],            // Right edge, top of chamfer
+                    [ config.width, 41 ],                // +8 chamfer
+                    [ config.width, config.height ],     // Bottom right
+                    [ 15, config.height ],               // Bottom left, bottom of chamfer
+                    [ 0 , config.height - 15],           // -15 chamfer
+                    [ 0 , config.height - 43 ],          // -18 up
+                    [ -15, config.height  - 58 ],        // -15 chamfer
+                    [ -15, config.height  - 65 ],        // -7 up
+                    [ 0, config.height  - 80 ],          // +15 chamfer
+                    [ 0, 28 ],                           // Top-left chamfer
+                    [ 15, 13 ]                           // +15 chamfer
+                ];
+
+                // Map and render path
+                var backMapper = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; });
+                svg.append("path")
+                    .attr("d", function(){ return backMapper(pathCoords)+"Z"; });
+
+                // Append chart
+                var chartElement = svg.append("g")
+                    .attr("transform", "translate(15,55)");
+                var chart = new ActiveAnalysisChart(chartElement, {
+                    width: config.width - 30,
+                    height: config.height - 55 - 50
+                });
+
+                this.update = function(data) {
+                    chart.update(data);
+                }
+
+            }
+
+            //var chart = new ActiveAnalysisChart('#d3-plot');
+            var frame = new ActiveAnalysisWindow('#d3-plot');
+            frame.update(testData)
 
     	});
 
     	</script>
     	<style type="text/css">
     	body {
-    		background: #000;
+    		background: #999;
     	}
-        svg path {
-            stroke: none;
+
+        .chart-aa {
+            font-family: 'Aldrich';
         }
 
-        svg.chart-aa path.back{
+        .chart-aa path.back{
             fill: #000;
             stroke: #4d4d4d;
             stroke-width: 1pt;
+        }
+
+        .chart-aa .axis line {
+            fill: none;
+            stroke: #4d4d4d;
+            shape-rendering: crispEdges;
+        }
+
+        .chart-aa .axis.gridline line {
+            stroke: rgba(255,255,255,0.1);
+        }
+
+        .chart-aa .axis path {
+            fill: none;
+            stroke:none ;
+        }
+
+        .chart-aa .axis > .tick > text {
+            fill: rgba(255,255,255,0.4);
+            stroke: none;
+            font-size: 7pt;
+            shape-rendering: crispEdges;
+        }
+
+        .chart-aa .line-dat {
+            stroke-width: 1pt;
+            fill: none;
+            stroke: #fbb03b;
+        }
+
+        .chart-aa .line-ref {
+            stroke-width: 1pt;
+            fill: none;
+            stroke: #fc0;
+            stroke-dasharray: 4,4;
+        }
+
+        .chart-aa .error-bar {
+            fill: none;
+            stroke: #ff0;
+            shape-rendering: crispEdges;
         }
 
     	</style>
@@ -108,6 +438,7 @@
 			<h1>Histogram Demo</h1>
 			<div id="d3-plot">
 			</div>
+
 		</div>
 	</body>
 </html>

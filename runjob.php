@@ -1,7 +1,7 @@
 <?php
 
 // We will be working on the MC production scripts folder
-chdir("/var/lib/t4t/scripts/mcprod");
+//chdir("/var/lib/t4t/scripts/mcprod");
 
 function runRivet($beam, $process, $energy, $tune="default", $events=100, $seed=123, $generator="pythia8", $version="8.175") {
 
@@ -126,6 +126,7 @@ function parse_histofile( $file ) {
 	return $ans;
 }
 
+/*
 // Fetch parameter
 $alphaS = 0.1;
 if (isset($_GET['v'])) {
@@ -150,6 +151,10 @@ runRivet("ee", "zhad", 91.2, "default", $numEvents);
 // Load rivet data
 $data_ref = parse_histofile( "dat/ee/zhad/tau/aleph1-charged/91.2/ALEPH_1996_S3486095.dat" );
 $data_rivet = parse_histofile( "dat/ee/zhad/tau/aleph1-charged/91.2/pythia8/8.175/default.dat" );
+*/
+
+$data_ref = parse_histofile( "examples/dat/ALEPH_1996_S3486095.dat" );
+$data_rivet = parse_histofile( "examples/dat/pythia-8-default.dat" );
 
 // Calculate chi square
 $chi2 = 0; $n = 0; $uncertainty = 0;
