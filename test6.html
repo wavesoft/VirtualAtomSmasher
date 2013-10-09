@@ -6,7 +6,7 @@
     	<link rel="stylesheet" type="text/css" href="theme/bootstrap/bootstrap-responsive.min.css" />
 	    <link rel="stylesheet" type="text/css" href="theme/bootstrap/darkstrap.min.css" />
 	    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<script src="js/d3.v3.min.js" charset="utf-8"></script>
         <script src="js/circularHeatChart.js" charset="utf-8"></script>
 		<script type="text/javascript" src="theme/bootstrap/bootstrap.min.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
@@ -15,6 +15,65 @@
     	$(function() {
 
             var testData = {"dat":{"plot":{"FullRange":"1","Title":"Thrust minor, $m$ (charged)","XLabel":"$m$","YLabel":"$1\/N \\, \\text{d}{N}\/\\text{d}{m}$"},"hist":{"bins":[[0,0.01,0.02,0.193875,0.00148429,0.00148429],[0.02,0.03,0.04,3.34374,0.00616417,0.00616417],[0.04,0.045,0.05,7.87552,0.0133787,0.0133787],[0.05,0.055,0.06,9.9815,0.0150616,0.0150616],[0.06,0.065,0.07,10.7716,0.0156464,0.0156464],[0.07,0.075,0.08,10.4561,0.0154155,0.0154155],[0.08,0.09,0.1,8.87063,0.01004,0.01004],[0.1,0.11,0.12,6.35608,0.00849872,0.00849872],[0.12,0.13,0.14,4.23401,0.00693641,0.00693641],[0.14,0.15,0.16,2.71869,0.00555826,0.00555826],[0.16,0.18,0.2,1.40447,0.00282488,0.00282488],[0.2,0.22,0.24,0.569057,0.00179813,0.00179813],[0.24,0.26,0.28,0.237392,0.00116139,0.00116139],[0.28,0.3,0.32,0.0978012,0.000745445,0.000745445],[0.32,0.34,0.36,0.0395625,0.000474117,0.000474117],[0.36,0.38,0.4,0.0153295,0.000295127,0.000295127],[0.4,0.425,0.45,0.00449091,0.000142875,0.000142875],[0.45,0.475,0.5,0.000804546,6.04733e-5,6.04733e-5]],"bounds":{"x":[0,0.5],"y":[0.000804546,10.7716]}},"meta":{"beam":"ee","crosssection":"41418.3","cuts":"aleph1-charged","energy":"91.2","generator":"pythia8","nevts":"4400000","observable":"Tminor","params":"-","process":"zhad","revision":"%revision%","rivet":"1.8.2","seed":"47 46 45 44 43 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 16 15 14 13 12 11 10 9 8 7 6 4 5 3 2 1","specific":"-","tune":"default","version":"8.170"},"stat":{"AidaPath":"\/ALEPH_1996_S3486095\/d04-x01-y01"}},"ref":{"plot":{"LogY":"1","Title":"Thrust minor, $m$ (charged)","XLabel":"$m$","YLabel":"$1\/N \\, \\text{d}{N}\/\\text{d}{m}$"},"hist":{"bins":[[0,0.01,0.02,0.1776,0.03028283,0.03028283],[0.02,0.03,0.04,3.237,0.1523187,0.1523187],[0.04,0.045,0.05,8.107,0.1353514,0.1353514],[0.05,0.055,0.06,10.45,0.08602325,0.08602325],[0.06,0.065,0.07,11.27,0.09433981,0.09433981],[0.07,0.075,0.08,10.89,0.08602325,0.08602325],[0.08,0.09,0.1,9.003,0.06053924,0.06053924],[0.1,0.11,0.12,6.208,0.04770744,0.04770744],[0.12,0.13,0.14,4.043,0.03661967,0.03661967],[0.14,0.15,0.16,2.536,0.0286007,0.0286007],[0.16,0.18,0.2,1.299,0.01923538,0.01923538],[0.2,0.22,0.24,0.526,0.01065317,0.01065317],[0.24,0.26,0.28,0.2208,0.007049113,0.007049113],[0.28,0.3,0.32,0.0946,0.005060632,0.005060632],[0.32,0.34,0.36,0.0371,0.003088689,0.003088689],[0.36,0.38,0.4,0.0141,0.001923538,0.001923538],[0.4,0.425,0.45,0.0039,0.0009848858,0.0009848858],[0.45,0.475,0.5,0.00064,0.0003201562,0.0003201562]],"bounds":{"x":[0,0.5],"y":[0.00064,11.27]}}},"bounds":{"x":[0,0.5],"y":[0.00064,11.27]},"chi2":0.0060458514165948};
+
+            /**
+             * ================================================================
+             *  A very simple LaTeX to HTML symbol conversion function
+             * ----------------------------------------------------------------
+             * This is used by the histogram plotting functions to populate the
+             * labels on the axes.
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
+            var SimpleLatex = {
+                toHTML: function(str) {
+                    var os = str
+                        .replace(/~/g," ")
+                        .replace(/\$/g, "")
+                        
+                        .replace(/\\equiv/g, "&equiv;")
+                        .replace(/\\approx/g, "&asymp;")
+                        .replace(/\\sim/g, "&sim;")
+                        .replace(/\\neq/g, "&ne;")
+                        .replace(/\\rangle/g, "&gt;")
+                        .replace(/\\langle/g, "&lt;")
+                        .replace(/\\rightarrow/g, "&rarr;")
+                        .replace(/\\to/g, "&rarr;")
+                        .replace(/\\perp/g, "&perp;")
+                        .replace(/\\left/g, "")
+                        .replace(/\\right/g, "")
+                        .replace(/\\mathrm/g, "")
+                        .replace(/\\left/g, "")
+                        
+                        /*
+                        .replace(/\^(.)\s/g, "<sup>$1</sup> ")
+                        .replace(/\^\{([^\}]+)\}\s/g, "<sup>$1</sup> ")
+                        .replace(/bar \\([^ ]+)/g, "<span style=\"border-top: solid 1px\">$1</span>")
+                        .replace(/\\text\{([^}]+)\}\{([^}]+)\}/g, "<em>$1</em>$2")
+                        .replace(/\\text\{([^}]+)\}/g, "$1")
+                        */
+                        .replace(/\^(.)\s/g, "^$1")
+                        .replace(/\^\{([^\}]+)\}\s/g, "^($1)")
+                        .replace(/bar \\([^ ]+)/g, "$1-bar")
+                        .replace(/\\text\{([^}]+)\}\{([^}]+)\}/g, "$1$2")
+                        .replace(/\\text\{([^}]+)\}/g, "$1")
+                        
+                        .replace(/\\!/g, "")
+                        .replace(/\\cos/g, "cos")
+                        .replace(/\\ln/g, "ln")
+                        .replace(/\\log/g, "log")
+                        .replace(/\\milli/g, "m")
+                        .replace(/\\barn/g, "b")
+                        .replace(/\\micro/g, "&mu;")
+                        
+                        .replace(/\\(.)([\s\\])/g, "$1$2")
+                    ;
+                        
+                    
+                    return os;
+                }
+            }
 
             /**
              * ================================================================
@@ -53,7 +112,7 @@
                       .attr("width", config.width)
                       .attr("height", config.height)
                 }
-                svg.attr("class", "chart-aa");
+                svg.attr("class", "c-chart-aa");
 
                 /* ======================== */
                 /* === Background frame === */
@@ -162,7 +221,7 @@
                 */
 
                 var yGridlines = d3.svg.axis()
-                    .scale(x)
+                    .scale(y)
                     .tickFormat(function() { return ""; })
                     .tickSize([ config.width-config.chamferSize-config.scrollerSize ])
                     .ticks([10])
@@ -253,8 +312,13 @@
                     return g;
                 }
 
+
+                // Extract the SVG DOM Element, and expose the global funcitions
+                // we are interested in.
+                var resSvg = svg[0][0];
+
                 // Update
-                this.update = function( data ) {
+                resSvg.update = function( data ) {
 
                     // Update domain bounds from data
                     x.domain([ data.bounds.x[0] - config.domainOffsetX[0] , data.bounds.x[1] + config.domainOffsetX[1] ] );
@@ -277,10 +341,10 @@
                     gYGridlines.call(yGridlines);
 
                     // Update data
-                    gLineDat.data( [data.dat.hist.bins] );
-                    gLineDat.transition().attr("d", lineMapper);
-                    gLineRef.data( [data.ref.hist.bins] );
-                    gLineRef.transition().attr("d", lineMapper);
+                    gLineDat.data( [data.dat.hist.bins] )
+                     .transition().attr("d", lineMapper);
+                    gLineRef.data( [data.ref.hist.bins] )
+                     .transition().attr("d", lineMapper);
 
                     // (1a) Update
                     var p = updateErrorBar(
@@ -293,7 +357,364 @@
                     p.exit().remove();
 
                 }
+                return resSvg;
+                
             };
+
+            /**
+             * ================================================================
+             *  Graphical component for the archived Analysis Chart
+             * ----------------------------------------------------------------
+             * This is the function plotter that renders the archived analysis
+             * histogram. 
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
+            var ArchivedAnalysisChart = function( id, options ) {
+               var o = options || { };
+               var config = this.config = {
+                 'width'           : o.width  || 180,
+                 'height'          : o.height || 200,
+
+                 'xscale'          : o.xscale || d3.scale.linear(),
+                 'yscale'          : o.xscale || d3.scale.log(),
+
+                 'chamferSize'     : o.chamferSize || 15,
+                 'scrollerSize'    : o.scrollerSize || 20,
+                 
+                 'leftMargin'      : o.leftMargin || 6,
+                 'topMargin'       : o.leftMargin || 15,
+                 'titleOffsetX'    : o.titleOffsetX || 100,
+                 'titleOffsetY'    : o.titleOffsetY || 85,
+                 'titleHeight'     : o.titleHeight || 15,
+                 'xAxisTextHeight' : o.xAxisTextHeight || 15,
+                 'padding'         : o.padding || 4,
+
+                 'domainOffsetX'   : o.domainOffsetX || [ 0.05, 0.05 ],
+                 'domainOffsetY'   : o.domainOffsetY || [ 0.0005, 5]
+               }
+
+               // Extract frequently-used components
+               var x = config.xscale,
+                   y = config.yscale;
+
+               // Setup SVG container
+               var svg = id;
+               if (typeof(id) == 'string') {
+                   svg = this.svg = d3.select(id).append("svg")
+                     .attr("width", config.width)
+                     .attr("height", config.height)
+               }
+               svg.attr("class", "c-chart-ar");
+
+               /* ======================== */
+               /* === Background frame === */
+               /* ======================== */
+
+               // Prepare edge frame
+               var eFrame = this.pFrame = svg.append("path")
+                   .attr("class", "edge")
+                   .attr("d", function(d,i) {
+                       return "M0 0" +
+                           "L" + (config.leftMargin+config.titleOffsetX) + " 0" +
+                           "L" + (config.leftMargin+config.titleOffsetX+config.titleHeight) + " " + config.titleHeight +
+                           "L" + config.leftMargin + " " + config.titleHeight +
+                           "L" + config.leftMargin + " " + (config.titleHeight+config.titleOffsetY+config.leftMargin) +
+                           "L" + 0 + " " + (config.titleHeight+config.titleOffsetY) + 
+                           "Z";
+                   });
+
+               // Prepare the background pen
+               var pFrame = this.pFrame = svg.append("path")
+                   .attr("class", "back")
+                   .attr("d", function(d,i) {
+                       return "M" + config.leftMargin + " " + config.titleHeight +
+                              "L" + (config.width-1) + " " + config.titleHeight +
+                              "L" + (config.width-1) + " " + (config.height-config.chamferSize) +
+                              "L" + (config.width-config.chamferSize) + " " + (config.height-1) +
+                              "L" + config.leftMargin + " " + (config.height-1) +
+                              "Z";
+                   });
+
+
+               /* ============== */
+               /* === X-Axis === */
+               /* ============== */
+               
+               // Range
+               x.range([
+                   config.leftMargin + config.padding , 
+                   config.width - config.padding - 1
+               ]);
+
+               // D3 configuration for the axes
+               var xGridlines = d3.svg.axis()
+                   .scale(x)
+                   .tickFormat(function() { return ""; })
+                   .tickSize([ config.height - 50 ])
+                   .ticks([10])
+                   .orient("top");
+
+               // SVG Components for the axes
+               var gXGridlines = this.gXGridlines = svg.append("g")
+                 .attr("class", "x axis gridline")
+                 .attr("transform", "translate(" +
+                   0 + "," + (config.height-config.padding-config.xAxisTextHeight) + ")"
+                  )
+                 .call(xGridlines);
+
+
+               /* ============== */
+               /* === Y-Axis === */
+               /* ============== */
+               
+               // Range
+               y.range([
+                   config.titleHeight+config.padding, 
+                   config.height-config.padding-config.xAxisTextHeight
+               ]);
+
+               // D3 configuration for the axes
+               var yGridlines = d3.svg.axis()
+                   .scale(y)
+                   .tickFormat(function(v) { return ""; })
+                   .tickSize([ config.width-config.leftMargin-(2*config.padding) ])
+                   .ticks([10])
+                   .orient("right");
+
+               // SVG Components for the axes
+               var gYGridlines = this.gYGridlines = svg.append("g")
+                 .attr("class", "y axis gridline")
+                 .attr("transform", "translate(" + (config.leftMargin+config.padding) + ",0)")
+                 .call(yGridlines);
+
+               /* ============== */
+               /* ==== Plot ==== */
+               /* ============== */
+
+               // Initial bin data
+               var initialData = [ ];
+               for (var i=0; i<21; i++) {
+                   initialData.push([0,0,0,0,0,0]);
+               }
+
+               // Line mapper for the histograms
+               var lineMapper = this.line = d3.svg.line()
+                   .x(function(d) { return x(d[1]); })
+                   .y(function(d) { return y(d[3]); })
+                   .defined(function(d) { return d[3] != 0; });
+
+               // Data line
+               var gLineDat = this.gLineDat = svg.append("path")
+                   .data( initialData )
+                   .attr("class", "line-dat");
+
+               /* =========================== */
+               /* ==== Frames & Overlays ==== */
+               /* =========================== */
+
+               // Prepare the plot frame
+               var bFrame = this.pFrame = svg.append("path")
+                   .attr("class", "plotback")
+                   .attr("d", function(d,i) {
+                       return "M" + (config.leftMargin+config.padding) + " " + (config.titleHeight+config.padding) +
+                              "L" + (config.width-config.padding-1) + " " + (config.titleHeight+config.padding) +
+                              "L" + (config.width-config.padding-1) + " " + (config.height-config.padding-config.xAxisTextHeight) +
+                              "L" + (config.leftMargin+config.padding) + " " + (config.height-config.padding-config.xAxisTextHeight) +
+                              "Z";
+                   });
+                   
+               /* ================ */
+               /* ==== Labels ==== */
+               /* ================ */
+               
+               var lblTitle = svg.append("text")
+                    .attr("class", "title")
+                    .attr("x", config.leftMargin+1)
+                    .attr("y", 12)
+                    .text("Label")
+
+               var lblXAxis = svg.append("text")
+                    .attr("class", "axis-label")
+                    .attr("x", (config.width/2) - (config.leftMargin/2) )
+                    .attr("y", config.height-6)
+                    .style("text-anchor", "middle")
+                    .text("Label"),
+                   lblXMin = svg.append("text")
+                    .attr("class", "axis-value")
+                    .attr("x", config.leftMargin + 5 )
+                    .attr("y", config.height-6)
+                    .text("Min"),
+                   lblXMax = svg.append("text")
+                    .attr("class", "axis-value")
+                    .attr("x", config.width - config.padding - config.chamferSize )
+                    .attr("y", config.height-6)
+                    .style("text-anchor", "end")
+                    .text("Max");
+                    
+               var lblYAxis = svg.append("text")
+                    .attr("class", "axis-label")
+                    .style("text-anchor", "end")
+                    .attr("x", config.width - config.leftMargin )
+                    .attr("y", config.titleHeight+config.padding+12)
+                    .text("Label"),
+                   lblYMin = svg.append("text")
+                    .attr("class", "axis-value")
+                    .style("text-anchor", "end")
+                    .attr("x", config.width - config.leftMargin )
+                    .attr("y", config.titleHeight+config.padding+25)
+                    .text("Min"),
+                   lblYMax = svg.append("text")
+                    .attr("class", "axis-value")
+                    .style("text-anchor", "end")
+                    .attr("x", config.width - config.leftMargin )
+                    .attr("y", config.height - config.xAxisTextHeight - 7)
+                    .text("Max");
+                    
+                // Extract the SVG DOM Element, and expose the global funcitions
+                // we are interested in.
+                var resSvg = svg[0][0];
+
+               // Update
+               resSvg.update = function( data ) {
+
+                   // Update domain bounds from data
+                   x.domain([ data.bounds.x[0] - config.domainOffsetX[0] , data.bounds.x[1] + config.domainOffsetX[1] ] );
+                   y.domain([ data.bounds.y[1] + config.domainOffsetY[1], data.bounds.y[0] - config.domainOffsetY[0] ]);  
+                   // Update labels
+                   lblXMin.text( data.bounds.x[0].toFixed(2) );
+                   lblXMax.text( data.bounds.x[1].toFixed(2) );
+                   lblYMin.text( data.bounds.y[1].toFixed(2) );
+                   lblYMax.text( data.bounds.y[0].toFixed(2) );
+                   
+                   // Update axis configuration
+                   xGridlines.scale(x);
+                   yGridlines.scale(y);
+
+                   // Update axes
+                   gXGridlines.call(xGridlines);
+                   gYGridlines.call(yGridlines);
+
+                   // Update data
+                   gLineDat.data( [data.dat.hist.bins] )
+                    .transition().attr("d", lineMapper);
+                
+                   // Update textx
+                   console.log(data.dat);
+                   lblTitle.text( SimpleLatex.toHTML(data.dat.plot.Title) );
+                   lblXAxis.text( SimpleLatex.toHTML(data.dat.plot.XLabel) );
+                   lblYAxis.text( SimpleLatex.toHTML(data.dat.plot.YLabel) );
+
+               }
+               return resSvg;
+                    
+            }
+
+            /**
+             * ================================================================
+             *  Graphical horizontal bar
+             * ----------------------------------------------------------------
+             * This is a horizontal bar with a label and text inside the value
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
+            var HorizontalBar = function( id, options ) {
+               var o = options || { };
+               var config = this.config = {
+                 'width'           : o.width  || 100,
+                 'height'          : o.height || 50,
+                 
+                 'domain'          : o.domain || [0,100],
+                 'barHeight'       : o.barHeight || 20,
+                 'title'           : o.title  || "Untitled label"
+               };
+
+               // Setup SVG container
+               var svg = id;
+               if (typeof(id) == 'string') {
+                   svg = this.svg = d3.select(id).append("svg")
+                     .attr("width", config.width)
+                     .attr("height", config.height)
+               }
+               svg.attr("class", "c-bar");
+               
+               // Create back label
+               var barW = config.width-5;
+               
+               // Create the bars
+               var barOut = svg.append("rect")
+                  .attr("width", config.width)
+                  .attr("height", config.barHeight)
+                  .attr("class", "bar-out");
+                  
+               var barIn = svg.append("rect")
+                  .attr("width", 32)
+                  .attr("height", config.barHeight-5)
+                  .attr("x", config.width - 34)
+                  .attr("y", 3)
+                  .attr("class", "bar-in");
+
+               var txtValDown = svg.append("text")
+                  .attr("class", "x-value")
+                  .style("text-anchor", "end")
+                  .attr("x", config.width-4)
+                  .attr("y", 14)
+                  .text("0%");
+
+               var txtLabel = svg.append("text")
+                  .attr("class", "x-label")
+                  .attr("x", 0)
+                  .attr("y", config.height - 16)
+                  .text(config.title);
+
+
+               // Prepare scales
+               var minWidth = 32;
+               var scale = d3.scale.linear()
+                  .range([0, barW])
+                  .domain(config.domain);
+               var percent = d3.scale.linear()
+                  .range([0, 100])
+                  .domain(config.domain);
+               var color = d3.scale.linear()
+                   .domain([config.domain[0], scale.invert(minWidth), config.domain[1]])
+                   .range(["#644616", "#FBB038", "#FBB038"]);
+               
+               // Set default value
+               barIn.data([ 0 ]);
+               txtValDown.data([ 0 ])
+               
+               // Extract the SVG DOM Element, and expose the global funcitions
+               // we are interested in.
+               var resSvg = svg[0][0];
+               resSvg.update = function( value ) {
+                  barIn
+                     .data([ value ])
+                     .transition()
+                     .attr("width", function(d,i) {
+                        var v = Math.max( scale(d), minWidth );
+                        return v;
+                     })
+                     .attr("x", function(d,i) {
+                        var v = Math.max( scale(d), minWidth );
+                        return 3 + barW - v;
+                     })
+                     .style("fill", function(d,i){
+                        return color(d);
+                     });
+                  txtValDown
+                     .data([ value ])
+                     .transition()
+                     .text(function(d) {
+                        return Math.round(percent(d)) + "%";
+                     })
+               }
+               resSvg.update(0);
+               return resSvg;
+               
+            }
 
             /**
              * ================================================================
@@ -350,83 +771,502 @@
                     .x(function(d) { return d[0]; })
                     .y(function(d) { return d[1]; });
                 svg.append("path")
+                    .attr("class", "background")
                     .attr("d", function(){ return backMapper(pathCoords)+"Z"; });
 
                 // Append chart
                 var chartElement = svg.append("g")
                     .attr("transform", "translate(15,55)");
-                var chart = new ActiveAnalysisChart(chartElement, {
+                var chart = ActiveAnalysisChart(chartElement, {
                     width: config.width - 30,
                     height: config.height - 55 - 50
                 });
+                
+                // Append texts
+                var txtTitle = svg.append("text")
+                  .attr("class", "title")
+                  .attr("x", 22)
+                  .attr("y", 21)
+                  .text(config.title);
+               var txtSubtitle = svg.append("text")
+                 .attr("class", "subtitle")
+                 .attr("x", 23)
+                 .attr("y", 37)
+                 .text("Heavy ion particles");
 
-                this.update = function(data) {
+               // Line1 config
+               var txtLine1 = svg.append("text")
+                 .attr("class", "details")
+                 .style("text-anchor", "end")
+                 .attr("x", config.width - 25)
+                 .attr("y", config.height - 35)
+                 .text("uemb-soft, early tune");
+                 svg.append("text")
+                 .attr("class", "details-ico")
+                 .style("text-anchor", "end")
+                 .attr("x", config.width - 15)
+                 .attr("y", config.height - 35)
+                 .text("-");
+                    
+              var txtLine2 = svg.append("text")
+                .attr("class", "details")
+                .style("text-anchor", "end")
+                .attr("x", config.width - 25)
+                .attr("y", config.height - 23)
+                .text("Pythia8 v1.4.10");
+                svg.append("text")
+                .attr("class", "details-ico")
+                .style("text-anchor", "end")
+                .attr("x", config.width - 15)
+                .attr("y", config.height - 23)
+                .text("-");
+
+             var txtLine3 = svg.append("text")
+               .attr("class", "details")
+               .style("text-anchor", "end")
+               .attr("x", config.width - 25)
+               .attr("y", config.height - 11)
+               .text("(no cuts)");
+               svg.append("text")
+               .attr("class", "details-ico")
+               .style("text-anchor", "end")
+               .attr("x", config.width - 15)
+               .attr("y", config.height - 11)
+               .text("-");
+                 
+                // Append Goodness-of-fit bar
+                var bar1Element = svg.append("g").attr("transform", "translate(30,"+ (config.height-45) +")");
+                var barGof = HorizontalBar( bar1Element, {
+                     title: 'Goodness of fit'
+                  });
+
+               // Append statistics quality bar
+               var bar2Element = svg.append("g").attr("transform", "translate(140,"+ (config.height-45) +")");
+               var barStats = HorizontalBar( bar2Element, {
+                    title: 'Stats quality'
+                 });
+
+                // Extract the SVG DOM Element, and expose the global funcitions
+                // we are interested in.
+                var resSvg = svg[0][0];
+                resSvg.update = function(data) {
                     chart.update(data);
+                    barGof.update(10);
+                    setTimeout(function() {
+                       barGof.update(90);
+                       setTimeout(function() {
+                          barGof.update(50);
+                          setTimeout(function() {
+                             barGof.update(100);
+                             setTimeout(function() {
+                                barGof.update(5);
+                                setTimeout(function() {
+                                   barGof.update(20);
+                                   setTimeout(function() {
+                                      barGof.update(25);
+                                   }, 1000);
+                                }, 1000);
+                             }, 1000);
+                          }, 1000);
+                       }, 1000);
+                    }, 1000);
                 }
+                return resSvg;
 
             }
+            
+            /**
+             * ================================================================
+             *  The center archive analysis window
+             * ----------------------------------------------------------------
+             * This class renders the widow that hosts ArchiveAnalysisCharts
+             *
+             * Author: Ioannis Charalampidis <ioannis.charalampidis[at]cern.ch>
+             * ================================================================
+             */
+            var ArchiveAnalysisWindow = function(id, options ) {
+                var o = options || { };
+                var config = this.config = {
+                  'width'           : o.width  || 400,
+                  'height'          : o.height || 300,
 
-            //var chart = new ActiveAnalysisChart('#d3-plot');
-            var frame = new ActiveAnalysisWindow('#d3-plot');
-            frame.update(testData)
+                  'title'           : o.title  || "Current analysis",
+                  'titleHeight'     : o.titleHeight || 20,
+                  'linksHeight'     : o.linksHeight || 15,
+                  'chamferSize'     : o.chamferSize || 15,
+
+                }
+                
+                var wContainer = jQuery('<div class="host"></div>'),
+                    wLinks = jQuery('<div class="links"></div>');
+                
+                
+                // Setup SVG container
+                var svg = id;
+                if (typeof(id) == 'string') {
+                    svg = this.svg = d3.select(id).append("svg")
+                      .attr("width", config.width)
+                      .attr("height", config.height)
+                }
+                svg.attr("class", "win-ar");
+
+                // Generate path line coordinates
+                var pathCoords = [
+                    [ config.chamferSize, 0 ],
+                    [ config.width - config.chamferSize, 0 ],
+                    [ config.width, config.chamferSize ],
+                    [ config.width, config.height - config.chamferSize ],
+                    [ config.width - config.chamferSize, config.height ],
+                    [ config.chamferSize, config.height ],
+                    [ 0, config.height - config.chamferSize ],
+                    [ 0, config.chamferSize ]
+                ];
+
+                // Map and render path
+                var backMapper = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; });
+                svg.append("path")
+                    .attr("class", "background")
+                    .attr("d", function(){ return backMapper(pathCoords)+"Z"; });
+                
+                this.update = function(e) {
+                    
+                }
+                
+            }
+            
+            /**
+             * Animated Network statistics histogram
+             */
+            var TimedValuesPlot = function(id, cofnig) {
+                var o = options || { };
+                var config = this.config = {
+                  'width'           : o.width  || 200,
+                  'height'          : o.height || 120,
+
+                  'title'           : o.title  || "Network traffic",
+                  'titleHeight'     : o.titleWidth || 183,
+                  'chamferSize'     : o.chamferSize || 15,
+                  
+                  'plots'           : o.plots || [ { 'name':'default', 'stroke':'#0F0', 'legend': 'Default' } ],
+                  'legendSize'      : o.legendSize || 10
+                }
+
+                // Setup SVG container
+                var svg = id;
+                if (typeof(id) == 'string') {
+                    svg = this.svg = d3.select(id).append("svg")
+                      .attr("width", config.width)
+                      .attr("height", config.height)
+                }
+                svg.attr("class", "c-chart-scl");
+                
+                // Generate path line coordinates
+                var pathCoords = [
+                    [ 0, 0 ],
+                    [ config.width, 0 ],
+                    [ config.width, config.height - config.chamferSize ],
+                    [ config.width - config.chamferSize, config.height ],
+                    [ 0, config.height ]
+                ];
+
+                // Map and render path
+                var backMapper = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; });
+                svg.append("path")
+                    .attr("class", "background")
+                    .attr("d", function(){ return backMapper(pathCoords)+"Z"; });
+                
+                // Generate legends and data stores
+                this.data = [ ];
+                var legendPadding = 2, textPadding = 2;
+                var cY=legendPadding;
+                var gLegends = svg.append("g").attr("class", "legends");
+                for (var i=0; i<config.plots.length; i++) {
+                    this.data.push([]);
+                    
+                    // Create legend rect
+                    var r = gLegends.append("rect")
+                        .attr("width", config.legendSize)
+                        .attr("height", config.legendSize)
+                        .attr("x", config.width - config.legendSize - legendPadding)
+                        .attr("y", cY)
+                        .style("fill", config.plots[i].fill || '#F0F' );
+                    
+                    // Create legend text
+                    var t = gLegends.append("text")
+                        .attr("x", config.width - config.legendSize - legendPadding - textPadding )
+                        .attr("y", cY-1)
+                        .style("text-anchor", "end")
+                        .text( config.plots[i].legend || "Unknown" );
+                    
+                    // Move to next legend element
+                    cY += config.legendSize + legendPadding;
+                    
+                }
+
+                // Prepare plot placeholders
+                
+                this.update = function(values, delta) {
+                    if (!delta) delta=0.05;
+                }
+                
+            }
+
+            //var frame = ActiveAnalysisWindow('#d3-plot');
+            var frame = ArchiveAnalysisWindow('#d3-plot');
+            frame.update(testData);
+            window.frame = frame;
 
     	});
-
+        
     	</script>
     	<style type="text/css">
     	body {
-    		background: #999;
+    		background: #444;
     	}
 
-        .chart-aa {
+
+      /**
+       * Horizontal bar component
+       */
+      
+      .c-bar {
+         font-family: 'Aldrich';
+         shape-rendering: crispEdges;
+      }
+
+      .c-bar rect.bar-out {
+         fill: rgba(0,0,0,0.1);
+         stroke: #4d4d4d;
+      }
+
+      .c-bar rect.bar-in {
+         fill: #FBB038;
+         stroke: none;
+      }
+
+      .c-bar text.x-value {
+         font-size: 8pt;
+         fill: #000;
+         stroke: none;
+      }
+
+      .c-bar text.x-label {
+         font-size: 8pt;
+         fill: #4d4d4d;
+         stroke: none;
+      }
+
+      /**
+       * Archive plotter
+       */
+
+        .c-chart-ar {
             font-family: 'Aldrich';
+            cursor: pointer;
+        }
+        
+        .c-chart-ar text.axis-label {
+            font-size: 10px;
+            fill: #4D4D4D;
         }
 
-        .chart-aa path.back{
-            fill: #000;
-            stroke: #4d4d4d;
-            stroke-width: 1pt;
+        .c-chart-ar text.axis-value {
+            font-size: 10px;
+            fill: #808080;
+        }
+        
+        .c-chart-ar text.title {
+            font-size: 10px;
+            fill: #b3b3b3;
+        }
+        .c-chart-ar:hover text.title {
+            fill: #fff;
         }
 
-        .chart-aa .axis line {
-            fill: none;
-            stroke: #4d4d4d;
+        .c-chart-ar path.edge{
+            fill: #4d4d4d;
+            stroke: #none;
             shape-rendering: crispEdges;
         }
-
-        .chart-aa .axis.gridline line {
-            stroke: rgba(255,255,255,0.1);
+        .c-chart-ar:hover path.edge {
+            fill: #666;
         }
-
-        .chart-aa .axis path {
-            fill: none;
-            stroke:none ;
-        }
-
-        .chart-aa .axis > .tick > text {
+        
+        .c-chart-ar .axis > .tick > text {
             fill: rgba(255,255,255,0.4);
             stroke: none;
             font-size: 7pt;
+        }
+        
+        .c-chart-ar path.back{
+            fill: rgba(26,26,26,0.4);
+            stroke: #4d4d4d;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+        .c-chart-ar:hover path.back {
+            stroke: #999;
+        }
+        
+        .c-chart-ar path.plotback {
+            fill: none;
+            stroke: #4d4d4d;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+        
+        .c-chart-ar .axis line {
+            fill: none;
+            stroke: #4d4d4d;
             shape-rendering: crispEdges;
         }
 
-        .chart-aa .line-dat {
+        .c-chart-ar .axis.gridline line {
+            stroke: #1a1a1a;
+            shape-rendering: crispEdges;
+        }
+
+        .c-chart-ar .axis path {
+            fill: none;
+            stroke:none ;
+            shape-rendering: crispEdges;
+        }
+        
+        .c-chart-ar .line-dat {
+            stroke-width: 1pt;
+            fill: none;
+            stroke: #D9E021;
+        }
+
+      /**
+       * Analysis plotter
+       */
+
+        .c-chart-aa {
+            font-family: 'Aldrich';
+        }
+
+        .c-chart-aa path.back{
+            fill: #000;
+            stroke: #4d4d4d;
+            stroke-width: 1pt;
+            shape-rendering: crispEdges;
+        }
+
+        .c-chart-aa .axis line {
+            fill: none;
+            stroke: #4d4d4d;
+            shape-rendering: crispEdges;
+        }
+
+        .c-chart-aa .axis.gridline line {
+            stroke: rgba(255,255,255,0.1);
+            shape-rendering: crispEdges;
+        }
+
+        .c-chart-aa .axis path {
+            fill: none;
+            stroke:none ;
+            shape-rendering: crispEdges;
+        }
+
+        .c-chart-aa .axis > .tick > text {
+            fill: rgba(255,255,255,0.4);
+            stroke: none;
+            font-size: 7pt;
+        }
+
+        .c-chart-aa .line-dat {
             stroke-width: 1pt;
             fill: none;
             stroke: #fbb03b;
         }
 
-        .chart-aa .line-ref {
+        .c-chart-aa .line-ref {
             stroke-width: 1pt;
             fill: none;
             stroke: #fc0;
             stroke-dasharray: 4,4;
         }
 
-        .chart-aa .error-bar {
+        .c-chart-aa .error-bar {
             fill: none;
             stroke: #ff0;
             shape-rendering: crispEdges;
+        }
+
+        /**
+         * Archived analyses window
+         */
+        
+        .win-ar {
+           font-family: 'Aldrich';
+        }
+        
+        .win-ar text.title {
+           font-size: 15pt;
+           fill: #fff;
+           stroke: none;
+           font-weight: 300;
+           opacity: 0.9;
+        }
+
+        .win-ar g.control-links text.link {
+           font-size: 8pt;
+           fill: #999;
+           stroke: none;
+        }
+
+        .win-ar g.control-links text.link:hover {
+           fill: #fff;
+        }
+        
+        .win-ar .background {
+           shape-rendering: crispEdges;
+           fill: rgba(0,0,0,0.6);
+           stroke: #888;
+        }
+        
+        /**
+         * Analysis window
+         */
+        
+        .win-aa {
+           font-family: 'Aldrich';
+        }
+        
+        .win-aa text.title {
+           font-size: 15pt;
+           fill: #fff;
+           stroke: none;
+           font-weight: 300;
+           opacity: 0.9;
+        }
+
+        .win-aa text.subtitle {
+           font-size: 8pt;
+           fill: #a80;
+           stroke: none;
+        }
+        
+        .win-aa .background {
+           shape-rendering: crispEdges;
+           fill: rgba(0,0,0,0.6);
+           stroke: #888;
+        }
+        
+        .win-aa text.details {
+           font-size: 10px;
+           fill: #888;
+        }
+
+        .win-aa text.details-ico {
+           font-size: 10px;
+           fill: #FBB038;
         }
 
     	</style>

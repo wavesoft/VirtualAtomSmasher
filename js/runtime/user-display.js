@@ -556,7 +556,8 @@ $(document).ready(function() {
 
             // Start session
             //plugin.requestSession( 'http://labs.wavesoft.gr/t4t/sign.php', function(session) {
-            plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
+            //plugin.requestSession( 'http://test.local/VirtualAtomSmasher/sign.php', function(session) {
+            plugin.requestSession( 'http://test.local/smasher/sign.php', function(session) {
 
                window.s = session;
                v_session = session;

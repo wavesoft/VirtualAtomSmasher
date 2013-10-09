@@ -63,7 +63,7 @@ $data = array(
     'flags'=> 1 
 );
 
-echo json_encode( sign_data( $data, $_GET['cvm_salt'], "C:/Users/icharala/Local/Shared/private.pem" ) );
+echo json_encode( sign_data( $data, $_GET['cvm_salt'], "/Users/icharala/Develop/SimAPI/keystore/domains/test.local/private.pem" ) );
 
 
 ?>
